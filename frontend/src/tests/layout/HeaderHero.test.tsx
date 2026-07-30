@@ -13,8 +13,8 @@ describe('HeaderHero', () => {
     for (const key of ['layout.headerHero.descriptionLine1', 'layout.headerHero.descriptionLine2', 'layout.headerHero.descriptionLine3']) {
       expect(p?.textContent).toContain(key);
     }
-    expect(container.querySelector('.bg-\\[\\#00D097\\]')).toBeInTheDocument();
-    expect(container.querySelector('.bg-\\[\\#030043\\]')).toBeInTheDocument();
+    expect(container.querySelector('[class*="primaryblue"]')).toBeInTheDocument();
+    expect(container.querySelector('.bg-\\[\\#93c5fd\\]')).toBeInTheDocument();
   });
 
   it('applies custom className and forwards props', () => {

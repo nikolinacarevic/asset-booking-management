@@ -12,8 +12,8 @@ export const HeaderHero: React.FC<React.ComponentPropsWithoutRef<'div'>> = ({
         {t('layout.headerHero.title')}
       </h1>
       <div className="mt-10 flex w-full">
-        <div className="h-2 w-1/2 bg-[#00D097]" />
-        <div className="h-2 w-1/2 bg-[#030043]" />
+        <div className="h-2 w-1/2 bg-(--color-primaryblue)" />
+        <div className="h-2 w-1/2 bg-[#93c5fd]" />
       </div>
       <p className="mt-10 w-full text-2xl xl:text-3xl">
         {t('layout.headerHero.descriptionLine1')}
