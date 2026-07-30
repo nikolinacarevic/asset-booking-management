@@ -1,11 +1,13 @@
 // Components
 import { Layout, LayoutRow, LayoutColumn } from '../components/layout/Layout';
 import { Header } from '../components/layout/Header';
-import { Logo } from '../components/icons/Logo';
 import { HeaderHero } from '../components/layout/HeaderHero';
 import LoginForm from '../features/auth/components/LoginForm';
+import { useTranslation } from 'react-i18next';
 
 export default function Login() {
+  const { t } = useTranslation();
+
   return (
     <>
       <Header className="hidden md:flex" />
@@ -13,7 +15,7 @@ export default function Login() {
         <LayoutRow>
           <LayoutColumn
             lgSpan={6}
-            className="hidden min-h-screen items-start justify-center pt-20 lg:flex lg:flex-col"
+            className="hidden min-h-screen items-start justify-center pt-28 lg:flex lg:flex-col"
           >
             <HeaderHero />
           </LayoutColumn>
@@ -22,11 +24,11 @@ export default function Login() {
             lgOffset={0}
             smOffset={2}
             smSpan={8}
-            className="flex min-h-screen flex-col items-center justify-center sm:mb-0 md:pt-20"
+            className="flex min-h-screen flex-col items-center justify-center px-4 py-10 sm:mb-0 md:pt-28"
           >
-            <div className="mb-10 md:hidden">
-              <Logo className="scale-150 dark:brightness-0 dark:invert" />
-            </div>
+            <p className="mb-6 text-2xl font-bold tracking-tight text-(--color-primaryblue) md:hidden">
+              {t('layout.brand')}
+            </p>
             <LoginForm />
           </LayoutColumn>
         </LayoutRow>

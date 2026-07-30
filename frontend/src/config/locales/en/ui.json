@@ -56,8 +56,8 @@
     "selectLanguage": "Select language"
   },
   "login": {
-    "title": "Login",
-    "subtitle": "Welcome to log in to your asset booking management",
+    "title": "Welcome!",
+    "subtitle": "Sign in to manage your workplace asset bookings.",
     "fields": {
       "username": "Username",
       "password": "Password"

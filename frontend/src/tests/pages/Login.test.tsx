@@ -3,6 +3,10 @@ import { MemoryRouter } from 'react-router-dom';
 import { describe, it, expect, vi } from 'vitest';
 import Login from '../../pages/Login';
 
+vi.mock('react-i18next', () => ({
+  useTranslation: () => ({ t: (k: string) => k }),
+}));
+
 vi.mock('../../app/ThemeProvider', () => ({
   ThemeProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   useTheme: () => ({ theme: 'light', toggleTheme: vi.fn() }),
@@ -22,10 +26,6 @@ vi.mock('../../components/layout/HeaderHero', () => ({
   HeaderHero: () => <div>HeaderHero</div>,
 }));
 
-vi.mock('../../components/icons/Logo', () => ({
-  Logo: () => <svg aria-label="Logo" />,
-}));
-
 vi.mock('../../features/auth/components/LoginForm', () => ({
   default: () => <form aria-label="LoginForm" />,
 }));
@@ -36,7 +36,6 @@ describe('Login', () => {
 
     expect(screen.getByText('Header')).toBeInTheDocument();
     expect(screen.getByText('HeaderHero')).toBeInTheDocument();
-    expect(screen.getByLabelText('Logo')).toBeInTheDocument();
     expect(screen.getByLabelText('LoginForm')).toBeInTheDocument();
   });
 });

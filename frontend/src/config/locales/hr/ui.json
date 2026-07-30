@@ -56,8 +56,8 @@
     "selectLanguage": "Odaberi jezik"
   },
   "login": {
-    "title": "Prijava",
-    "subtitle": "Dobrodošli! Prijavite se u sustav za upravljanje rezervacijama.",
+    "title": "Dobrodošli!",
+    "subtitle": "Prijavite se u sustav za upravljanje rezervacijama.",
     "fields": {
       "username": "Korisničko ime",
       "password": "Lozinka"

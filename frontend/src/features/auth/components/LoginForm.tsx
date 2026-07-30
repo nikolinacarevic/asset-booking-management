@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 // Components
 import { Button } from '../../../components/ui/Button';
-import { Input } from '../../../components/ui/Input';
+import { FormInput } from '../../../components/ui/FormInput';
 import { createUserValidationSchema } from '../../user/validation';
 
 // Context
@@ -93,57 +93,68 @@ const LoginForm = () => {
         const formData = new FormData(event.currentTarget);
         handleSubmit(formData);
       }}
-      className="relative flex w-full flex-col overflow-hidden rounded-2xl bg-(--color-table-surface) px-5 py-10 shadow-(--shadow-card) sm:px-12 md:mt-0 md:px-12 lg:px-20"
+      className="w-full max-w-md rounded-2xl border border-(--color-table-border) bg-(--color-table-surface) px-6 py-8 shadow-(--shadow-card) sm:px-8 sm:py-10"
     >
-      <h1 className="mb-6 text-center text-6xl font-black text-gray-900 dark:text-gray-100">
-        {t('ui.login.title')}
-      </h1>
-      <h2 className="mb-6 text-center font-bold">{t('ui.login.subtitle')}</h2>
-      <p className="mb-2 tracking-[0.2em]">{t('ui.login.fields.username')}</p>
-      <Form.Field name="username" className="mb-10 w-full md:mb-12">
-        <Form.Control asChild>
-          <Input
-            data-testid="username"
-            type="text"
-            placeholder={t('ui.login.placeholders.username')}
-            className="w-full border p-3"
-            error={!!errors.username}
-            errorMessage={errors.username}
-          />
-        </Form.Control>
-      </Form.Field>
-      <p className="mb-2 tracking-[0.2em]">{t('ui.login.fields.password')}</p>
-      <Form.Field name="password" className="mb-10 w-full md:mb-12">
-        <Form.Control asChild>
-          <Input
-            data-testid="password"
-            type="password"
-            placeholder={t('ui.login.placeholders.password')}
-            className="w-full border p-3"
-            error={!!errors.password}
-            errorMessage={errors.password}
-          />
-        </Form.Control>
-      </Form.Field>
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold tracking-tight text-(--color-primaryblue) sm:text-4xl">
+          {t('ui.login.title')}
+        </h1>
+        <p className="mt-2 text-sm leading-relaxed text-(--color-modal-label)">
+          {t('ui.login.subtitle')}
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-5">
+        <Form.Field name="username" className="w-full">
+          <Form.Control asChild>
+            <FormInput
+              id="login-username"
+              data-testid="username"
+              type="text"
+              autoComplete="username"
+              label={t('ui.login.fields.username')}
+              placeholder={t('ui.login.placeholders.username')}
+              error={!!errors.username}
+              errorMessage={errors.username}
+            />
+          </Form.Control>
+        </Form.Field>
+
+        <Form.Field name="password" className="w-full">
+          <Form.Control asChild>
+            <FormInput
+              id="login-password"
+              data-testid="password"
+              type="password"
+              autoComplete="current-password"
+              label={t('ui.login.fields.password')}
+              placeholder={t('ui.login.placeholders.password')}
+              error={!!errors.password}
+              errorMessage={errors.password}
+            />
+          </Form.Control>
+        </Form.Field>
+      </div>
+
+      {serverError && (
+        <p
+          role="alert"
+          className="mt-5 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-center text-sm font-medium text-red-600 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-300"
+        >
+          {serverError}
+        </p>
+      )}
 
       <Form.Submit asChild>
         <Button
           data-testid="login-button"
           type="submit"
-          className="mt-2 mb-8 font-bold uppercase"
+          className="mt-6 w-full font-semibold"
           disabled={loading}
         >
           {loading ? t('ui.login.loading') : t('ui.login.submit')}
         </Button>
       </Form.Submit>
-      {serverError && (
-        <p className="absolute bottom-8 self-center text-center font-semibold text-red-500">
-          {serverError}
-        </p>
-      )}
-      {/* <Button variant="link" onClick={() => navigate('/register')}>
-        {t('ui.login.registerCta')}
-      </Button> */}
     </Form.Root>
   );
 };

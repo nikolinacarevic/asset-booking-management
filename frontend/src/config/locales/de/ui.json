@@ -56,8 +56,8 @@
     "selectLanguage": "Sprache auswählen"
   },
   "login": {
-    "title": "Anmelden",
-    "subtitle": "Willkommen – melden Sie sich bei Ihrer Asset-Booking-Verwaltung an",
+    "title": "Willkommen!",
+    "subtitle": "Melden Sie sich an, um Ihre Asset-Buchungen zu verwalten.",
     "fields": {
       "username": "Benutzername",
       "password": "Passwort"
