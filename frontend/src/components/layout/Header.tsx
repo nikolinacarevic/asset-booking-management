@@ -20,7 +20,7 @@ export const Header: React.FC<HeaderProps> = ({
   const brand = (
     <Link
       to="/"
-      className="text-2xl font-bold tracking-tight text-(--color-primaryblue) md:text-3xl"
+      className="text-2xl font-bold tracking-tight text-(--color-primaryblue) md:text-3xl dark:text-[#93c5fd]"
     >
       {t('layout.brand')}
     </Link>
@@ -30,9 +30,9 @@ export const Header: React.FC<HeaderProps> = ({
     <>
       <div className="hidden gap-6 md:flex">
         <ThemeToggle />
-        <LanguageSwitcher className="text-(--color-primaryblue)" />
+        <LanguageSwitcher className="text-(--color-primaryblue) dark:text-[#93c5fd]" />
       </div>
-      <div className="text-(--color-primaryblue) md:hidden">
+      <div className="text-(--color-primaryblue) md:hidden dark:text-[#93c5fd]">
         <MobileMenu />
       </div>
     </>
@@ -41,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <div
       className={twMerge(
-        'fixed top-0 z-40 mx-auto h-20 w-full border-b border-(--color-border) bg-white text-(--color-primaryblue) shadow-md',
+        'fixed top-0 z-40 mx-auto h-20 w-full border-b border-(--color-border) bg-(--color-table-surface) text-(--color-primaryblue) shadow-md dark:text-[#93c5fd]',
         className
       )}
     >

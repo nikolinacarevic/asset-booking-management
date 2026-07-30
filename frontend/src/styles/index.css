@@ -641,8 +641,8 @@
 .dark {
   --color-bg: #252525;
   --color-text: #f5f5f5;
-  --color-surface: #000000;
-  --color-border: #252525;
+  --color-surface: #111827;
+  --color-border: #1f2937;
   --color-table-surface: #111111;
   --color-table-head: var(--color-surface);
   --color-table-head-text: var(--color-text);
