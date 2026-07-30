@@ -1,0 +1,169 @@
+logging {
+  level  = "info"
+  format = "json"
+}
+
+//
+// OTLP RECEIVER
+// Receives:
+// - traces
+// - logs
+// - metrics
+//
+otelcol.receiver.otlp "default" {
+  grpc {
+    endpoint = "0.0.0.0:4317"
+  }
+
+  http {
+    endpoint = "0.0.0.0:4318"
+  }
+
+  output {
+    logs    = [otelcol.processor.batch.default.input]
+    traces  = [otelcol.processor.batch.default.input]
+    metrics = [otelcol.processor.batch.default.input]
+  }
+}
+
+//
+// BATCH PROCESSOR
+//
+otelcol.processor.batch "default" {
+  output {
+    logs    = [otelcol.exporter.loki.default.input]
+    traces  = [otelcol.exporter.otlphttp.tempo.input]
+    metrics = [otelcol.exporter.prometheus.default.input]
+  }
+}
+
+//
+// LOGS -> LOKI
+//
+
+local.file_match "backend_logs" {
+  path_targets = [
+    {
+      __path__ = "/var/log/backend/application.json",
+      job      = "backend",
+      app      = "assetbookingmanagement",
+    },
+  ]
+}
+
+loki.source.file "backend_logs" {
+  targets       = local.file_match.backend_logs.targets
+  forward_to    = [loki.process.backend.receiver]
+  tail_from_end = true
+}
+
+loki.process "backend" {
+
+  stage.json {
+    expressions = {
+      trace_id = "traceId",
+      span_id  = "spanId",
+      level   = "level",
+      logger  = "logger",
+    }
+  }
+
+  stage.labels {
+    values = {
+      trace_id = "",
+      span_id = "",
+      level   = "",
+    }
+  }
+
+  forward_to = [loki.write.default.receiver]
+}
+
+local.file_match "postgres_logs" {
+  path_targets = [
+    {
+      __path__ = "/var/log/postgresql/*.json",
+      job      = "postgres",
+    },
+  ]
+}
+
+otelcol.exporter.loki "default" {
+  forward_to = [loki.write.default.receiver]
+}
+
+
+loki.source.file "postgres_logs" {
+  targets    = local.file_match.postgres_logs.targets
+  forward_to = [loki.process.postgres.receiver]
+
+  tail_from_end = true
+}
+
+loki.process "postgres" {
+  forward_to = [loki.write.default.receiver]
+
+  stage.json {
+    expressions = {
+      level   = "error_severity",
+      message = "message",
+      db      = "dbname",
+      user    = "user",
+      app     = "application_name",
+      client  = "client_addr",
+    }
+  }
+
+  stage.regex {
+    expression = "duration: (?P<duration_ms>[0-9.]+) ms"
+    source     = "message"
+  }
+
+  stage.labels {
+    values = {
+      level = "",
+      db    = "",
+      app   = "",
+    }
+  }
+
+  stage.output {
+    source = "message"
+  }
+}
+
+loki.write "default" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}
+
+//
+// TRACES -> TEMPO
+//
+otelcol.exporter.otlphttp "tempo" {
+  client {
+    endpoint = "http://tempo:4318"
+
+    tls {
+      insecure             = true
+      insecure_skip_verify = true
+    }
+  }
+}
+
+//
+// METRICS -> PROMETHEUS
+//
+// Alloy converts OTLP metrics into Prometheus metrics
+// and remote_writes them into Prometheus.
+//
+otelcol.exporter.prometheus "default" {
+  forward_to = [prometheus.remote_write.default.receiver]
+}
+
+prometheus.remote_write "default" {
+  endpoint {
+    url = "http://prometheus:9090/api/v1/write"
+  }
+}

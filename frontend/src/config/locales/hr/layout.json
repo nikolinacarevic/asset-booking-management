@@ -1,0 +1,57 @@
+{
+  "brand": "Rezervacije",
+  "navbar": {
+    "assets": "Imovina",
+    "categories": "Kategorije",
+    "bookings": "Rezervacije",
+    "myBookings": "Moje rezervacije",
+    "allBookings": "Sve rezervacije",
+    "users": "Korisnici",
+    "account": "Račun",
+    "report": "Report",
+    "approvals": "Odobravanja",
+    "pendingApprovals": "{{count}} rezervacija čeka vaše odobrenje",
+    "logout": "Odjava"
+  },
+  "footer": {
+    "websiteLinkLabel": "Web stranica tvrtke",
+    "copyright": "© 2026 | Example Company Ltd.",
+    "partOfThe": "Dio",
+    "groupName": "Example Group"
+  },
+  "mobileMenu": {
+    "title": "Navigacijski izbornik",
+    "description": "Glavna navigacija"
+  },
+  "headerHero": {
+    "title": "Upravljanje rezervacijama",
+    "descriptionLine1": "Jednostavan i moćan web i mobilni softver",
+    "descriptionLine2": "za upravljanje rezervacijama",
+    "descriptionLine3": "imovine na radnom mjestu"
+  },
+  "toast": {
+    "bookingCreated": "Rezervacija je uspješno kreirana.",
+    "bookingCancelled": "Rezervacija je uspješno otkazana.",
+    "bookingCreateFailed": "Kreiranje rezervacije nije uspjelo.",
+    "bookingCancelFailed": "Otkazivanje rezervacije nije uspjelo.",
+    "invalidBookingPeriod": "Odaberite valjano razdoblje rezervacije.",
+    "missingUser": "Korisnički podaci nisu dostupni. Rezervaciju nije moguće kreirati.",
+    "assetCreated": "Imovina je uspješno kreirana.",
+    "assetCreateFailed": "Kreiranje imovine nije uspjelo.",
+    "assetUpdated": "Imovina je uspješno ažurirana.",
+    "assetUpdateFailed": "Ažuriranje imovine nije uspjelo.",
+    "assetDeleted": "Imovina je uspješno obrisana.",
+    "assetDeleteFailed": "Brisanje imovine nije uspjelo.",
+    "categoryCreated": "Kategorija je uspješno kreirana.",
+    "categoryCreateFailed": "Kreiranje kategorije nije uspjelo.",
+    "categoryUpdated": "Kategorija je uspješno ažurirana.",
+    "categoryUpdateFailed": "Ažuriranje kategorije nije uspjelo.",
+    "userCreated": "Korisnik \"{{name}}\" je uspješno kreiran.",
+    "userUpdated": "Korisnik \"{{name}}\" je uspješno ažuriran.",
+    "userDeleted": "Korisnik \"{{name}}\" je uspješno obrisan.",
+    "userCreateFailed": "Kreiranje korisnika nije uspjelo.",
+    "userUpdateFailed": "Ažuriranje korisnika nije uspjelo.",
+    "userDeleteFailed": "Brisanje korisnika nije uspjelo.",
+    "passwordChanged": "Lozinka je uspješno promijenjena."
+  }
+}

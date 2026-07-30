@@ -1,0 +1,42 @@
+opencollection: 1.0.0
+
+info:
+  name: Asset Booking Management
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+request:
+  auth:
+    type: bearer
+    token: "{{token}}"
+  actions:
+    - type: set-variable
+      phase: after-response
+      selector:
+        expression: |-
+          {{ 
+            const token = res?.body?.accessToken ?? bru.getVar("token");
+            if (res?.body?.accessToken) {
+              bru.setVar("token", token);
+            }
+            token;
+          }}
+        method: jsonq
+      variable:
+        name: token
+        scope: runtime
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

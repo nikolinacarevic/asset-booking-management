@@ -1,0 +1,57 @@
+{
+  "brand": "Bookings",
+  "navbar": {
+    "assets": "Assets",
+    "categories": "Categories",
+    "bookings": "Bookings",
+    "myBookings": "My Bookings",
+    "allBookings": "All Bookings",
+    "users": "Users",
+    "account": "Account",
+    "report": "Report",
+    "approvals": "Approvals",
+    "pendingApprovals": "{{count}} pending booking(s) awaiting your approval",
+    "logout": "Logout"
+  },
+  "footer": {
+    "websiteLinkLabel": "Company Website",
+    "copyright": "© 2026 | Example Company Ltd.",
+    "partOfThe": "Part of the",
+    "groupName": "Example Group"
+  },
+  "mobileMenu": {
+    "title": "Navigation menu",
+    "description": "Main navigation"
+  },
+  "headerHero": {
+    "title": "Asset Booking Management",
+    "descriptionLine1": "Simple powerful web and mobile software",
+    "descriptionLine2": "for asset booking management of",
+    "descriptionLine3": "workplace assets"
+  },
+  "toast": {
+    "bookingCreated": "Booking successfully created.",
+    "bookingCreateFailed": "Failed to create booking.",
+    "bookingCancelled": "Booking successfully canceled.",
+    "bookingCancelFailed": "Failed to cancel booking.",
+    "invalidBookingPeriod": "Please select a valid booking period.",
+    "missingUser": "Unable to create booking. User information is missing.",
+    "assetCreated": "Asset successfully created.",
+    "assetCreateFailed": "Failed to create asset.",
+    "assetUpdated": "Asset successfully updated.",
+    "assetUpdateFailed": "Failed to update asset.",
+    "assetDeleted": "Asset successfully deleted.",
+    "assetDeleteFailed": "Failed to delete asset.",
+    "categoryCreated": "Category successfully created.",
+    "categoryCreateFailed": "Failed to create category.",
+    "categoryUpdated": "Category successfully updated.",
+    "categoryUpdateFailed": "Failed to update category.",
+    "userCreated": "User \"{{name}}\" successfully created.",
+    "userUpdated": "User \"{{name}}\" successfully updated.",
+    "userDeleted": "User \"{{name}}\" successfully deleted.",
+    "userCreateFailed": "Failed to create user.",
+    "userUpdateFailed": "Failed to update user.",
+    "userDeleteFailed": "Failed to delete user.",
+    "passwordChanged": "Password successfully changed."
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Moje rezervacije",
+  "titleAdmin": "Sve rezervacije",
+  "search": {
+    "placeholder": "Pretraži rezervacije..."
+  },
+  "filter": {
+    "asset": "Asset",
+    "allAssets": "Svi asseti",
+    "status": "Status",
+    "allStatuses": "Svi statusi",
+    "fromDate": "Od",
+    "toDate": "Do"
+  },
+  "table": {
+    "user": "Korisnik",
+    "asset": "Asset",
+    "time": "Vrijeme rezervacije",
+    "status": "Status",
+    "actionsSr": "Akcije rezervacije"
+  },
+  "actions": {
+    "cancel": "Otkaži"
+  },
+  "cancelModal": {
+    "ariaLabel": "Otkazivanje rezervacije #{{id}}",
+    "title": "Otkazati rezervaciju?",
+    "description": "Jeste li sigurni da želite otkazati ovu rezervaciju?",
+    "closeAria": "Zatvori",
+    "keepBooking": "Ne, zadrži rezervaciju",
+    "confirmCancel": "Da, otkaži rezervaciju",
+    "processing": "Otkazivanje...",
+    "fields": {
+      "asset": "Asset",
+      "time": "Vrijeme rezervacije",
+      "status": "Status",
+      "notes": "Napomene"
+    }
+  },
+  "loading": "Učitavanje rezervacija...",
+  "empty": "Nema rezervacija.",
+  "error": "Učitavanje rezervacija nije uspjelo.",
+  "cancelError": "Rezervacija nije otkazana. Pokušajte ponovno."
+}

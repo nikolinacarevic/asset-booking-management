@@ -1,0 +1,85 @@
+HELP.md
+target/
+.m2/
+**/.m2/
+backend/.m2/
+.metals/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+backend/target_test-classes/
+out/test/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+!.vscode/extensions.json
+
+### Logs ###
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+### Node / frontend ###
+node_modules
+dist
+dist-ssr
+*.local
+
+### Other editor directories and files ###
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+### Env files ###
+.env
+.env.*
+!.env.example
+!.env.sample
+
+### Local caches (Maven / OWASP dependency-check) ###
+backend/.m2/
+**/.m2/
+**/dependency-check-data/
+*.mv.db
+
+# SonarQube
+.scannerwork/
+.sonarqube/
+coverage
+*storybook.log
+storybook-static
+
+deployment/demo-package.tar.gz
+demo-vm

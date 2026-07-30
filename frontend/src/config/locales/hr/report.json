@@ -1,0 +1,17 @@
+{
+  "title": "Report",
+  "bookingStatusPieChart": {
+    "title": "Rezervacije po Statusu"
+  },
+  "bookingStatusBarChart": {
+    "title": "Rezervacije po Mjesecima",
+    "yAxisLabel": "Rezervacije"
+  },
+  "noData": "Nema podataka",
+  "topUsersChart": {
+    "title": "Top korisnici po broju rezervacija"
+  },
+  "topAssetsChart": {
+    "title": "Top imovine po broju rezervacija"
+  }
+}

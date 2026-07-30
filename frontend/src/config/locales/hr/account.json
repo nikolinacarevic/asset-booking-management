@@ -1,0 +1,57 @@
+{
+  "heading": "Podaci o računu",
+  "loading": "Učitavanje podataka o korisniku...",
+  "error": "Neuspješno učitavanje podataka o korisniku.",
+  "empty": "Nema dostupnih podataka o korisniku.",
+  "common": {
+    "emptyValue": "-"
+  },
+  "sections": {
+    "profile": "Profil",
+    "workDetails": "Radni podaci",
+    "accountDetails": "Podaci o računu"
+  },
+  "labels": {
+    "id": "ID",
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "username": "Korisničko ime",
+    "email": "E-mail",
+    "password": "Lozinka",
+    "role": "Uloga",
+    "status": "Status",
+    "department": "Odjel",
+    "managerEmail": "E-mail voditelja",
+    "notes": "Napomene"
+  },
+  "role": {
+    "admin": "Administrator",
+    "manager": "Voditelj",
+    "employee": "Zaposlenik"
+  },
+  "status": {
+    "active": "Aktivan",
+    "inactive": "Neaktivan"
+  },
+  "password": {
+    "changeButton": "Promijeni lozinku",
+    "modalTitle": "Promjena lozinke",
+    "closeAria": "Zatvori",
+    "cancel": "Odustani",
+    "save": "Spremi lozinku",
+    "saving": "Spremanje…",
+    "fields": {
+      "current": "Trenutačna lozinka",
+      "new": "Nova lozinka",
+      "confirm": "Potvrdi novu lozinku"
+    },
+    "validation": {
+      "currentRequired": "Unesite trenutačnu lozinku",
+      "confirmMismatch": "Nove lozinke se ne podudaraju"
+    },
+    "errors": {
+      "wrongCurrent": "Trenutačna lozinka nije ispravna.",
+      "submit": "Lozinka se nije mogla promijeniti. Pokušajte ponovno."
+    }
+  }
+}

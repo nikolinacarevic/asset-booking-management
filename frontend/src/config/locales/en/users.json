@@ -1,0 +1,183 @@
+{
+  "title": "Users",
+  "actions": {
+    "export": "Export",
+    "new": "New"
+  },
+  "search": {
+    "placeholder": "Search users..."
+  },
+  "filters": {
+    "showDeleted": "Show deleted",
+    "role": "Role",
+    "allRoles": "All roles",
+    "department": "Department",
+    "allDepartments": "All departments"
+  },
+  "roles": {
+    "EMPLOYEE": "Employee",
+    "ADMIN": "Admin",
+    "MANAGER": "Manager"
+  },
+  "empty": {
+    "loading": "Loading users...",
+    "none": "No users yet."
+  },
+  "errors": {
+    "loadUsers": "Failed to load users.",
+    "loadReport": "Failed to load report.",
+    "loadBookings": "Failed to load bookings."
+  },
+  "delete": {
+    "title": "Delete user?",
+    "description": "Are you sure you want to delete \"{{name}}\"? This user will be marked as deleted."
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "student": "Student",
+    "left_company": "Left company",
+    "deleted": "Deleted"
+  },
+  "modals": {
+    "common": {
+      "closeAria": "Close",
+      "save": "Save",
+      "saving": "Saving…",
+      "emptyValue": "-"
+    },
+    "view": {
+      "ariaLabel": "User details",
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "username": "Username",
+        "role": "Role",
+        "department": "Department",
+        "managerEmail": "Manager email",
+        "notes": "Notes"
+      }
+    },
+    "edit": {
+      "ariaLabel": "Edit user",
+      "title": "Edit user",
+      "submitError": "Failed to save changes. Please try again.",
+      "fields": {
+        "role": "Role",
+        "status": "Status",
+        "username": "Username",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "department": "Department",
+        "managerEmail": "Manager email",
+        "notes": "Notes"
+      }
+    },
+    "create": {
+      "ariaLabel": "Create user",
+      "title": "Add New User",
+      "submitError": "Failed to create user. Please try again.",
+      "fields": {
+        "role": "Role",
+        "status": "Status",
+        "username": "Username",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "password": "Password",
+        "department": "Department",
+        "managerEmail": "Manager email",
+        "notes": "Notes"
+      }
+    },
+    "bookings": {
+      "ariaLabel": "Bookings",
+      "title": "Bookings",
+      "export": "Export",
+      "closeAria": "Close bookings modal",
+      "loading": "Loading bookings...",
+      "empty": "No bookings for this user.",
+      "table": {
+        "columns": {
+          "bookingId": "Booking ID",
+          "asset": "Asset",
+          "date": "Date",
+          "status": "Status"
+        }
+      }
+    },
+    "report": {
+      "userLabel": "User",
+      "loading": "Loading...",
+      "stats": {
+        "total": "Total bookings",
+        "active": "Active",
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected"
+      }
+    }
+  },
+  "table": {
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "bookings": "Bookings",
+      "actions": "Actions"
+    },
+    "bookingsCta": "Bookings",
+    "sort": {
+      "byLastNameAria": "Sort by last name {{direction}}",
+      "direction": {
+        "ascending": "ascending",
+        "descending": "descending"
+      }
+    },
+    "rowActions": {
+      "viewAria": "View user",
+      "reportAria": "User report",
+      "editAria": "Edit user",
+      "deleteAria": "Delete user"
+    }
+  },
+  "validation": {
+    "username": {
+      "min": "Username must be at least 3 characters long",
+      "max": "Username must be at most 50 characters long",
+      "pattern": "Only letters, numbers, ., _, and - are allowed"
+    },
+    "surname": {
+      "required": "Surname is required",
+      "min": "Surname must be at least 3 characters long",
+      "max": "Surname must be at most 100 characters long",
+      "pattern": "Surname can contain letters only"
+    },
+    "name": {
+      "required": "Name is required",
+      "min": "Name must be at least 3 characters long",
+      "max": "Name must be at most 100 characters long",
+      "pattern": "Name can contain letters only"
+    },
+    "email": {
+      "invalid": "Email is not in a valid format",
+      "max": "Email must be at most 254 characters long"
+    },
+    "password": {
+      "min": "Password must be at least 8 characters long",
+      "max": "Password must be at most 50 characters long"
+    },
+    "department": {
+      "required": "Department is required"
+    },
+    "managerEmail": {
+      "invalid": "Manager's email is not in a valid format",
+      "max": "Manager's email must be at most 254 characters long"
+    },
+    "notes": {
+      "max": "Notes must be at most 1000 characters long"
+    }
+  }
+}

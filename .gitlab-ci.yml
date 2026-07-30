@@ -1,0 +1,53 @@
+stages:
+  - build
+  - test
+  - bruno
+  - security
+  - images
+  # - deploy
+ 
+include:
+  # --Shared config--
+  - local: /.gitlab/.env_dropdown.yaml
+  - local: /.gitlab/.hidden_jobs.yaml
+ 
+  # --build--
+  # - local: /.gitlab/.job_prepare-build.yaml
+  - local: /.gitlab/.job_build-backend.yaml
+  - local: /.gitlab/.job_build-frontend.yaml
+    # rules:
+    #   - if: '$RUN_PREPARE_BUILD == "true"'
+
+  # --test--
+  - local: /.gitlab/.job_run-test-backend.yaml
+  - local: /.gitlab/.job_run-test-frontend.yaml
+  # - local: /.gitlab/.job_verify-artifacts.yaml
+
+  # --bruno smoke test --
+  - local: /.gitlab/.job_smoke-bruno.yaml
+
+  # --security--
+  - local: /.gitlab/.job_security-check-owasp-backend.yaml
+  - local: /.gitlab/.job_security-check-audit-frontend.yaml
+  - local: /.gitlab/.job_security-check-socket-scan.yaml
+  - local: /.gitlab/.job_security-check-snyk-scan.yaml
+
+  # --images--
+  # - local: /.gitlab/.job_images-backend.yaml
+  # - local: /.gitlab/.job_images-frontend.yaml
+   
+
+
+
+default:
+  interruptible: true
+ 
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_OPEN_MERGE_REQUESTS'
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH =~ /^(feature|refactor|fix|hotfix|test)\//'

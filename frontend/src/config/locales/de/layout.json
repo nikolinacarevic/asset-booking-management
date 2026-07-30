@@ -1,0 +1,57 @@
+{
+  "brand": "Buchungen",
+  "navbar": {
+    "assets": "Inventar",
+    "categories": "Kategorien",
+    "bookings": "Buchungen",
+    "myBookings": "Meine Buchungen",
+    "allBookings": "Alle Buchungen",
+    "users": "Benutzer",
+    "account": "Konto",
+    "report": "Bericht",
+    "approvals": "Freigaben",
+    "pendingApprovals": "{{count}} ausstehende Buchung(en) warten auf Ihre Freigabe",
+    "logout": "Abmelden"
+  },
+  "footer": {
+    "websiteLinkLabel": "Unternehmenswebsite",
+    "copyright": "© 2026 | Example Company Ltd.",
+    "partOfThe": "Teil der",
+    "groupName": "Example Group"
+  },
+  "mobileMenu": {
+    "title": "Navigationsmenü",
+    "description": "Hauptnavigation"
+  },
+  "headerHero": {
+    "title": "Asset-Booking-Verwaltung",
+    "descriptionLine1": "Einfache, leistungsstarke Web- und Mobile-Software",
+    "descriptionLine2": "für die Verwaltung von Asset-Buchungen",
+    "descriptionLine3": "von Workplace-Assets"
+  },
+  "toast": {
+    "bookingCreated": "Die Buchung wurde erfolgreich erstellt.",
+    "bookingCancelled": "Die Buchung wurde erfolgreich storniert.",
+    "bookingCreateFailed": "Die Buchung konnte nicht erstellt werden.",
+    "bookingCancelFailed": "Die Buchung konnte nicht storniert werden.",
+    "invalidBookingPeriod": "Bitte wählen Sie einen gültigen Buchungszeitraum aus.",
+    "missingUser": "Benutzerinformationen fehlen. Die Buchung kann nicht erstellt werden.",
+    "assetCreated": "Das Asset wurde erfolgreich erstellt.",
+    "assetCreateFailed": "Das Asset konnte nicht erstellt werden.",
+    "assetUpdated": "Das Asset wurde erfolgreich aktualisiert.",
+    "assetUpdateFailed": "Das Asset konnte nicht aktualisiert werden.",
+    "assetDeleted": "Das Asset wurde erfolgreich gelöscht.",
+    "assetDeleteFailed": "Das Asset konnte nicht gelöscht werden.",
+    "categoryCreated": "Die Kategorie wurde erfolgreich erstellt.",
+    "categoryCreateFailed": "Die Kategorie konnte nicht erstellt werden.",
+    "categoryUpdated": "Die Kategorie wurde erfolgreich aktualisiert.",
+    "categoryUpdateFailed": "Die Kategorie konnte nicht aktualisiert werden.",
+    "userCreated": "Der Benutzer \"{{name}}\" wurde erfolgreich erstellt.",
+    "userUpdated": "Der Benutzer \"{{name}}\" wurde erfolgreich aktualisiert.",
+    "userDeleted": "Der Benutzer \"{{name}}\" wurde erfolgreich gelöscht.",
+    "userCreateFailed": "Der Benutzer konnte nicht erstellt werden.",
+    "userUpdateFailed": "Der Benutzer konnte nicht aktualisiert werden.",
+    "userDeleteFailed": "Der Benutzer konnte nicht gelöscht werden.",
+    "passwordChanged": "Das Passwort wurde erfolgreich geändert."
+  }
+}

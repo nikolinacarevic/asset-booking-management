@@ -1,0 +1,118 @@
+{
+  "label": "Asset",
+  "location": "Standort",
+  "categories": {
+    "all": "Alle Assets"
+  },
+  "actions": {
+    "new": "Neues Asset"
+  },
+  "search": {
+    "placeholder": "Assets suchen…"
+  },
+  "filters": {
+    "showDeleted": "Gelöschte anzeigen",
+    "status": "Status",
+    "allStatuses": "Alle Status"
+  },
+  "empty": {
+    "loading": "Assets werden geladen…"
+  },
+  "errors": {
+    "loadAssets": "Assets konnten nicht geladen werden",
+    "loadCategories": "Kategorien konnten nicht geladen werden.",
+    "loadBookings": "Buchungen konnten nicht geladen werden.",
+    "loadReport": "Bericht konnte nicht geladen werden.",
+    "updateAsset": "Asset konnte nicht aktualisiert werden.",
+    "createAsset": "Asset konnte nicht erstellt werden."
+  },
+  "delete": {
+    "title": "Asset löschen?",
+    "description": "Möchten Sie \"{{name}}\" wirklich löschen? Dieses Asset wird als gelöscht markiert."
+  },
+  "categoryCard": {
+    "badge": "Kategorie"
+  },
+  "status": {
+    "ACTIVE": "Aktiv",
+    "INACTIVE": "Inaktiv",
+    "DAMAGED": "Beschädigt",
+    "DELETED": "Gelöscht"
+  },
+  "table": {
+    "id": "ID",
+    "assetName": "Asset-Name",
+    "category": "Kategorie",
+    "status": "Status",
+    "bookings": "Buchungen",
+    "actionsSr": "Aktionen",
+    "ariaView": "Asset anzeigen",
+    "ariaReport": "Asset-Bericht",
+    "ariaEdit": "Asset bearbeiten",
+    "ariaDelete": "Asset löschen",
+    "sort": {
+      "byNameAria": "Nach Name sortieren ({{direction}})",
+      "direction": {
+        "ascending": "aufsteigend",
+        "descending": "absteigend"
+      }
+    }
+  },
+  "modals": {
+    "close": "Schließen",
+    "save": "Speichern",
+    "saving": "Speichern…",
+    "loadingCategories": "Kategorien werden geladen…",
+    "fields": {
+      "status": "Status",
+      "category": "Kategorie",
+      "name": "Name",
+      "description": "Beschreibung",
+      "location": "Standort"
+    },
+    "view": {
+      "aria": "Asset-Details",
+      "closeAria": "Asset-Details schließen",
+      "category": "Asset-Kategorie"
+    },
+    "edit": {
+      "aria": "Asset bearbeiten",
+      "title": "Asset bearbeiten"
+    },
+    "add": {
+      "title": "Neues Asset hinzufügen",
+      "selectCategory": "Kategorie auswählen"
+    },
+    "bookings": {
+      "closeAria": "Buchungsfenster schließen",
+      "loading": "Buchungen werden geladen…",
+      "empty": "Keine Buchungen für dieses Asset.",
+      "colId": "Buchungs-ID",
+      "colUser": "Benutzer",
+      "colDate": "Datum",
+      "colNote": "Notiz"
+    },
+    "report": {
+      "loading": "Wird geladen…",
+      "stats": {
+        "total": "Buchungen gesamt",
+        "active": "Aktiv",
+        "completed": "Abgeschlossen",
+        "cancelled": "Storniert",
+        "pending": "Ausstehend",
+        "approved": "Genehmigt",
+        "rejected": "Abgelehnt"
+      }
+    }
+  },
+  "validation": {
+    "nameRequired": "Anlagenname ist erforderlich",
+    "nameMax": "Name darf höchstens 100 Zeichen lang sein",
+    "categoryRequired": "Kategorie ist erforderlich",
+    "descriptionMax": "Beschreibung darf höchstens 255 Zeichen lang sein",
+    "codeRequired": "QR-Code ist erforderlich",
+    "codeMax": "QR-Code darf höchstens 2000 Zeichen lang sein",
+    "locationRequired": "Standort ist erforderlich",
+    "locationMax": "Standort darf höchstens 255 Zeichen lang sein"
+  }
+}

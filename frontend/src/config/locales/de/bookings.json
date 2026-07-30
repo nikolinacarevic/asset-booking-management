@@ -1,0 +1,127 @@
+{
+  "viewParkingMap": "Parkplan ansehen",
+  "resetFilters": "Filter zurücksetzen",
+  "loading": "Laden...",
+  "table": {
+    "approval": "Freigabe",
+    "book": "Buchen",
+    "bookSr": "Asset buchen"
+  },
+  "empty": {
+    "loading": "Assets werden geladen...",
+    "noAssets": "Keine Assets verfügbar."
+  },
+  "validation": {
+    "userRequired": "Benutzer ist erforderlich",
+    "assetRequired": "Asset ist erforderlich",
+    "bookingStartRequired": "Buchungsbeginn ist erforderlich",
+    "bookingEndRequired": "Buchungsende ist erforderlich",
+    "noteMax": "Notiz darf höchstens 1000 Zeichen lang sein",
+    "endAfterStart": "Buchungsende muss nach dem Buchungsbeginn liegen"
+  },
+  "status": {
+    "pending": "Ausstehend",
+    "approved": "Genehmigt",
+    "cancelled": "Abgesagt",
+    "rejected": "Abgelehnt",
+    "completed": "Fertiggestellt"
+  },
+  "recurringDays": {
+    "bookEvery": "Jeden buchen",
+    "monday": "Montag",
+    "tuesday": "Dienstag",
+    "wednesday": "Mittwoch",
+    "thursday": "Donnerstag",
+    "friday": "Freitag",
+    "saturday": "Samstag",
+    "sunday": "Sonntag"
+  },
+  "parkingMap": {
+    "title": "Parkplatz karte",
+    "availabilityFor": "Verfügbarkeit für {{date}}",
+    "today": "Heute · {{date}}",
+    "levelTab": "Ebene {{level}}",
+    "spotNumber": "Parkplatz",
+    "taken": "Belegt",
+    "available": "Verfügbar",
+    "notesPlaceholder": "Anmerkung (optional)",
+    "booking": "Wird gebucht...",
+    "selectDateFirst": "Bitte zuerst ein Datum auswählen",
+    "closeAria": "Karte schließen",
+    "clearDate": "Löschen"
+  },
+  "floorMap": {
+    "stairs": "Treppenhaus",
+    "level": "Ebene",
+    "entrance": "Einfahrt",
+    "directionOfTravel": "Fahrtrichtung",
+    "legend": {
+      "parkingSpot": "Parkplatz",
+      "taken": "Belegt",
+      "noParking": "Parken verboten",
+      "stairs": "Treppenhaus"
+    },
+    "rooms": {
+      "office": "Büro",
+      "meetingRoom": "Besprechungsraum",
+      "meetingRoomShort": "B",
+      "kitchenWc": "Küche / WC",
+      "stairs": "Treppenhaus",
+      "corridor": "Flur",
+      "commonArea": "Gemeinschaftsbereich"
+    },
+    "depts": {
+      "AT": "Fortgeschrittene Technologien",
+      "MR": "Besprechungsräume",
+      "MS": "Mobilität & Sicherheit",
+      "ST": "Systemtest",
+      "D": "Direktor",
+      "A": "Architekten"
+    }
+  },
+  "officeMap": {
+    "title": "Bürokarte",
+    "closeAria": "Karte schließen",
+    "floorTab": "Etage {{floor}}",
+    "showLegend": "Legende anzeigen",
+    "hideLegend": "Legende schließen",
+    "legend": "Legende"
+  },
+
+  "confirmation": {
+    "and": "und",
+    "recurring": "Möchten Sie diese Ressource jeden {{days}} im {{month}} buchen?",
+    "singleHour": "Möchten Sie diese Ressource am {{date}} von {{from}} bis {{to}} buchen?",
+    "singleDay": "Möchten Sie diese Ressource für den {{date}} buchen?",
+    "multiDay": "Möchten Sie diese Ressource vom {{from}} bis zum {{to}} buchen?",
+    "needApproval": "Für diese Buchung ist die Genehmigung Ihres Vorgesetzten erforderlich. Eine E-Mail-Benachrichtigung wird zur Überprüfung an Ihren Vorgesetzten gesendet.",
+    "parkingSpotTaken": "Dieser Parkplatz ist bereits für das ausgewählte Datum gebucht. Bitte wählen Sie einen anderen Parkplatz oder ändern Sie das Datum."
+  },
+  "buttons": {
+    "book": "Buchen",
+    "booking": "Buchen...",
+    "bookNow": "Jetzt buchen",
+    "sendRequest": "Antrag senden",
+    "cancel": "Abbrechen",
+    "close": "Schließen",
+    "confirm": "Bestätigen",
+    "loadingAsset": "Lade Asset-Details...",
+    "loading": "Laden...",
+    "errorLoadingBookings": "Fehler beim Laden der Buchungen. Bitte versuchen Sie es später erneut."
+  },
+  "bookingDetailsModal": {
+    "booking": "Buchung",
+    "user": "Benutzer",
+    "name": "Name",
+    "role": "Rolle",
+    "email": "E-Mail",
+    "asset": "Asset",
+    "status": "Status",
+    "category": "Kategorie",
+    "location": "Lokation",
+    "bookingId": "Buchungs-ID",
+    "start": "Start",
+    "end": "Ende",
+    "notes": "Notizen"
+  }
+}

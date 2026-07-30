@@ -1,0 +1,126 @@
+{
+  "viewParkingMap": "View parking map",
+  "resetFilters": "Reset filters",
+  "loading": "Loading...",
+  "table": {
+    "approval": "Approval",
+    "book": "Book",
+    "bookSr": "Book asset"
+  },
+  "empty": {
+    "loading": "Loading assets...",
+    "noAssets": "No assets available."
+  },
+  "validation": {
+    "userRequired": "User is required",
+    "assetRequired": "Asset is required",
+    "bookingStartRequired": "Booking start is required",
+    "bookingEndRequired": "Booking end is required",
+    "noteMax": "Note must be at most 1000 characters long",
+    "endAfterStart": "Booking end must be after booking start"
+  },
+  "status": {
+    "pending": "Pending",
+    "approved": "Approved",
+    "cancelled": "Cancelled",
+    "rejected": "Rejected",
+    "completed": "Completed"
+  },
+  "recurringDays": {
+    "bookEvery": "Book every",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+  "parkingMap": {
+    "title": "Parking Map",
+    "availabilityFor": "Availability for {{date}}",
+    "today": "Today · {{date}}",
+    "levelTab": "Level {{level}}",
+    "spotNumber": "Parking Spot",
+    "taken": "Taken",
+    "available": "Available",
+    "notesPlaceholder": "Notes (optional)",
+    "booking": "Booking...",
+    "selectDateFirst": "Select a date first to book",
+    "closeAria": "Close map",
+    "clearDate": "Clear"
+  },
+  "floorMap": {
+    "stairs": "Stairs",
+    "level": "Level",
+    "entrance": "Entrance",
+    "directionOfTravel": "Direction of travel",
+    "legend": {
+      "parkingSpot": "Parking spot",
+      "taken": "Taken",
+      "noParking": "No parking",
+      "stairs": "Stairs"
+    },
+    "rooms": {
+      "office": "Office",
+      "meetingRoom": "Meeting room",
+      "meetingRoomShort": "MR",
+      "kitchenWc": "Kitchen / WC",
+      "stairs": "Staircase",
+      "corridor": "Corridor",
+      "commonArea": "Common area"
+    },
+    "depts": {
+      "AT": "Advanced Technologies",
+      "MR": "Meeting Rooms",
+      "MS": "Mobile & Security",
+      "ST": "System Test",
+      "D": "Director",
+      "A": "Architects"
+    }
+  },
+  "officeMap": {
+    "title": "Office Map",
+    "closeAria": "Close map",
+    "floorTab": "Floor {{floor}}",
+    "showLegend": "Show legend",
+    "hideLegend": "Hide legend",
+    "legend": "Legend"
+  },
+  "confirmation": {
+    "and": "i",
+    "recurring": "Do you want to book this asset every {{days}} in {{month}}?",
+    "singleHour": "Do you want to book this asset on {{date}}, from {{from}} to {{to}}?",
+    "singleDay": "Do you want to book this asset for {{date}}?",
+    "multiDay": "Do you want to book this asset from {{from}} to {{to}}?",
+    "needApproval": "This booking requires manager approval. An email notification will be sent to your manager for review.",
+    "parkingSpotTaken": "This parking spot is already booked for the selected date. Please select another parking spot or change the date."
+  },
+  "buttons": {
+    "book": "Book",
+    "booking": "Booking...",
+    "bookNow": "Book now",
+    "sendRequest": "Send request",
+    "cancel": "Cancel",
+    "close": "Close",
+    "confirm": "Confirm",
+    "loadingAsset": "Loading asset details...",
+    "loading": "Loading...",
+    "errorLoadingBookings": "Error loading bookings. Please try again later."
+  },
+  "bookingDetailsModal": {
+    "booking": "Booking",
+    "user": "User",
+    "name": "Name",
+    "role": "Role",
+    "email": "Email",
+    "asset": "Asset",
+    "status": "Status",
+    "category": "Category",
+    "location": "Location",
+    "bookingId": "Booking ID",
+    "start": "Start",
+    "end": "End",
+    "notes": "Notes"
+  }
+}

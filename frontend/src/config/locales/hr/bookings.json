@@ -1,0 +1,126 @@
+{
+  "viewParkingMap": "Prikaži tlocrt parkinga",
+  "resetFilters": "Poništi filtere",
+  "loading": "Učitavanje...",
+  "table": {
+    "approval": "Odobrenje",
+    "book": "Rezerviraj",
+    "bookSr": "Rezerviraj imovinu"
+  },
+  "empty": {
+    "loading": "Učitavanje imovine...",
+    "noAssets": "Nema dostupne imovine."
+  },
+  "validation": {
+    "userRequired": "Korisnik je obavezan",
+    "assetRequired": "Imovina je obavezna",
+    "bookingStartRequired": "Početak rezervacije je obavezan",
+    "bookingEndRequired": "Kraj rezervacije je obavezan",
+    "noteMax": "Napomena smije imati najviše 1000 znakova",
+    "endAfterStart": "Kraj rezervacije mora biti nakon početka"
+  },
+  "status": {
+    "pending": "Na čekanju",
+    "approved": "Odobreno",
+    "cancelled": "Otkazano",
+    "rejected": "Odbijeno",
+    "completed": "Dovršeno"
+  },
+  "recurringDays": {
+    "bookEvery": "Rezerviraj svaki",
+    "monday": "Ponedjeljak",
+    "tuesday": "Utorak",
+    "wednesday": "Srijeda",
+    "thursday": "Četvrtak",
+    "friday": "Petak",
+    "saturday": "Subota",
+    "sunday": "Nedjelja"
+  },
+  "parkingMap": {
+    "title": "Parking mapa",
+    "availabilityFor": "Dostupnost za {{date}}",
+    "today": "Danas · {{date}}",
+    "levelTab": "Kat {{level}}",
+    "spotNumber": "Parking mjesto",
+    "taken": "Zauzeto",
+    "available": "Slobodno",
+    "notesPlaceholder": "Napomena (opcionalno)",
+    "booking": "Rezerviranje...",
+    "selectDateFirst": "Odaberite datum za rezervaciju",
+    "closeAria": "Zatvori kartu",
+    "clearDate": "Očisti"
+  },
+  "floorMap": {
+    "stairs": "Stubište",
+    "level": "Kat",
+    "entrance": "Ulaz",
+    "directionOfTravel": "Smjer vožnje",
+    "legend": {
+      "parkingSpot": "Parkirno mjesto",
+      "taken": "Zauzeto",
+      "noParking": "Zabranjeno",
+      "stairs": "Stubište"
+    },
+    "rooms": {
+      "office": "Ured",
+      "meetingRoom": "Sala za sastanke",
+      "meetingRoomShort": "SZS",
+      "kitchenWc": "Kuhinja / WC",
+      "stairs": "Stubište",
+      "corridor": "Hodnik",
+      "commonArea": "Zajednički prostor"
+    },
+    "depts": {
+      "AT": "Napredne tehnologije",
+      "MR": "Sala za sastanke",
+      "MS": "Mobilne tehnologije i sigurnost",
+      "ST": "Testiranje sustava",
+      "D": "Direktor",
+      "A": "Arhitekti"
+    }
+  },
+  "officeMap": {
+    "title": "Karta ureda",
+    "closeAria": "Zatvori kartu",
+    "floorTab": "Kat {{floor}}",
+    "showLegend": "Prikaži legendu",
+  "hideLegend": "Zatvori legendu",
+  "legend": "Legenda"
+  },
+  "confirmation": {
+    "and": "i",
+    "recurring": "Želite li rezervirati ovo svaki {{days}} tijekom {{month}}?",
+    "singleHour": "Želite li rezervirati ovo za {{date}}, od {{from}} do {{to}}?",
+    "singleDay": "Želite li rezervirati ovo za {{date}}?",
+    "multiDay": "Želite li rezervirati ovo od {{from}} do {{to}}?",
+    "needApproval": "Ova rezervacija zahtijeva odobrenje nadređenog. Obavijest e-poštom bit će poslana vašem nadređenom na pregled.",
+    "parkingSpotTaken": "Ovo parking mjesto je već rezervirano za odabrani datum. Molimo odaberite drugo parking mjesto ili promijenite datum."
+  },
+  "buttons": {
+    "book": "Rezerviraj",
+    "booking": "Rezerviranje...",
+    "bookNow": "Rezerviraj sada",
+    "sendRequest": "Pošalji zahtjev",
+    "cancel": "Otkaži",
+    "close": "Zatvori",
+    "confirm": "Potvrdi",
+    "loadingAsset": "Učitavanje detalja imovine...",
+    "loading": "Učitavanje...",
+    "errorLoadingBookings": "Pogreška pri učitavanju rezervacija. Molimo pokušajte ponovo kasnije."
+  },
+  "bookingDetailsModal": {
+    "booking": "Rezervacija",
+    "user": "Korisnik",
+    "name": "Ime",
+    "role": "Uloga",
+    "email": "E-mail",
+    "asset": "Imovina",
+    "status": "Status",
+    "category": "Kategorija",
+    "location": "Lokacija",
+    "bookingId": "ID rezervacije",
+    "start": "Početak",
+    "end": "Kraj",
+    "notes": "Bilješke"
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "title": "Korisnici",
+  "actions": {
+    "export": "Izvoz",
+    "new": "Novi"
+  },
+  "search": {
+    "placeholder": "Pretraži korisnike..."
+  },
+  "filters": {
+    "showDeleted": "Prikaži obrisane",
+    "role": "Uloga",
+    "allRoles": "Sve uloge",
+    "department": "Odjel",
+    "allDepartments": "Svi odjeli"
+  },
+  "roles": {
+    "EMPLOYEE": "Zaposlenik",
+    "ADMIN": "Administrator",
+    "MANAGER": "Menadžer"
+  },
+  "empty": {
+    "loading": "Učitavanje korisnika...",
+    "none": "Još nema korisnika."
+  },
+  "errors": {
+    "loadUsers": "Učitavanje korisnika nije uspjelo.",
+    "loadReport": "Učitavanje izvještaja nije uspjelo.",
+    "loadBookings": "Učitavanje rezervacija nije uspjelo."
+  },
+  "delete": {
+    "title": "Obrisati korisnika?",
+    "description": "Jeste li sigurni da želite obrisati \"{{name}}\"? Ovaj korisnik će biti označen kao obrisan."
+  },
+  "status": {
+    "active": "Aktivan",
+    "inactive": "Neaktivan",
+    "student": "Student",
+    "left_company": "Napustio tvrtku",
+    "deleted": "Obrisan"
+  },
+  "modals": {
+    "common": {
+      "closeAria": "Zatvori",
+      "save": "Spremi",
+      "saving": "Spremanje…",
+      "emptyValue": "-"
+    },
+    "view": {
+      "ariaLabel": "Detalji korisnika",
+      "fields": {
+        "name": "Ime",
+        "email": "Email",
+        "username": "Korisničko ime",
+        "role": "Uloga",
+        "department": "Odjel",
+        "managerEmail": "Email voditelja",
+        "notes": "Bilješke"
+      }
+    },
+    "edit": {
+      "ariaLabel": "Uredi korisnika",
+      "title": "Uredi korisnika",
+      "submitError": "Spremanje promjena nije uspjelo. Pokušajte ponovno.",
+      "fields": {
+        "role": "Uloga",
+        "status": "Status",
+        "username": "Korisničko ime",
+        "firstName": "Ime",
+        "lastName": "Prezime",
+        "email": "Email",
+        "department": "Odjel",
+        "managerEmail": "Email voditelja",
+        "notes": "Bilješke"
+      }
+    },
+    "create": {
+      "ariaLabel": "Kreiraj korisnika",
+      "title": "Dodaj novog korisnika",
+      "submitError": "Kreiranje korisnika nije uspjelo. Pokušajte ponovno.",
+      "fields": {
+        "role": "Uloga",
+        "status": "Status",
+        "username": "Korisničko ime",
+        "firstName": "Ime",
+        "lastName": "Prezime",
+        "email": "Email",
+        "password": "Lozinka",
+        "department": "Odjel",
+        "managerEmail": "Email voditelja",
+        "notes": "Bilješke"
+      }
+    },
+    "bookings": {
+      "ariaLabel": "Rezervacije",
+      "title": "Rezervacije",
+      "export": "Izvoz",
+      "closeAria": "Zatvori modal rezervacija",
+      "loading": "Učitavanje rezervacija...",
+      "empty": "Nema rezervacija za ovog korisnika.",
+      "table": {
+        "columns": {
+          "bookingId": "ID rezervacije",
+          "asset": "Imovina",
+          "date": "Datum",
+          "status": "Status"
+        }
+      }
+    },
+    "report": {
+      "userLabel": "Korisnik",
+      "loading": "Učitavanje...",
+      "stats": {
+        "total": "Ukupno rezervacija",
+        "active": "Aktivne",
+        "completed": "Završene",
+        "cancelled": "Otkazane",
+        "pending": "Na čekanju",
+        "approved": "Odobrene",
+        "rejected": "Odbijene"
+      }
+    }
+  },
+  "table": {
+    "columns": {
+      "name": "Ime",
+      "email": "Email",
+      "bookings": "Rezervacije",
+      "actions": "Radnje"
+    },
+    "bookingsCta": "Rezervacije",
+    "sort": {
+      "byLastNameAria": "Sortiraj po prezimenu ({{direction}})",
+      "direction": {
+        "ascending": "uzlazno",
+        "descending": "silazno"
+      }
+    },
+    "rowActions": {
+      "viewAria": "Pregled korisnika",
+      "reportAria": "Izvještaj korisnika",
+      "editAria": "Uredi korisnika",
+      "deleteAria": "Obriši korisnika"
+    }
+  },
+  "validation": {
+    "username": {
+      "min": "Korisničko ime mora imati najmanje 3 znaka",
+      "max": "Korisničko ime smije imati najviše 50 znakova",
+      "pattern": "Dopuštena su samo slova, brojke te znakovi ., _ i -"
+    },
+    "surname": {
+      "required": "Prezime je obavezno",
+      "min": "Prezime mora imati najmanje 3 znaka",
+      "max": "Prezime smije imati najviše 100 znakova",
+      "pattern": "Prezime smije sadržavati samo slova"
+    },
+    "name": {
+      "required": "Ime je obavezno",
+      "min": "Ime mora imati najmanje 3 znaka",
+      "max": "Ime smije imati najviše 100 znakova",
+      "pattern": "Ime smije sadržavati samo slova"
+    },
+    "email": {
+      "invalid": "E-mail nije u ispravnom formatu",
+      "max": "E-mail smije imati najviše 254 znaka"
+    },
+    "password": {
+      "min": "Lozinka mora imati najmanje 8 znakova",
+      "max": "Lozinka smije imati najviše 50 znakova"
+    },
+    "department": {
+      "required": "Odjel je obavezan"
+    },
+    "managerEmail": {
+      "invalid": "E-mail voditelja nije u ispravnom formatu",
+      "max": "E-mail voditelja smije imati najviše 254 znaka"
+    },
+    "notes": {
+      "max": "Bilješke smiju imati najviše 1000 znakova"
+    }
+  }
+}

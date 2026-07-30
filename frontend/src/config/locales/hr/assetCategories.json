@@ -1,0 +1,100 @@
+{
+  "title": "Kategorije imovine",
+  "actions": {
+    "new": "Novo"
+  },
+  "search": {
+    "placeholder": "Pretraži kategorije..."
+  },
+  "empty": {
+    "loading": "Učitavanje kategorija...",
+    "none": "Nema pronađenih kategorija"
+  },
+  "errors": {
+    "loadFailed": "Neuspjelo učitavanje kategorija",
+    "createFailed": "Neuspjelo dodavanje kategorije. Pokušajte ponovno."
+  },
+  "table": {
+    "columns": {
+      "name": "Naziv",
+      "description": "Opis",
+      "bookingPeriod": "Period rezervacije",
+      "actions": "Radnje"
+    },
+    "rowActions": {
+      "viewAria": "Prikaži kategoriju",
+      "editAria": "Uredi kategoriju"
+    },
+    "sort": {
+      "byNameAria": "Sortiraj po nazivu ({{direction}})",
+      "direction": {
+        "ascending": "uzlazno",
+        "descending": "silazno"
+      }
+    }
+  },
+  "modals": {
+    "common": {
+      "closeAria": "Zatvori",
+      "save": "Spremi",
+      "saving": "Spremanje…"
+    },
+    "view": {
+      "ariaLabel": "Detalji kategorije",
+      "fields": {
+        "icon": "Ikona",
+        "name": "Naziv",
+        "description": "Opis",
+        "bookingPeriod": "Period rezervacije",
+        "approval": "Treba odobrenje voditelja?"
+      },
+      "approval": {
+        "yes": "Da",
+        "no": "Ne"
+      }
+    },
+    "add": {
+      "ariaLabel": "Dodaj kategoriju",
+      "title": "Dodaj novu kategoriju",
+      "submit": "Dodaj",
+      "saving": "Spremanje…",
+      "fields": {
+        "name": "Naziv",
+        "description": "Opis",
+        "bookingPeriod": "Period rezervacije",
+        "approvalLabel": "Sva imovina iz ove kategorije treba odobrenje voditelja"
+      },
+      "validation": {
+        "nameRequired": "Naziv je obavezan",
+        "bookingPeriodRequired": "Period rezervacije je obavezan"
+      }
+    },
+    "edit": {
+      "ariaLabel": "Uredi kategoriju",
+      "title": "Uredi kategoriju",
+      "submit": "Spremi",
+      "submitError": "Neuspjelo spremanje promjena. Pokušajte ponovno.",
+      "fields": {
+        "name": "Naziv",
+        "description": "Opis",
+        "bookingPeriod": "Period rezervacije",
+        "approvalLabel": "Sva imovina iz ove kategorije treba odobrenje voditelja"
+      },
+      "validation": {
+        "nameRequired": "Naziv je obavezan",
+        "bookingPeriodRequired": "Period rezervacije je obavezan"
+      }
+    }
+  },
+  "bookingPeriod": {
+    "hour": "Sat",
+    "day": "Dan"
+  },
+  "validation": {
+    "nameRequired": "Naziv kategorije je obavezan",
+    "nameMax": "Naziv smije imati najviše 100 znakova",
+    "descriptionMax": "Opis smije imati najviše 255 znakova",
+    "bookingPeriodRequired": "Period rezervacije je obavezan",
+    "approvalRequired": "Odobrenje je obavezno"
+  }
+}

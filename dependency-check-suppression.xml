@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+
+    <suppress until="2026-08-31Z">
+        <notes><![CDATA[
+            CVE-2026-53914: build-time-only (build cache metadata / KAPT),
+            local + high-priv. No stable fix released yet (2.4.20 pending).
+            Not reachable at app runtime. Re-evaluate when 2.4.20 ships.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.jetbrains\.kotlin/kotlin-stdlib@.*$</packageUrl>
+        <cve>CVE-2026-53914</cve>
+    </suppress>
+
+
+    <suppress>
+        <notes><![CDATA[
+            Wrong-ecosystem false positives for io.opentelemetry Java artifacts
+            (proto, semconv, api, ...). Each CVE below targets opentelemetry-go,
+            opentelemetry-dotnet, or opentelemetry-cpp, not the Java runtime.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.opentelemetry.*$</packageUrl>
+        <cve>CVE-2026-29181</cve> <!-- opentelemetry-go -->
+        <cve>CVE-2026-39882</cve> <!-- opentelemetry-go, OTLP HTTP exporter -->
+        <cve>CVE-2026-39883</cve> <!-- opentelemetry-go, Darwin ioreg PATH hijack -->
+        <cve>CVE-2026-40894</cve> <!-- opentelemetry-dotnet, baggage parsing -->
+        <cve>CVE-2026-41178</cve> <!-- opentelemetry-go -->
+        <cve>CVE-2026-44967</cve> <!-- opentelemetry-cpp -->
+    </suppress>
+
+
+    <!-- FALSE POSITIVE: CVE-2025-7962 targets angus-mail (email transport),
+         NOT angus-activation (MIME type activation framework).
+         CPE mismatch: cpe for eclipse:angus_mail matched wrong artifact. -->
+    <suppress>
+        <notes>CVE-2025-7962 is assigned to angus-mail, not angus-activation. CPE false positive -
+            different artifact, different purpose.</notes>
+        <packageUrl regex="true">^pkg:maven/org\.eclipse\.angus/angus\-activation@.*$</packageUrl>
+        <cve>CVE-2025-7962</cve>
+    </suppress>
+
+    <!-- FALSE POSITIVE: CVE is for OpenTelemetry-Go, not Java (io.opentelemetry group) -->
+    <suppress>
+        <notes>CVE-2026-29181 affects opentelemetry-go, not the Java SDK semconv library</notes>
+        <packageUrl regex="true">^pkg:maven/io\.opentelemetry.*$</packageUrl>
+        <cve>CVE-2026-29181</cve>
+    </suppress>
+
+    <suppress>
+        <notes>CVE-2026-39883 affects opentelemetry-go PATH hijacking, not Java</notes>
+        <packageUrl regex="true">^pkg:maven/io\.opentelemetry.*$</packageUrl>
+        <cve>CVE-2026-39883</cve>
+    </suppress>
+
+    <suppress>
+        <notes>CVE-2026-39882 affects opentelemetry-go OTLP exporter, not Java</notes>
+        <packageUrl regex="true">^pkg:maven/io\.opentelemetry.*$</packageUrl>
+        <cve>CVE-2026-39882</cve>
+    </suppress>
+
+    <!-- FALSE POSITIVE: CVE-2026-40894 affects OpenTelemetry .NET, not Java -->
+    <suppress>
+        <notes>CVE-2026-40894 affects opentelemetry-dotnet baggage parsing, not Java</notes>
+        <packageUrl regex="true">^pkg:maven/io\.opentelemetry.*$</packageUrl>
+        <cve>CVE-2026-40894</cve>
+    </suppress>
+
+    <!-- FALSE POSITIVE: CVE-2026-42154  affects OpenTelemetry .NET, not Java -->
+    <suppress>
+        <notes>
+            The CVE is about the Prometheus server binary, OWASP Dependency-Check is incorrectly
+            matching it to your micrometer-registry-prometheus Java library because both contain the
+            word "prometheus" in their CPE (Common Platform Enumeration) identifier.
+        </notes>
+        <packageUrl regex="true">^pkg:maven/io\.micrometer/micrometer\-registry\-prometheus@.*$</packageUrl>
+        <cve>CVE-2026-42154</cve>
+    </suppress>
+
+</suppressions>
