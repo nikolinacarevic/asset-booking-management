@@ -20,16 +20,28 @@ export const Header: React.FC<HeaderProps> = ({
   const brand = (
     <Link
       to="/"
-      className="text-xl font-semibold tracking-tight text-(--color-text) md:text-2xl"
+      className="text-2xl font-bold tracking-tight text-(--color-primaryblue) md:text-3xl"
     >
       {t('layout.brand')}
     </Link>
   );
 
+  const controls = (
+    <>
+      <div className="hidden gap-6 md:flex">
+        <ThemeToggle />
+        <LanguageSwitcher className="text-(--color-primaryblue)" />
+      </div>
+      <div className="text-(--color-primaryblue) md:hidden">
+        <MobileMenu />
+      </div>
+    </>
+  );
+
   return (
     <div
       className={twMerge(
-        'fixed top-0 z-40 mx-auto h-20 w-full bg-(--color-surface) shadow-md',
+        'fixed top-0 z-40 mx-auto h-20 w-full border-b border-(--color-border) bg-white text-(--color-primaryblue) shadow-md',
         className
       )}
     >
@@ -37,22 +49,14 @@ export const Header: React.FC<HeaderProps> = ({
       {variant === 'app' ? (
         <div className="flex h-full items-center justify-between px-4 md:px-6">
           {brand}
-          <div className="hidden gap-6 md:flex">
-            <ThemeToggle />
-            <LanguageSwitcher />
-          </div>
-          <MobileMenu />
+          {controls}
         </div>
       ) : (
         <Layout className="h-full">
           <LayoutRow className="flex h-full items-center">
             <LayoutColumn className="flex items-center justify-between">
               {brand}
-              <div className="hidden gap-6 md:flex">
-                <ThemeToggle />
-                <LanguageSwitcher />
-              </div>
-              <MobileMenu />
+              {controls}
             </LayoutColumn>
           </LayoutRow>
         </Layout>

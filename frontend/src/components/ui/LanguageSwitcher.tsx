@@ -30,9 +30,10 @@ function resolveLanguage(code: string) {
 
 type Props = {
   variant?: 'header' | 'mobileMenu';
+  className?: string;
 };
 
-function LanguageSwitcher({ variant = 'header' }: Readonly<Props>) {
+function LanguageSwitcher({ variant = 'header', className }: Readonly<Props>) {
   const { i18n, t } = useTranslation();
 
   const currentLanguage = resolveLanguage(i18n.language);
@@ -53,7 +54,10 @@ function LanguageSwitcher({ variant = 'header' }: Readonly<Props>) {
           aria-label={
             currentLanguage?.label ?? t('ui.languageSwitcher.selectLanguage')
           }
-          className="group flex items-center gap-1.5 text-gray-900 hover:cursor-pointer focus:outline-none dark:text-gray-100"
+          className={twMerge(
+            'group flex items-center gap-1.5 text-gray-900 hover:cursor-pointer focus:outline-none dark:text-gray-100',
+            className
+          )}
         >
           {CurrentFlag ? (
             <CurrentFlag className={flagClass} title={currentLanguage.label} />

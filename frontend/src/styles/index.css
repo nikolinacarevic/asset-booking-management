@@ -600,23 +600,23 @@
 }
 
 :root {
-  --color-bg: #f5f5f5;
+  --color-bg: #ffffff;
   --color-text: #252525;
-  --color-surface: #e4e4e4;
-  --color-border: #e4e4e4;
+  --color-surface: #f0f5fb;
+  --color-border: #d9e6f4;
   --color-select-border: #2684ff;
-  --color-primaryblue: #0043ce;
-  --color-secondaryblue: #0036a5;
+  --color-primaryblue: #0033a8;
+  --color-secondaryblue: #002784;
   --color-table-surface: #ffffff;
-  --color-table-head: var(--color-surface);
+  --color-table-head: #f5f8fc;
   --color-table-head-text: var(--color-text);
   --color-table-text: var(--color-text);
-  --color-table-border: rgba(37, 37, 37, 0.12);
-  --color-table-row-border: rgba(37, 37, 37, 0.08);
-  --color-table-row-hover: rgba(0, 67, 206, 0.05);
-  --color-surface-hover: rgba(0, 67, 206, 0.05);
+  --color-table-border: rgba(37, 37, 37, 0.1);
+  --color-table-row-border: rgba(37, 37, 37, 0.06);
+  --color-table-row-hover: rgba(0, 67, 206, 0.04);
+  --color-surface-hover: rgba(0, 67, 206, 0.04);
   --color-table-shadow:
-    0px 0px 0px 1px rgba(37, 37, 37, 0.03), 0px 8px 24px rgba(37, 37, 37, 0.06);
+    0px 0px 0px 1px rgba(37, 37, 37, 0.03), 0px 8px 24px rgba(37, 37, 37, 0.04);
 
   --font-sans: 'Roboto', ui-sans-serif, system-ui, sans-serif;
 
