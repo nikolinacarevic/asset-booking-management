@@ -8,7 +8,7 @@ import { Table, type TableColumn } from '../../../components/ui/Table';
 import { Button } from '../../../components/ui/Button';
 
 // Types
-import { type AssetDto, type AssetStatus } from '../../asset/types';
+import { type AssetDto } from '../../asset/types';
 
 type Props = {
   assets: AssetDto[];
@@ -39,12 +39,6 @@ export function BookingTable({
         key: 'name',
         header: t('assets.table.assetName'),
         accessor: 'name',
-      },
-      {
-        key: 'status',
-        header: t('assets.table.status'),
-        render: (asset) =>
-          t(`assets.status.${asset.status}` as `assets.status.${AssetStatus}`),
       },
       {
         key: 'approval',
