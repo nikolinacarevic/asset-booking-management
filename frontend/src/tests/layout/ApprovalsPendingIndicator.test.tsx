@@ -49,16 +49,32 @@ describe('ApprovalsPendingIndicator', () => {
     expect(screen.queryByLabelText('layout.navbar.pendingApprovals')).not.toBeInTheDocument();
   });
 
-  it('renders a red indicator when pending bookings exist', () => {
+  it('renders a count badge when pending bookings exist', () => {
     vi.mocked(usePendingBookings).mockReturnValue({
-      bookings: [{ id: 1 }] as any,
+      bookings: [{ id: 1 }, { id: 2 }, { id: 3 }] as any,
       loading: false,
       error: '',
       refetch: vi.fn().mockResolvedValue(undefined),
     });
 
     renderIndicator();
-    expect(screen.getByLabelText('layout.navbar.pendingApprovals')).toBeInTheDocument();
+    const badge = screen.getByLabelText('layout.navbar.pendingApprovals');
+    expect(badge).toBeInTheDocument();
+    expect(badge).toHaveTextContent('3');
+  });
+
+  it('caps the badge label at 9+', () => {
+    vi.mocked(usePendingBookings).mockReturnValue({
+      bookings: Array.from({ length: 12 }, (_, id) => ({ id })) as any,
+      loading: false,
+      error: '',
+      refetch: vi.fn().mockResolvedValue(undefined),
+    });
+
+    renderIndicator();
+    expect(screen.getByLabelText('layout.navbar.pendingApprovals')).toHaveTextContent(
+      '9+'
+    );
   });
 
   it('does not render for non-manager users', () => {
