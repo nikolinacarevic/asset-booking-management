@@ -128,8 +128,8 @@ export default function BookingsByAsset() {
   );
 
   const calendarEvents = React.useMemo(
-    () => mapBookingsToCalendarEvents(bookings),
-    [bookings]
+    () => mapBookingsToCalendarEvents(bookings, bookingPeriod),
+    [bookings, bookingPeriod]
   );
 
   const isButtonDisabled = useBookingAvailability({

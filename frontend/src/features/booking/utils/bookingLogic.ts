@@ -1,13 +1,6 @@
 // Types
 import type { BookingWithRelations } from '../../booking/types';
 
-const STATUS_COLORS: Record<string, string> = {
-  APPROVED: '#22c55e',
-  PENDING: '#f59e0b',
-  REJECTED: '#ef4444',
-  CANCELLED: '#6b7280',
-};
-
 // function to check if a booking is past its end date
 export const isBookingPastEnd = (
   booking: Pick<BookingWithRelations, 'bookingEnd'>
@@ -36,19 +29,26 @@ export const sortBookingsNewestFirst = (
   );
 
 export const mapBookingsToCalendarEvents = (
-  bookings: BookingWithRelations[]
+  bookings: BookingWithRelations[],
+  bookingPeriod: 'HOUR' | 'DAY' = 'DAY'
 ) => {
-  return bookings.map((booking) => ({
-    id: booking.id.toString(),
-    title: booking.user.surname,
-    start: new Date(booking.bookingStart).toISOString(),
-    end: new Date(booking.bookingEnd).toISOString(),
-    backgroundColor: STATUS_COLORS[booking.status] || '#3b82f6',
-    borderColor: STATUS_COLORS[booking.status] || '#3b82f6',
-    extendedProps: {
-      booking,
-    },
-  }));
+  return bookings
+    .filter(
+      (booking) =>
+        booking.status === 'APPROVED' || booking.status === 'PENDING'
+    )
+    .map((booking) => ({
+      id: booking.id.toString(),
+      title: '',
+      start: new Date(booking.bookingStart).toISOString(),
+      end: new Date(booking.bookingEnd).toISOString(),
+      backgroundColor: '#e5e7eb',
+      borderColor: '#e5e7eb',
+      display: bookingPeriod === 'DAY' ? ('background' as const) : ('block' as const),
+      extendedProps: {
+        booking,
+      },
+    }));
 };
 
 export const hasBookingOverlap = ({
