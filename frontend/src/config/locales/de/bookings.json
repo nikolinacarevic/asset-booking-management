@@ -4,6 +4,8 @@
   "loading": "Laden...",
   "table": {
     "approval": "Freigabe",
+    "approvalYes": "Ja",
+    "approvalNo": "Nein",
     "book": "Buchen",
     "bookSr": "Asset buchen"
   },

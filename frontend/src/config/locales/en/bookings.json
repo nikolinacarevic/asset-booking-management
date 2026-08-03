@@ -4,6 +4,8 @@
   "loading": "Loading...",
   "table": {
     "approval": "Approval",
+    "approvalYes": "Yes",
+    "approvalNo": "No",
     "book": "Book",
     "bookSr": "Book asset"
   },

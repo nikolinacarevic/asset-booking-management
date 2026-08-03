@@ -89,7 +89,11 @@ export default function Bookings() {
       {loading ? (
         <div className="mt-6">{t('bookings.loading')}</div>
       ) : (
-        <BookingTable assets={assets} className="mt-6" />
+        <BookingTable
+          assets={assets}
+          requiresApproval={selectedCategory?.approval}
+          className="mt-6"
+        />
       )}
     </LayoutColumn>
   );

@@ -4,6 +4,8 @@
   "loading": "Učitavanje...",
   "table": {
     "approval": "Odobrenje",
+    "approvalYes": "Da",
+    "approvalNo": "Ne",
     "book": "Rezerviraj",
     "bookSr": "Rezerviraj imovinu"
   },

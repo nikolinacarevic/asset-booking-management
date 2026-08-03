@@ -12,12 +12,19 @@ import { type AssetDto, type AssetStatus } from '../../asset/types';
 
 type Props = {
   assets: AssetDto[];
+  requiresApproval?: boolean;
   isLoading?: boolean;
   error?: string | null;
   className?: string;
 };
 
-export function BookingTable({ assets, isLoading, error, className }: Props) {
+export function BookingTable({
+  assets,
+  requiresApproval,
+  isLoading,
+  error,
+  className,
+}: Props) {
   const { t } = useTranslation();
 
   const columns: TableColumn<AssetDto>[] = useMemo(
@@ -42,7 +49,26 @@ export function BookingTable({ assets, isLoading, error, className }: Props) {
       {
         key: 'approval',
         header: t('bookings.table.approval'),
-        render: () => '-',
+        render: () => {
+          if (requiresApproval == null) {
+            return '-';
+          }
+
+          return (
+            <span
+              className={[
+                'inline-flex w-fit rounded-full px-3 py-1 text-sm font-medium',
+                requiresApproval
+                  ? 'bg-(--color-status-damaged-bg) text-(--color-status-damaged-text)'
+                  : 'bg-(--color-status-active-bg) text-(--color-status-active-text)',
+              ].join(' ')}
+            >
+              {requiresApproval
+                ? t('bookings.table.approvalYes')
+                : t('bookings.table.approvalNo')}
+            </span>
+          );
+        },
       },
       {
         key: 'book',
@@ -53,12 +79,14 @@ export function BookingTable({ assets, isLoading, error, className }: Props) {
         cellClassName: 'w-px whitespace-nowrap',
         render: (asset) => (
           <Link to={`/assets/${asset.id}/bookings`}>
-            <Button data-testid="book-button" size="sm">{t('bookings.table.book')}</Button>
+            <Button data-testid="book-button" size="sm">
+              {t('bookings.table.book')}
+            </Button>
           </Link>
         ),
       },
     ],
-    [t]
+    [requiresApproval, t]
   );
 
   return (
