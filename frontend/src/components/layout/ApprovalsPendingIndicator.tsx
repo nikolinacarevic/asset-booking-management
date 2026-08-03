@@ -2,14 +2,14 @@ import { useTranslation } from 'react-i18next';
 
 import { useAuth } from '../../features/auth/context/AuthContext';
 import { usePendingBookings } from '../../features/booking/hooks/usePendingBookings';
-import { isManager } from '../../features/user/utils/users';
+import { canAccessApprovals } from '../../features/user/utils/users';
 
 const MAX_DISPLAY_COUNT = 9;
 
 export function ApprovalsPendingIndicator() {
   const { t } = useTranslation();
   const { user, isLoading } = useAuth();
-  const canFetch = !isLoading && user != null && isManager(user);
+  const canFetch = !isLoading && user != null && canAccessApprovals(user);
   const { bookings } = usePendingBookings(user, canFetch);
 
   if (!canFetch || bookings.length === 0) {

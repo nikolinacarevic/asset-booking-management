@@ -13,7 +13,7 @@ import { useBookingApproval } from '../features/booking/hooks/useBookingApproval
 import { usePendingBookings, invalidatePendingBookings } from '../features/booking/hooks/usePendingBookings';
 import { useAuth } from '../features/auth/context/AuthContext';
 import { filterPendingBookingsBySearch } from '../features/booking/utils/approvalFilter';
-import { isManager } from '../features/user/utils/users';
+import { canAccessApprovals } from '../features/user/utils/users';
 
 // Approvals page
 export default function Approvals() {
@@ -22,7 +22,7 @@ export default function Approvals() {
   const { bookingId } = useParams();
 
   const { user, isLoading } = useAuth();
-  const canFetch = !isLoading && user != null && isManager(user);
+  const canFetch = !isLoading && user != null && canAccessApprovals(user);
   const { bookings, loading, error } = usePendingBookings(user, canFetch);
   const [search, setSearch] = useState('');
 
@@ -67,7 +67,7 @@ export default function Approvals() {
     navigate('/approvals');
   }, [navigate]);
 
-  if (!isLoading && !isManager(user)) {
+  if (!isLoading && !canAccessApprovals(user)) {
     return <Navigate to="/bookings" replace />;
   }
 

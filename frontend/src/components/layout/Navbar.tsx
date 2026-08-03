@@ -22,7 +22,7 @@ import type { UserDto } from '../../features/user/types';
 // API
 import { useAuth } from '../../features/auth/context/AuthContext';
 import { getUserById } from '../../features/user/api/users';
-import { getFullName, isAdmin, isEmployee, isManager } from '../../features/user/utils/users';
+import { getFullName, isAdmin, isEmployee, canAccessApprovals } from '../../features/user/utils/users';
 
 export const Navbar: React.FC = () => {
   const { t } = useTranslation();
@@ -84,7 +84,7 @@ export const Navbar: React.FC = () => {
       label: t('layout.navbar.report'),
       icon: AssessmentSharpIcon,
     },
-    ...(isManager(user)
+    ...(canAccessApprovals(user)
       ? [
           {
             to: '/approvals',

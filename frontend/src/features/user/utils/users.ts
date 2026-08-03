@@ -36,6 +36,13 @@ export function isManager(
   return user?.role === 'MANAGER';
 }
 
+// function to check if the user can access the approvals page
+export function canAccessApprovals(
+  user: Pick<UserDto, 'role'> | null | undefined
+): boolean {
+  return isAdmin(user) || isManager(user);
+}
+
 // function to check if the user is an employee
 export function isEmployee(
   user: Pick<UserDto, 'role'> | null | undefined

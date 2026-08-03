@@ -8,7 +8,15 @@ vi.mock('../../features/booking/hooks/usePendingBookings', () => ({
 }));
 vi.mock('../../features/user/utils/users', async (importOriginal) => {
   const actual = await importOriginal<typeof import('../../features/user/utils/users')>();
-  return { ...actual, isManager: vi.fn() };
+  const isAdmin = vi.fn();
+  const isManager = vi.fn();
+  return {
+    ...actual,
+    isAdmin,
+    isManager,
+    canAccessApprovals: (user: Parameters<typeof actual.canAccessApprovals>[0]) =>
+      Boolean(isAdmin(user) || isManager(user)),
+  };
 });
 
 import { ApprovalsPendingIndicator } from '../../components/layout/ApprovalsPendingIndicator';
@@ -77,7 +85,7 @@ describe('ApprovalsPendingIndicator', () => {
     );
   });
 
-  it('does not render for non-manager users', () => {
+  it('does not render for users without approval access', () => {
     vi.mocked(isManager).mockReturnValue(false);
     vi.mocked(usePendingBookings).mockReturnValue({
       bookings: [{ id: 1 }] as any,

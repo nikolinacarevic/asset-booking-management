@@ -4,7 +4,7 @@ import { vi } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Approvals from '../../pages/Approvals';
 import { mockUseAuth, authState } from '../mocks/auth';
-import { isManager } from '../../features/user/utils/users';
+import { canAccessApprovals } from '../../features/user/utils/users';
 import { usePendingBookings } from '../../features/booking/hooks/usePendingBookings';
 import { filterPendingBookingsBySearch } from '../../features/booking/utils/approvalFilter';
 
@@ -41,7 +41,7 @@ vi.mock('../../features/booking/components/PendingApprovalsTable', () => ({
 }));
 
 vi.mock('../../features/user/utils/users', () => ({
-  isManager: vi.fn(() => true),
+  canAccessApprovals: vi.fn(() => true),
 }));
 
 vi.mock('../../features/booking/hooks/usePendingBookings', () => ({
@@ -85,7 +85,7 @@ const renderPage = (path = '/approvals') =>
 
 describe('Approvals', () => {
   afterEach(() => {
-    vi.mocked(isManager).mockReturnValue(true);
+    vi.mocked(canAccessApprovals).mockReturnValue(true);
     mockUseAuth.mockReturnValue(authState({ user: { id: 1, role: 'MANAGER' } as any }));
     vi.mocked(usePendingBookings).mockReturnValue({ bookings: [], loading: false, error: '', refetch: vi.fn().mockResolvedValue(undefined) });
   });
@@ -100,8 +100,8 @@ describe('Approvals', () => {
     expect(screen.getByPlaceholderText('approvals.search.placeholder')).toBeInTheDocument();
   });
 
-  it('redirects to /bookings for non-manager', () => {
-    vi.mocked(isManager).mockReturnValue(false);
+  it('redirects to /bookings for users without approval access', () => {
+    vi.mocked(canAccessApprovals).mockReturnValue(false);
     mockUseAuth.mockReturnValue(authState({ user: { id: 1, role: 'EMPLOYEE' } as any }));
     renderPage();
     expect(screen.getByText('BookingsPage')).toBeInTheDocument();
@@ -142,7 +142,7 @@ describe('Approvals', () => {
 
   it('does not redirect while user is loading', () => {
     mockUseAuth.mockReturnValue(authState({ user: null, isLoading: true }));
-    vi.mocked(isManager).mockReturnValue(false);
+    vi.mocked(canAccessApprovals).mockReturnValue(false);
     renderPage();
     expect(screen.queryByText('BookingsPage')).not.toBeInTheDocument();
   });

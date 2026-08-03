@@ -10,11 +10,15 @@ vi.mock('../../components/layout/Layout', () => ({
 }));
 vi.mock('../../features/user/utils/users', async (importOriginal) => {
   const actual = await importOriginal<typeof import('../../features/user/utils/users')>();
+  const isAdmin = vi.fn();
+  const isManager = vi.fn();
   return {
     ...actual,
     getFullName: vi.fn(() => 'Test User'),
-    isAdmin: vi.fn(),
-    isManager: vi.fn(),
+    isAdmin,
+    isManager,
+    canAccessApprovals: (user: Parameters<typeof actual.canAccessApprovals>[0]) =>
+      Boolean(isAdmin(user) || isManager(user)),
   };
 });
 vi.mock('../../features/user/api/users', () => ({
@@ -60,8 +64,19 @@ describe('Navbar', () => {
   });
 
   it.each([
-    ['users',     'admin',   () => vi.mocked(isAdmin).mockReturnValue(true),   'layout.navbar.users'],
-    ['approvals', 'manager', () => vi.mocked(isManager).mockReturnValue(true), 'layout.navbar.approvals'],
+    ['users', 'admin', () => vi.mocked(isAdmin).mockReturnValue(true), 'layout.navbar.users'],
+    [
+      'approvals',
+      'manager',
+      () => vi.mocked(isManager).mockReturnValue(true),
+      'layout.navbar.approvals',
+    ],
+    [
+      'approvals',
+      'admin',
+      () => vi.mocked(isAdmin).mockReturnValue(true),
+      'layout.navbar.approvals',
+    ],
   ])('renders %s link only for %s', (_, __, setup, linkText) => {
     renderNavbar();
     expect(screen.queryByText(linkText)).not.toBeInTheDocument();
@@ -70,8 +85,8 @@ describe('Navbar', () => {
     expect(screen.getAllByText(linkText)[0]).toBeInTheDocument();
   });
 
-  it('renders pending approvals indicator for manager', () => {
-    vi.mocked(isManager).mockReturnValue(true);
+  it('renders pending approvals indicator for manager or admin', () => {
+    vi.mocked(isAdmin).mockReturnValue(true);
     renderNavbar();
     expect(screen.getByTestId('approvals-pending-indicator')).toBeInTheDocument();
   });

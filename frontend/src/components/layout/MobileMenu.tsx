@@ -27,7 +27,7 @@ import {
   getFullName,
   isAdmin,
   isEmployee,
-  isManager,
+  canAccessApprovals,
 } from '../../features/user/utils/users';
 
 export default function MobileMenu() {
@@ -66,7 +66,7 @@ export default function MobileMenu() {
     ...(isAdmin(user)
       ? [{ to: '/users', label: t('layout.navbar.users'), icon: PeopleSharp }]
       : []),
-    ...(isManager(user)
+    ...(canAccessApprovals(user)
       ? [
           {
             to: '/approvals',
