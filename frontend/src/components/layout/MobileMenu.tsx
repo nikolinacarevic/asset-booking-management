@@ -2,7 +2,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { useTranslation } from 'react-i18next';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, matchPath, useLocation, useNavigate } from 'react-router-dom';
 
 // Components
 import { ApprovalsPendingIndicator } from './ApprovalsPendingIndicator';
@@ -33,6 +33,17 @@ import {
 export default function MobileMenu() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { pathname } = useLocation();
+  const isAssetBookingRoute =
+    matchPath('/assets/:assetId/bookings', pathname) != null;
+
+  const isItemActive = (to: string, isActive: boolean) => {
+    if (to === '/bookings') {
+      return isActive || isAssetBookingRoute;
+    }
+    return isActive;
+  };
+
   const links = [
     ...(user && !isEmployee(user)
       ? [
@@ -99,10 +110,11 @@ export default function MobileMenu() {
               <Dialog.Close asChild key={label}>
                 <NavLink
                   to={to}
+                  end={to === '/assets'}
                   className={({ isActive }) =>
                     [
                       'flex items-center gap-3 rounded-xl px-3.5 py-3 text-base font-medium transition-colors duration-150',
-                      isActive
+                      isItemActive(to, isActive)
                         ? 'bg-(--color-bg) text-black shadow-(--shadow-card) dark:bg-bg-dark dark:text-white'
                         : 'text-black hover:bg-(--color-bg)/70 dark:text-white dark:hover:bg-bg-dark/70',
                     ].join(' ')

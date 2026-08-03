@@ -1,6 +1,6 @@
 // External packages
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, matchPath, useLocation } from 'react-router-dom';
 import MonitorSharpIcon from '@mui/icons-material/MonitorSharp';
 import CalendarTodaySharpIcon from '@mui/icons-material/CalendarTodaySharp';
 import PeopleSharpIcon from '@mui/icons-material/PeopleSharp';
@@ -27,6 +27,7 @@ import { getFullName, isAdmin, isEmployee, isManager } from '../../features/user
 export const Navbar: React.FC = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { pathname } = useLocation();
 
   const [userDto, setUserDto] = useState<UserDto | undefined>();
 
@@ -35,6 +36,16 @@ export const Navbar: React.FC = () => {
 
     getUserById(user.id).then(setUserDto).catch(console.error);
   }, [user]);
+
+  const isAssetBookingRoute =
+    matchPath('/assets/:assetId/bookings', pathname) != null;
+
+  const isItemActive = (to: string, isActive: boolean) => {
+    if (to === '/bookings') {
+      return isActive || isAssetBookingRoute;
+    }
+    return isActive;
+  };
 
   const navItems = [
     ...(user && !isEmployee(user)
@@ -107,7 +118,10 @@ export const Navbar: React.FC = () => {
             <NavLink
               key={to}
               to={to}
-              className={({ isActive }) => getLinkClass(isActive)}
+              end={to === '/assets'}
+              className={({ isActive }) =>
+                getLinkClass(isItemActive(to, isActive))
+              }
             >
               <Icon className="shrink-0 opacity-80" fontSize="small" />
               <span className="flex min-w-0 flex-1 items-center font-medium">

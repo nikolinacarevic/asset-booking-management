@@ -107,4 +107,14 @@ describe('Navbar', () => {
     expect(active).toHaveClass('rounded-xl');
     expect(active).not.toHaveClass('border-transparent');
   });
+
+  it('keeps Bookings active on asset booking route instead of Assets', () => {
+    renderNavbar(['/assets/12/bookings']);
+
+    const bookings = screen.getByRole('link', { name: /layout\.navbar\.bookings/i });
+    const assets = screen.getByRole('link', { name: /layout\.navbar\.assets/i });
+
+    expect(bookings).not.toHaveClass('border-transparent');
+    expect(assets).toHaveClass('border-transparent');
+  });
 });
