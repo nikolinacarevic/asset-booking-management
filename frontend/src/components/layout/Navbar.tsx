@@ -84,20 +84,14 @@ export const Navbar: React.FC = () => {
       : []),
   ];
   //TODO hover, new tab
-  // Base for links
   const linkBase =
-    'flex w-full hover:cursor-pointer items-center p-3 transition-all border-l-8 w-full';
+    'mx-3 flex w-[calc(100%-1.5rem)] cursor-pointer items-center gap-3 rounded-xl border-l-4 px-3.5 py-3 text-base leading-snug tracking-normal transition-all duration-150 md:text-lg lg:text-xl';
 
-  // Style when link iz active
   const activeStyle =
-    'bg-(--color-bg)  border-(--color-primaryblue) text-black shadow-card dark:bg-bg-dark dark:text-white';
+    'border-(--color-primaryblue) bg-(--color-bg) text-black shadow-(--shadow-card) dark:bg-bg-dark dark:text-white';
 
-  // Style when link is not active
-  const inactiveStyle = `
-    border-transparent text-black 
-    hover:bg-(--color-bg) hover:border-(--color-primaryblue)
-    dark:text-white dark:hover:bg-bg-dark dark:hover:border-(--color-primaryblue)
-  `;
+  const inactiveStyle =
+    'border-transparent text-black hover:border-(--color-primaryblue) hover:bg-(--color-bg) dark:text-white dark:hover:bg-bg-dark';
 
   const getLinkClass = (isActive: boolean) =>
     `${linkBase} ${isActive ? activeStyle : inactiveStyle}`;
@@ -105,18 +99,18 @@ export const Navbar: React.FC = () => {
   return (
     <LayoutColumn
       mdSpan={3}
-      className="text-text-light fixed left-0 z-20 hidden h-screen min-h-screen w-full flex-col bg-(--color-surface) px-0 pt-20 pb-10 text-base leading-11 tracking-[0.2em] shadow-md sm:text-lg sm:tracking-widest md:flex md:w-50 md:max-w-75 md:px-0 md:text-xl md:tracking-[0.15em] lg:px-0 lg:text-2xl dark:text-white dark:shadow-black/20"
+      className="text-text-light fixed left-0 z-20 hidden h-screen min-h-screen w-full flex-col border-r border-(--color-border) bg-(--color-surface) pt-20 pb-6 shadow-md md:flex md:w-50 md:max-w-75 dark:text-white dark:shadow-black/20"
     >
-      <nav className="flex h-full w-full flex-col overflow-y-auto overscroll-contain pt-10">
-        <div className="flex w-full shrink-0 flex-col gap-4">
+      <nav className="flex h-full w-full flex-col overflow-y-auto overscroll-contain px-0 pt-8">
+        <div className="flex w-full shrink-0 flex-col gap-2">
           {navItems.map(({ to, label, icon: Icon }) => (
             <NavLink
               key={to}
               to={to}
               className={({ isActive }) => getLinkClass(isActive)}
             >
-              <Icon className="mr-4" />
-              <span className="flex flex-1 items-center">
+              <Icon className="shrink-0 opacity-80" fontSize="small" />
+              <span className="flex min-w-0 flex-1 items-center font-medium">
                 {label}
                 {to === '/approvals' && <ApprovalsPendingIndicator />}
               </span>
@@ -124,26 +118,28 @@ export const Navbar: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-auto flex w-full shrink-0 flex-col gap-4 pt-4">
+        <div className="mt-auto flex w-full shrink-0 flex-col gap-2 border-t border-(--color-border) pt-4">
           <NavLink
             to="/account-info"
             className={({ isActive }) => getLinkClass(isActive)}
           >
-            <AccountCircleSharp className="mr-3" sx={{ fontSize: 26 }} />
+            <AccountCircleSharp className="shrink-0 opacity-80" sx={{ fontSize: 24 }} />
             {user ? (
-              <div className="flex flex-col leading-tight">
-                <div className="tracking-normal">{getFullName(user)}</div>
+              <div className="flex min-w-0 flex-col leading-tight">
+                <div className="truncate font-medium tracking-normal">
+                  {getFullName(user)}
+                </div>
                 <div className="text-xs tracking-normal text-gray-500 dark:text-gray-400">
                   {userDto?.role}
                 </div>
               </div>
             ) : (
-              t('layout.navbar.account')
+              <span className="font-medium">{t('layout.navbar.account')}</span>
             )}
           </NavLink>
           <NavLink to="/login" className={getLinkClass(false)}>
-            <LogoutSharpIcon className="mr-4" />
-            {t('layout.navbar.logout')}
+            <LogoutSharpIcon className="shrink-0 opacity-80" fontSize="small" />
+            <span className="font-medium">{t('layout.navbar.logout')}</span>
           </NavLink>
         </div>
       </nav>

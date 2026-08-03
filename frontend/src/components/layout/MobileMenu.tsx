@@ -83,7 +83,7 @@ export default function MobileMenu() {
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-40 bg-black/50 data-[state=closed]:animate-[fadeOut_200ms] data-[state=open]:animate-[fadeIn_200ms]" />
 
-        <Dialog.Content className="fixed top-0 left-0 z-50 flex h-full w-[calc(100vw-80px)] flex-col bg-(--color-surface) shadow-lg data-[state=closed]:animate-[slideOut_300ms_ease-in] data-[state=open]:animate-[slideIn_300ms_ease-out]">
+        <Dialog.Content className="fixed top-0 left-0 z-50 flex h-full w-[min(100vw-4rem,22rem)] flex-col bg-(--color-surface) shadow-lg data-[state=closed]:animate-[slideOut_300ms_ease-in] data-[state=open]:animate-[slideIn_300ms_ease-out]">
           <VisuallyHidden.Root>
             <Dialog.Title>{t('layout.mobileMenu.title')}</Dialog.Title>
             <Dialog.Description>
@@ -91,18 +91,25 @@ export default function MobileMenu() {
             </Dialog.Description>
           </VisuallyHidden.Root>
 
-          <div className="flex h-20 w-full items-center justify-center px-6">
-            <Logo className="mt-2 h-10 w-auto" />
+          <div className="flex h-20 w-full shrink-0 items-center justify-center border-b border-(--color-border) px-6">
+            <Logo className="h-10 w-auto" />
           </div>
-          <nav className="flex-1 overflow-y-auto overscroll-contain">
+          <nav className="flex flex-1 flex-col gap-1 overflow-y-auto overscroll-contain px-3 py-3">
             {links.map(({ to, label, icon: Icon }) => (
               <Dialog.Close asChild key={label}>
                 <NavLink
                   to={to}
-                  className={'flex items-center gap-3 p-6 text-2xl'}
+                  className={({ isActive }) =>
+                    [
+                      'flex items-center gap-3 rounded-xl px-3.5 py-3 text-base font-medium transition-colors duration-150',
+                      isActive
+                        ? 'bg-(--color-bg) text-black shadow-(--shadow-card) dark:bg-bg-dark dark:text-white'
+                        : 'text-black hover:bg-(--color-bg)/70 dark:text-white dark:hover:bg-bg-dark/70',
+                    ].join(' ')
+                  }
                 >
-                  <Icon />
-                  <span className="flex flex-1 items-center">
+                  <Icon className="shrink-0 opacity-80" fontSize="small" />
+                  <span className="flex min-w-0 flex-1 items-center">
                     {label}
                     {to === '/approvals' && <ApprovalsPendingIndicator />}
                   </span>
@@ -110,20 +117,20 @@ export default function MobileMenu() {
               </Dialog.Close>
             ))}
           </nav>
-          <div className="flex w-full items-center justify-between px-6">
+          <div className="flex w-full shrink-0 items-center justify-between px-4 py-3">
             <LanguageSwitcher variant="mobileMenu" />
             <ThemeToggle />
           </div>
-          <div className="mt-auto flex w-full flex-col gap-3 p-6">
+          <div className="mt-auto flex w-full shrink-0 flex-col gap-2.5 border-t border-(--color-border) p-3">
             <Dialog.Close asChild>
               <NavLink
                 to="/account-info"
-                className="flex w-full items-center justify-center gap-3 rounded-lg border border-(--color-table-border) py-3 text-lg font-medium"
+                className="flex w-full items-center gap-3 rounded-xl bg-(--color-bg) px-3.5 py-3 text-base font-medium shadow-(--shadow-card) transition-colors dark:bg-bg-dark"
               >
-                <AccountCircleSharp sx={{ fontSize: 26 }} />
+                <AccountCircleSharp className="shrink-0" sx={{ fontSize: 26 }} />
                 {user ? (
-                  <div className="flex flex-col items-start leading-tight">
-                    <div>{getFullName(user)}</div>
+                  <div className="flex min-w-0 flex-col items-start leading-tight">
+                    <div className="truncate">{getFullName(user)}</div>
                     <div className="text-xs font-normal text-gray-500 dark:text-gray-400">
                       {user.role}
                     </div>
@@ -137,7 +144,7 @@ export default function MobileMenu() {
             <Dialog.Close asChild>
               <Button
                 onClick={handleLogout}
-                className="w-full border-none bg-red-500 hover:bg-red-600"
+                className="w-full rounded-xl border-none bg-red-500 hover:bg-red-600"
               >
                 <LogoutSharp />
                 {t('layout.navbar.logout')}

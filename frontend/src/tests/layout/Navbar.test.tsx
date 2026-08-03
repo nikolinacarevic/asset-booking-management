@@ -99,12 +99,12 @@ describe('Navbar', () => {
   it('applies inactive styles by default and active styles on current route', () => {
     renderNavbar();
     const inactive = screen.getByRole('link', { name: /layout\.navbar\.assets/i });
+    expect(inactive).toHaveClass('rounded-xl');
     expect(inactive).toHaveClass('border-transparent');
-    expect(inactive).not.toHaveClass('shadow-card');
 
     renderNavbar(['/assets']);
     const active = screen.getAllByRole('link', { name: /layout\.navbar\.assets/i })[1];
-    expect(active).toHaveClass('shadow-card');
+    expect(active).toHaveClass('rounded-xl');
     expect(active).not.toHaveClass('border-transparent');
   });
 });
