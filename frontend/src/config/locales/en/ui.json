@@ -35,6 +35,7 @@
     "toTime": "To time",
     "date": "Date",
     "selectDate": "Select date...",
+    "clearDate": "Clear date",
     "fromDate":"From date",
     "toDate":"To date"
   },

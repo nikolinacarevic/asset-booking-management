@@ -20,10 +20,8 @@ vi.mock('../../features/booking/hooks/useBookingData', () => ({
 vi.mock('../../components/layout/Layout', () => ({
   LayoutColumn: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
-vi.mock('../../components/ui/Button', () => ({
-  Button: ({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) => (
-    <button onClick={onClick}>{children}</button>
-  ),
+vi.mock('../../features/booking/components/FilterBar', () => ({
+  FiltersBar: () => <div>filters-bar</div>,
 }));
 vi.mock('../../features/asset/components/AssetCategoryGrid', () => ({
   AssetCategoryGrid: ({ categories, onSelectCategory }: {
@@ -33,14 +31,17 @@ vi.mock('../../features/asset/components/AssetCategoryGrid', () => ({
     <div>{categories.map((c) => <button key={c} onClick={() => onSelectCategory(c)}>{c}</button>)}</div>
   ),
 }));
-vi.mock('../../features/booking/components/FilterBar', () => ({
-  FiltersBar: () => <div>filters-bar</div>,
-}));
 vi.mock('../../features/booking/components/BookingTable', () => ({
   BookingTable: () => <div>booking-table</div>,
 }));
 vi.mock('../../features/booking/components/ParkingMap', () => ({
   ParkingMap: () => <div>parking-map</div>,
+}));
+vi.mock('../../features/booking/components/OfficeMap', () => ({
+  OfficeMap: () => <div>office-map</div>,
+}));
+vi.mock('@mui/icons-material/RestartAltSharp', () => ({
+  default: () => <span>reset-icon</span>,
 }));
 
 // ── Fixtures ─────────────────────────────────────────────────────────────────

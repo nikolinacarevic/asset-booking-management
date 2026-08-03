@@ -35,6 +35,7 @@
     "toTime": "Bis",
     "date": "Datum",
     "selectDate": "Datum auswählen...",
+    "clearDate": "Datum löschen",
     "fromDate": "Von-Datum",
     "toDate": "Bis-Datum"
   },

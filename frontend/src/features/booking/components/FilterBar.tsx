@@ -77,7 +77,7 @@ export function FiltersBar({
   return (
     <div
       className={twMerge(
-        'mt-6 grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3',
+        'mt-6 flex w-full flex-wrap items-center gap-3',
         className
       )}
     >
@@ -85,7 +85,7 @@ export function FiltersBar({
         <>
           <DateInput
             id="date"
-            label={t('ui.filters.date')}
+            label=""
             placeholder={t('ui.filters.selectDate')}
             value={filters.fromDate}
             onChange={(v) =>
@@ -95,58 +95,60 @@ export function FiltersBar({
               })
             }
             max={maxDate}
-            className="w-full"
+            className="w-44"
           />
-          <div className="flex gap-3">
+          <div className="flex w-72 gap-3">
             <HourSelect
-              label={t('ui.filters.fromTime')}
+              label=""
               value={filters.fromHour}
               onChange={(v) => update({ fromHour: v })}
               selectedDate={filters.fromDate}
               className="w-1/2"
+              ariaLabel={t('ui.filters.fromTime')}
             />
 
             <HourSelect
-              label={t('ui.filters.toTime')}
+              label=""
               value={filters.toHour}
               onChange={(v) => update({ toHour: v })}
               selectedDate={filters.fromDate}
               minHour={filters.fromHour}
               className="w-1/2"
+              ariaLabel={t('ui.filters.toTime')}
             />
           </div>
         </>
       ) : variant === 'DAY' ? (
         <DateInput
           id="date"
-          label={t('ui.filters.date')}
+          label=""
           placeholder={t('ui.filters.selectDate')}
           value={filters.fromDate}
           onChange={(v) => update({ fromDate: v })}
           max={maxDate}
-          className="col-span-1 w-full sm:col-span-2 md:col-span-2 lg:col-start-1 lg:w-1/2"
+          className="w-44"
         />
       ) : (
         <>
           <DateInput
             id="date"
-            label={t('ui.filters.fromDate')}
-            placeholder={t('ui.filters.selectDate')}
+            label=""
+            placeholder={t('ui.filters.fromDate')}
             value={filters.fromDate}
             testId="from-date-input"
             onChange={(v) => update({ fromDate: v })}
             max={maxDate}
-            className="col-span-1 w-full sm:col-span-2 md:col-span-2 lg:col-span-1"
+            className="w-44"
           />
           <DateInput
             id="date"
-            label={t('ui.filters.toDate')}
-            placeholder={t('ui.filters.selectDate')}
+            label=""
+            placeholder={t('ui.filters.toDate')}
             value={filters.toDate}
             testId="to-date-input"
             onChange={(v) => update({ toDate: v })}
             max={maxDate}
-            className="col-span-1 w-full sm:col-span-2 md:col-span-2 lg:col-span-1"
+            className="w-44"
           />
         </>
       )}
@@ -156,7 +158,7 @@ export function FiltersBar({
           value={filters.search}
           onChange={(v) => update({ search: v })}
           placeholder={t('ui.search.assetsPlaceholder')}
-          className="col-span-1 mt-auto w-full sm:col-span-2 md:col-span-1 lg:ml-auto lg:max-w-60"
+          className="ml-auto w-full max-w-60 sm:w-60"
         />
       )}
     </div>

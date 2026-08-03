@@ -1,10 +1,10 @@
 // External packages
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import RestartAltSharpIcon from '@mui/icons-material/RestartAltSharp';
 
 // Components
 import { LayoutColumn } from '../components/layout/Layout';
-import { Button } from '../components/ui/Button';
 import { PageTitle, PageTitleDivider } from '../components/ui/PageTitle';
 import { FiltersBar } from '../features/booking/components/FilterBar';
 import { AssetCategoryGrid } from '../features/asset/components/AssetCategoryGrid';
@@ -72,13 +72,15 @@ export default function Bookings() {
             />
           )}
           {selectedCategory?.name === 'Meeting room' && <OfficeMap />}
-          <Button
+          <button
+            type="button"
             data-testid="reset-filters-button"
-            className="border-gray-400 bg-gray-400 hover:border-gray-300 hover:bg-gray-300"
             onClick={handleResetFilters}
+            className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-xl bg-white px-3.5 text-sm font-medium text-[#000d4d] shadow-sm ring-1 ring-[rgba(152,197,251,0.45)] transition-all hover:cursor-pointer hover:bg-[rgba(152,197,251,0.12)] hover:ring-[rgba(152,197,251,0.7)] focus-visible:ring-2 focus-visible:ring-[#98c5fb] focus-visible:outline-none dark:bg-(--color-table-surface) dark:text-[#98c5fb] dark:ring-[rgba(152,197,251,0.25)] dark:hover:bg-[rgba(152,197,251,0.1)]"
           >
-            {t('bookings.resetFilters')}
-          </Button>
+            <RestartAltSharpIcon sx={{ fontSize: 18 }} />
+            <span>{t('bookings.resetFilters')}</span>
+          </button>
         </div>
       </div>
 

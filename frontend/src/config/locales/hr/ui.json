@@ -35,6 +35,7 @@
     "toTime": "Do",
     "date": "Datum",
     "selectDate": "Odaberi datum...",
+    "clearDate": "Očisti datum",
     "fromDate": "Od datuma",
     "toDate": "Do datuma"
   },

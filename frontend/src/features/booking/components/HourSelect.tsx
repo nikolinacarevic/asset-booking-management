@@ -1,6 +1,8 @@
 // External packages
 import * as React from 'react';
+import { twMerge } from 'tailwind-merge';
 import { useTranslation } from 'react-i18next';
+import AccessTimeSharpIcon from '@mui/icons-material/AccessTimeSharp';
 
 type Props = {
   label: string;
@@ -9,6 +11,7 @@ type Props = {
   selectedDate: string;
   minHour?: string;
   className?: string;
+  ariaLabel?: string;
 };
 
 export const hourOptions = Array.from(
@@ -28,6 +31,7 @@ export const HourSelect: React.FC<Props> = ({
   selectedDate,
   minHour,
   className,
+  ariaLabel,
 }) => {
   const { t } = useTranslation();
 
@@ -50,28 +54,42 @@ export const HourSelect: React.FC<Props> = ({
 
   return (
     <div className={className}>
-      <p className="mb-1 text-sm font-medium text-(--color-table-text)">
-        {label}
-      </p>
+      {label && (
+        <label className="mb-1.5 block text-xs font-semibold tracking-wide text-(--color-table-text)/70 uppercase">
+          {label}
+        </label>
+      )}
 
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        aria-label={`${label} ${t('ui.dateTimeInput.hourAriaSuffix')}`}
-        className={`h-11 w-full cursor-pointer rounded-lg border-2 border-(--color-table-border) bg-(--color-table-surface) px-3 text-sm transition outline-none focus:outline-none ${
-          value ? 'text-(--color-table-text)' : 'text-(--color-table-text)/60'
-        }`}
-      >
-        <option value="" disabled hidden>
-          {t('ui.dateTimeInput.selectHour')}
-        </option>
-
-        {availableHours.map((hour) => (
-          <option key={hour} value={hour}>
-            {hour}
+      <div className="relative">
+        <AccessTimeSharpIcon
+          className="pointer-events-none absolute top-1/2 left-3 z-10 -translate-y-1/2 text-(--color-primaryblue) opacity-80 dark:text-[#98c5fb]"
+          sx={{ fontSize: 20 }}
+        />
+        <select
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          aria-label={`${ariaLabel ?? label} ${t('ui.dateTimeInput.hourAriaSuffix')}`}
+          className={twMerge(
+            'h-11 w-full cursor-pointer appearance-none rounded-xl bg-white py-2 pr-3 pl-10 text-sm font-medium shadow-sm ring-1 ring-[rgba(152,197,251,0.45)] transition-all outline-none',
+            'hover:bg-[rgba(152,197,251,0.08)] hover:ring-[rgba(152,197,251,0.7)]',
+            'focus-visible:ring-2 focus-visible:ring-[#98c5fb]',
+            'dark:bg-(--color-table-surface) dark:ring-[rgba(152,197,251,0.25)] dark:hover:bg-[rgba(152,197,251,0.1)]',
+            value
+              ? 'text-[#000d4d] dark:text-[#98c5fb]'
+              : 'text-(--color-table-text)/50'
+          )}
+        >
+          <option value="" disabled hidden>
+            {t('ui.dateTimeInput.selectHour')}
           </option>
-        ))}
-      </select>
+
+          {availableHours.map((hour) => (
+            <option key={hour} value={hour}>
+              {hour}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   );
 };
