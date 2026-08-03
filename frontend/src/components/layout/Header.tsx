@@ -9,21 +9,25 @@ import { useTranslation } from 'react-i18next';
 interface HeaderProps {
   className?: string;
   variant?: 'public' | 'app';
+  brandClickable?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   className,
   variant = 'public',
+  brandClickable = true,
 }) => {
   const { t } = useTranslation();
 
-  const brand = (
-    <Link
-      to="/"
-      className="text-2xl font-bold tracking-tight text-(--color-primaryblue) md:text-3xl dark:text-[#93c5fd]"
-    >
+  const brandClassName =
+    'text-2xl font-bold tracking-tight text-(--color-primaryblue) md:text-3xl dark:text-[#93c5fd]';
+
+  const brand = brandClickable ? (
+    <Link to="/" className={brandClassName}>
       {t('layout.brand')}
     </Link>
+  ) : (
+    <span className={brandClassName}>{t('layout.brand')}</span>
   );
 
   const controls = (

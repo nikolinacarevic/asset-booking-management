@@ -10,7 +10,7 @@ export default function Login() {
 
   return (
     <>
-      <Header className="hidden md:flex" />
+      <Header className="hidden md:flex" brandClickable={false} />
       <Layout>
         <LayoutRow>
           <LayoutColumn
