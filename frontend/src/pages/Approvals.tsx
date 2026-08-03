@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 // components
 import { LayoutColumn } from '../components/layout/Layout';
+import { PageTitle, PageTitleDivider } from '../components/ui/PageTitle';
 import { SearchInput } from '../components/ui/SearchBar';
 import { PendingApprovalsTable } from '../features/booking/components/PendingApprovalsTable';
 
@@ -80,12 +81,10 @@ export default function Approvals() {
     >
       <div className="flex w-full flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-black tracking-widest text-black dark:text-white">
-            {t('approvals.title')}
-          </h1>
+          <PageTitle>{t('approvals.title')}</PageTitle>
         </div>
 
-        <div className="h-px w-full bg-(--color-table-border)" />
+        <PageTitleDivider />
 
         {/* search input for the approvals page */}
         <div className="flex w-full items-center justify-end">

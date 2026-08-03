@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 // Components
 import { LayoutColumn } from '../components/layout/Layout';
 import { Button } from '../components/ui/Button';
+import { PageTitle, PageTitleDivider } from '../components/ui/PageTitle';
 import { FiltersBar } from '../features/booking/components/FilterBar';
 import { AssetCategoryGrid } from '../features/asset/components/AssetCategoryGrid';
 import { BookingTable } from '../features/booking/components/BookingTable';
@@ -58,9 +59,7 @@ export default function Bookings() {
       />
 
       <div className="mt-12 flex w-full items-center justify-between gap-4">
-        <h1 className="text-3xl leading-11 font-black tracking-[0.2em]">
-          {selectedCategory?.name ?? ''}
-        </h1>
+        <PageTitle>{selectedCategory?.name ?? ''}</PageTitle>
 
         <div className="flex items-center gap-3">
           {selectedCategory?.name === 'Parking' && (
@@ -83,7 +82,7 @@ export default function Bookings() {
         </div>
       </div>
 
-      <div className="mt-6 h-px w-full bg-(--color-table-border)" />
+      <PageTitleDivider className="mt-6" />
       <FiltersBar filters={filters} setFilters={setFilters} variant={variant} />
 
       {loading ? (

@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 // Components
 import { LayoutColumn } from '../components/layout/Layout';
+import { PageTitle, PageTitleDivider } from '../components/ui/PageTitle';
 
 import FiltersBar from '../features/report/components/FilterBar';
 import BookingStatusPie from '../features/report/components/BookingStatusPie';
@@ -44,11 +45,9 @@ export default function Report() {
       >
         <div className="flex w-full flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <h1 className="text-3xl font-black tracking-widest text-black dark:text-white">
-              {t('report.title')}
-            </h1>
+            <PageTitle>{t('report.title')}</PageTitle>
           </div>
-          <div className="h-px w-full bg-(--color-table-border)" />
+          <PageTitleDivider />
         </div>
 
         <FiltersBar

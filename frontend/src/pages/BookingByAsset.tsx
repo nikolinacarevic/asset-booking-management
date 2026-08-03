@@ -22,6 +22,7 @@ import { getCategoryById } from '../features/asset-category/api/categoryApi';
 import { LayoutColumn } from '../components/layout/Layout';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
+import { PageTitle, PageTitleDivider } from '../components/ui/PageTitle';
 import { FiltersBar } from '../features/booking/components/FilterBar';
 import { AvailabilityCalendar } from '../features/booking/components/AvailabilityCalendar';
 import { RecurringDaysSelector } from '../features/booking/components/RecurringDaysSelector';
@@ -187,9 +188,7 @@ export default function BookingsByAsset() {
     >
       <div className="mb-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-          <h1 className="text-3xl font-black text-black dark:text-white">
-            {asset.name}
-          </h1>
+          <PageTitle>{asset.name}</PageTitle>
 
           <span
             className={`rounded px-3 py-1 text-center text-sm font-medium ${
@@ -206,7 +205,7 @@ export default function BookingsByAsset() {
         </p>
       </div>
 
-      <div className="mb-6 h-px w-full bg-(--color-table-border)" />
+      <PageTitleDivider className="mb-6" />
 
       <div className="mb-2 flex w-full items-end justify-between gap-4">
         <FiltersBar

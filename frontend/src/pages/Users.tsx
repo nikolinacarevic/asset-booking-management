@@ -8,6 +8,7 @@ import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 // Reusable UI components
 import { LayoutColumn } from '../components/layout/Layout';
 import { Button } from '../components/ui/Button';
+import { PageTitle, PageTitleDivider } from '../components/ui/PageTitle';
 import { SearchInput } from '../components/ui/SearchBar';
 import { Pagination } from '../components/ui/Pagination';
 import { DeleteModal } from '../components/ui/DeleteModal';
@@ -91,9 +92,7 @@ function UsersPage() {
     >
       {/* Page header and action buttons */}
       <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-3xl font-black tracking-widest">
-          {t('users.title')}
-        </h1>
+        <PageTitle>{t('users.title')}</PageTitle>
 
         <div className="flex flex-col gap-3 sm:flex-row">
           {/* Export users to CSV */}
@@ -119,7 +118,7 @@ function UsersPage() {
       </div>
 
       {/* Divider line */}
-      <div className="mt-6 h-px w-full bg-(--color-table-border)" />
+      <PageTitleDivider className="mt-6" />
 
       {/* Filters and search section */}
       <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">

@@ -9,6 +9,7 @@ import { LayoutColumn } from '../components/layout/Layout';
 import { Button } from '../components/ui/Button';
 import { DeleteModal } from '../components/ui/DeleteModal';
 import { FormDropdown } from '../components/ui/FormDropdown';
+import { PageTitle, PageTitleDivider } from '../components/ui/PageTitle';
 import { SearchInput } from '../components/ui/SearchBar';
 import { Pagination } from '../components/ui/Pagination';
 import { AssetCategoryGrid } from '../features/asset/components/AssetCategoryGrid';
@@ -262,9 +263,7 @@ function AssetsPage() {
       />
 
       <div className="mt-12 flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-3xl leading-11 font-black tracking-[0.2em] text-black dark:text-white">
-          {pageTitle}
-        </h1>
+        <PageTitle>{pageTitle}</PageTitle>
 
         {isAdmin(user) && (
           <Button
@@ -280,7 +279,7 @@ function AssetsPage() {
         )}
       </div>
 
-      <div className="mt-6 h-px w-full bg-(--color-table-border)" />
+      <PageTitleDivider className="mt-6" />
 
       <div
         className={`mt-6 flex w-full flex-col gap-3 sm:flex-row sm:items-center ${isAdmin(user) ? 'sm:justify-between' : 'sm:justify-end'}`}

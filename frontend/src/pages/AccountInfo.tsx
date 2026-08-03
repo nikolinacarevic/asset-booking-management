@@ -7,6 +7,7 @@ import { LayoutColumn } from '../components/layout/Layout';
 import { BadgeRow } from '../components/ui/BadgeRow';
 import { InfoRow } from '../components/ui/InfoRow';
 import { Button } from '../components/ui/Button';
+import { PageTitle, PageTitleDivider } from '../components/ui/PageTitle';
 
 // Hooks
 import { useDepartments } from '../features/department/hooks/useDepartments';
@@ -63,12 +64,10 @@ export default function AccountInfo() {
         data-testid="account-heading"
         className="flex w-full items-center justify-between gap-6"
       >
-        <h1 className="text-3xl leading-11 font-black tracking-widest text-black dark:text-white">
-          {t('account.heading')}
-        </h1>
+        <PageTitle>{t('account.heading')}</PageTitle>
       </div>
 
-      <div className="mt-6 h-px w-full bg-(--color-table-border)" />
+      <PageTitleDivider className="mt-6" />
 
       {isLoading ? (
         <div className="mt-6 rounded-2xl border border-(--color-table-border) bg-white p-6 shadow-none dark:bg-(--color-surface)">

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 // components
 import { LayoutColumn } from '../components/layout/Layout';
 import { FormDropdown } from '../components/ui/FormDropdown';
+import { PageTitle, PageTitleDivider } from '../components/ui/PageTitle';
 import { Pagination } from '../components/ui/Pagination';
 import { SearchInput } from '../components/ui/SearchBar';
 import { FilterDateInput } from '../features/booking/components/FilterDateInput';
@@ -95,12 +96,12 @@ export default function MyBookings() {
       <div className="flex w-full flex-col gap-4">
         <div className="flex flex-col gap-2">
           {/* title for the my or all bookings page */}
-          <h1 className="text-3xl font-black tracking-widest text-black dark:text-white">
+          <PageTitle>
             {isAdmin(user) ? t('myBookings.titleAdmin') : t('myBookings.title')}
-          </h1>
+          </PageTitle>
         </div>
         {/* divider for the my bookings page */}
-        <div className="h-px w-full bg-(--color-table-border)" />
+        <PageTitleDivider />
 
         <div className="flex w-full flex-col gap-3">
           {/* top row: from/to date filters + search */}

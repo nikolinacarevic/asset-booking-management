@@ -8,6 +8,7 @@ import { LayoutColumn } from '../components/layout/Layout';
 import { SearchInput } from '../components/ui/SearchBar';
 import { Pagination } from '../components/ui/Pagination';
 import { Button } from '../components/ui/Button';
+import { PageTitle, PageTitleDivider } from '../components/ui/PageTitle';
 import { CategoryFormModal } from '../features/asset-category/components/CategoryFormModal';
 import { CategoryModal } from '../features/asset-category/components/CategoryModal';
 import { AssetCategoriesTable } from '../features/asset-category/components/AssetCategoriesTable';
@@ -188,9 +189,7 @@ function AssetCategoriesPage() {
     >
       <div className="w-full">
         <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="text-3xl leading-11 font-black tracking-[0.2em] text-black dark:text-white">
-            {t('assetCategories.title')}
-          </h1>
+          <PageTitle>{t('assetCategories.title')}</PageTitle>
 
           {isAdmin(user) && (
             <Button
@@ -205,7 +204,7 @@ function AssetCategoriesPage() {
           )}
         </div>
 
-        <div className="mt-6 h-px w-full bg-(--color-table-border)" />
+        <PageTitleDivider className="mt-6" />
 
         <div className="mt-6 flex w-full flex-wrap items-end gap-3">
           <SearchInput
