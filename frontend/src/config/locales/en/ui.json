@@ -55,6 +55,10 @@
   "languageSwitcher": {
     "selectLanguage": "Select language"
   },
+  "password": {
+    "show": "Show password",
+    "hide": "Hide password"
+  },
   "login": {
     "title": "Welcome!",
     "subtitle": "Sign in to manage your workplace asset bookings.",

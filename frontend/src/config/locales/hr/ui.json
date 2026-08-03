@@ -55,6 +55,10 @@
   "languageSwitcher": {
     "selectLanguage": "Odaberi jezik"
   },
+  "password": {
+    "show": "Prikaži lozinku",
+    "hide": "Sakrij lozinku"
+  },
   "login": {
     "title": "Dobrodošli!",
     "subtitle": "Prijavite se u sustav za upravljanje rezervacijama.",

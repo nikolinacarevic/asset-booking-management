@@ -55,6 +55,10 @@
   "languageSwitcher": {
     "selectLanguage": "Sprache auswählen"
   },
+  "password": {
+    "show": "Passwort anzeigen",
+    "hide": "Passwort verbergen"
+  },
   "login": {
     "title": "Willkommen!",
     "subtitle": "Melden Sie sich an, um Ihre Asset-Buchungen zu verwalten.",
