@@ -18,6 +18,9 @@ export const filterAvailableAssets = ({
 }: Props) => {
   let filtered = assets;
 
+  // Only bookable (active) assets
+  filtered = filtered.filter((a) => a.status === 'ACTIVE');
+
   // CATEGORY FILTER
   if (selectedCategory) {
     filtered = filtered.filter((a) => a.categoryId === selectedCategory.id);
