@@ -1,7 +1,7 @@
 // External packages
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Components
 import { Table, type TableColumn } from '../../../components/ui/Table';
@@ -26,6 +26,7 @@ export function BookingTable({
   className,
 }: Props) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const columns: TableColumn<AssetDto>[] = useMemo(
     () => [
@@ -72,7 +73,10 @@ export function BookingTable({
         headerClassName: 'w-px whitespace-nowrap',
         cellClassName: 'w-px whitespace-nowrap',
         render: (asset) => (
-          <Link to={`/assets/${asset.id}/bookings`}>
+          <Link
+            to={`/assets/${asset.id}/bookings`}
+            onClick={(e) => e.stopPropagation()}
+          >
             <Button data-testid="book-button" size="sm">
               {t('bookings.table.book')}
             </Button>
@@ -89,6 +93,7 @@ export function BookingTable({
       columns={columns}
       getRowKey={(asset) => asset.id}
       className={`w-full ${className}`}
+      onRowClick={(asset) => navigate(`/assets/${asset.id}/bookings`)}
       emptyMessage={
         isLoading
           ? t('bookings.empty.loading')
