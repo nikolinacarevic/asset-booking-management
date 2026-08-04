@@ -14,6 +14,7 @@ type Props = {
   testId?: string;
   max?: string;
   min?: string;
+  ariaLabel?: string;
 };
 
 const formatDisplayDate = (dateString: string) => {
@@ -42,6 +43,7 @@ function DateField({
   testId,
   max,
   min,
+  ariaLabel,
   enforceMinToday = false,
 }: Readonly<DateFieldProps>) {
   const { t } = useTranslation();
@@ -106,6 +108,7 @@ function DateField({
           value={value}
           min={resolvedMin}
           max={max}
+          aria-label={ariaLabel ?? (label || placeholder)}
           onChange={(e) => onChange(e.target.value)}
           onClick={openDatePicker}
           className="absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"

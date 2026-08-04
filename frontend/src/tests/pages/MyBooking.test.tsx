@@ -24,10 +24,19 @@ vi.mock('../../components/ui/SearchBar', () => ({
     <input placeholder={placeholder} value={value} onChange={(e) => onChange(e.target.value)} />
   ),
 }));
-vi.mock('../../components/ui/FormDropdown', () => ({
-  FormDropdown: ({ value, onChange, options, 'aria-label': ariaLabel }: any) => (
-    <select aria-label={ariaLabel} value={value} onChange={onChange}>
-      {options.map((o: any) => <option key={o.value} value={o.value}>{o.label}</option>)}
+vi.mock('../../features/booking/components/BookingAssetFilter', () => ({
+  BookingAssetFilter: ({ value, onChange, options }: any) => (
+    <select
+      aria-label="myBookings.filter.asset"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    >
+      <option value="">myBookings.filter.allAssets</option>
+      {options.map((o: any) => (
+        <option key={o.id} value={o.id}>
+          {o.name}
+        </option>
+      ))}
     </select>
   ),
 }));
@@ -39,9 +48,29 @@ vi.mock('../../components/ui/Pagination', () => ({
     </nav>
   ),
 }));
-vi.mock('../../features/booking/components/FilterDateInput', () => ({
-  FilterDateInput: ({ id, label, value, onChange }: any) => (
-    <input id={id} aria-label={label} value={value} onChange={(e) => onChange(e.target.value)} />
+vi.mock('../../features/booking/components/DateInput', () => ({
+  DateInputNoMin: ({ id, placeholder, value, onChange, testId }: any) => (
+    <input
+      id={id}
+      data-testid={testId}
+      aria-label={placeholder}
+      placeholder={placeholder}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    />
+  ),
+}));
+vi.mock('../../features/booking/components/BookingStatusFilter', () => ({
+  BookingStatusFilter: ({ value, onChange }: any) => (
+    <select
+      aria-label="myBookings.filter.status"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    >
+      <option value="">myBookings.filter.allStatuses</option>
+      <option value="PENDING">PENDING</option>
+      <option value="APPROVED">APPROVED</option>
+    </select>
   ),
 }));
 vi.mock('../../features/booking/components/MyBookingsTable', () => ({

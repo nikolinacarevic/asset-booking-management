@@ -4,11 +4,12 @@ import { useTranslation } from 'react-i18next';
 
 // components
 import { LayoutColumn } from '../components/layout/Layout';
-import { FormDropdown } from '../components/ui/FormDropdown';
 import { PageTitle, PageTitleDivider } from '../components/ui/PageTitle';
 import { Pagination } from '../components/ui/Pagination';
 import { SearchInput } from '../components/ui/SearchBar';
-import { FilterDateInput } from '../features/booking/components/FilterDateInput';
+import { DateInputNoMin } from '../features/booking/components/DateInput';
+import { BookingAssetFilter } from '../features/booking/components/BookingAssetFilter';
+import { BookingStatusFilter } from '../features/booking/components/BookingStatusFilter';
 import { MyBookingsTable } from '../features/booking/components/MyBookingsTable';
 
 // hooks
@@ -24,7 +25,6 @@ import {
   filterBookingsByStatus,
   filterPendingBookingsBySearch,
 } from '../features/booking/utils/approvalFilter';
-import { bookingStatuses } from '../features/booking/types';
 import type { BookingStatus } from '../features/booking/types';
 import { isAdmin } from '../features/user/utils/users';
 
@@ -43,19 +43,6 @@ export default function MyBookings() {
   const [selectedStatus, setSelectedStatus] = useState<BookingStatus | ''>('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
-
-  const statusFilterOptions = useMemo(
-    () => [
-      { value: '', label: t('myBookings.filter.allStatuses') },
-      ...bookingStatuses.map((status) => ({
-        value: status,
-        label: t(`bookings.status.${status.toLowerCase()}`, {
-          defaultValue: status,
-        }),
-      })),
-    ],
-    [t]
-  );
 
   const assetOptions = useMemo(() => {
     const assets = new Map<number, string>();
@@ -95,80 +82,60 @@ export default function MyBookings() {
     >
       <div className="flex w-full flex-col gap-4">
         <div className="flex flex-col gap-2">
-          {/* title for the my or all bookings page */}
           <PageTitle>
             {isAdmin(user) ? t('myBookings.titleAdmin') : t('myBookings.title')}
           </PageTitle>
         </div>
-        {/* divider for the my bookings page */}
         <PageTitleDivider />
 
         <div className="flex w-full flex-col gap-3">
-          {/* top row: from/to date filters + search */}
-          <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-end">
-              <FilterDateInput 
-                id="my-bookings-from-date"
-                label={t('myBookings.filter.fromDate')}
-                value={fromDate}
-                onChange={setFromDate}
-                max={toDate || undefined}
-                className="w-full sm:w-40"
-              />
-              <FilterDateInput 
-                id="my-bookings-to-date"
-                label={t('myBookings.filter.toDate')}
-                value={toDate}
-                onChange={setToDate}
-                min={fromDate || undefined}
-                className="w-full sm:w-40"
-              />
-            </div>
-            <SearchInput data-testid="search-input"
+          <div className="flex w-full flex-wrap items-center gap-3">
+            <DateInputNoMin
+              id="my-bookings-from-date"
+              label=""
+              placeholder={t('myBookings.filter.fromDate')}
+              value={fromDate}
+              onChange={setFromDate}
+              max={toDate || undefined}
+              className="w-full sm:w-44"
+              testId="my-bookings-from-date"
+            />
+            <DateInputNoMin
+              id="my-bookings-to-date"
+              label=""
+              placeholder={t('myBookings.filter.toDate')}
+              value={toDate}
+              onChange={setToDate}
+              min={fromDate || undefined}
+              className="w-full sm:w-44"
+              testId="my-bookings-to-date"
+            />
+
+            <SearchInput
+              data-testid="search-input"
               value={search}
               onChange={setSearch}
               placeholder={t('myBookings.search.placeholder')}
-              className="w-full lg:w-70"
+              className="ml-auto w-full sm:w-52"
             />
           </div>
 
-          {/* bottom row: dropdown filters */}
-          <div className="flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end">
-            <div className="relative w-full pt-1 sm:w-40">
-              <FormDropdown data-testid="my-booking-asset-filter"
-                id="my-bookings-asset-filter"
-                aria-label={t('myBookings.filter.asset')}
-                value={selectedAssetId}
-                onChange={(event) => setSelectedAssetId(event.target.value)}
-                options={[
-                  { value: '', label: t('myBookings.filter.allAssets') },
-                  ...assetOptions.map((asset) => ({
-                    value: asset.id,
-                    label: asset.name,
-                  })),
-                ]}
-                className="cursor-pointer border-2 py-2.5 text-(--color-table-text) shadow-none"
-              />
-            </div>
+          <div className="flex w-full flex-wrap items-center gap-3">
+            <BookingAssetFilter
+              value={selectedAssetId}
+              onChange={setSelectedAssetId}
+              options={assetOptions}
+            />
+
             {isUserAdmin && (
-              <div className="relative w-full pt-1 sm:w-44">
-                <FormDropdown
-                  data-testid="my-booking-status-filter"
-                  id="my-bookings-status-filter"
-                  aria-label={t('myBookings.filter.status')}
-                  value={selectedStatus}
-                  onChange={(event) =>
-                    setSelectedStatus(event.target.value as BookingStatus | '')
-                  }
-                  options={statusFilterOptions}
-                  className="h-10 cursor-pointer border-2 py-0 text-(--color-table-text) shadow-none"
-                />
-              </div>
+              <BookingStatusFilter
+                value={selectedStatus}
+                onChange={setSelectedStatus}
+              />
             )}
           </div>
         </div>
 
-        {/* my bookings table */}
         <MyBookingsTable
           bookings={pagination.paged}
           isLoading={loading || isUserLoading}
@@ -179,7 +146,6 @@ export default function MyBookings() {
           onClearCancelError={clearCancelError}
         />
 
-        {/* pagination for the bookings table */}
         {filteredBookings.length > 0 && !loading && !error && (
           <Pagination
             page={pagination.page}
