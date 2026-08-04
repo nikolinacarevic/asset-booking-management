@@ -1,5 +1,15 @@
 {
   "title": "Report",
+  "filters": {
+    "fromDate": "Od",
+    "toDate": "Do",
+    "user": "Korisnik",
+    "asset": "Imovina",
+    "allUsers": "Svi korisnici",
+    "allAssets": "Sva imovina",
+    "loadingUsers": "Učitavanje korisnika...",
+    "loadingAssets": "Učitavanje imovine..."
+  },
   "bookingStatusPieChart": {
     "title": "Rezervacije po Statusu"
   },

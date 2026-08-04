@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { twMerge } from 'tailwind-merge';
+import { useTranslation } from 'react-i18next';
+import RestartAltSharpIcon from '@mui/icons-material/RestartAltSharp';
 
-import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
-
-import { DateInput, DateInputNoMin } from '../../booking/components/DateInput';
-import { Button } from '../../../components/ui/Button';
+import { DateInputNoMin } from '../../booking/components/DateInput';
+import { FilterSelect } from '../../../components/ui/FilterSelect';
 
 import { useUsersData } from '../../user/hooks/useUsersData';
 import { useAssetsData } from '../../asset/hooks/useAssetsData';
@@ -21,19 +20,16 @@ type Props = {
   setSelectedAssetName: React.Dispatch<React.SetStateAction<string>>;
 };
 
-type Option = {
-  id: number;
-  label: string;
-};
-
 export default function FiltersBar({
   filters,
   setFilters,
   onReset,
   className,
   setSelectedUserName,
-  setSelectedAssetName
-}: Props) {
+  setSelectedAssetName,
+}: Readonly<Props>) {
+  const { t } = useTranslation();
+
   const update = (partial: Partial<Filter>) => {
     setFilters((prev) => ({
       ...prev,
@@ -41,117 +37,99 @@ export default function FiltersBar({
     }));
   };
 
-  const {
-    users,
-    loading: usersLoading,
-  } = useUsersData();
+  const { users, loading: usersLoading } = useUsersData();
+  const { assets, loading: assetsLoading } = useAssetsData();
 
-  const {
-    assets,
-    loading: assetsLoading,
-  } = useAssetsData();
-
-  const userOptions = React.useMemo<Option[]>(
-    () =>
-      users.map((user) => ({
-        id: user.id,
+  const userOptions = React.useMemo(
+    () => [
+      { value: '', label: t('report.filters.allUsers') },
+      ...users.map((user) => ({
+        value: user.id,
         label: `${user.name} ${user.surname}`,
       })),
-    [users]
+    ],
+    [t, users]
   );
 
-  const assetOptions = React.useMemo<Option[]>(
-    () =>
-      assets.map((asset) => ({
-        id: asset.id,
+  const assetOptions = React.useMemo(
+    () => [
+      { value: '', label: t('report.filters.allAssets') },
+      ...assets.map((asset) => ({
+        value: asset.id,
         label: asset.name,
       })),
-    [assets]
+    ],
+    [assets, t]
   );
 
   return (
-    <div
-      className={twMerge(
-        'rounded-2xl border border-(--color-table-border) bg-white p-5 shadow-sm dark:bg-(--color-bg-dark)',
-        className
-      )}
-    >
-      <div className="flex flex-col gap-4">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <DateInputNoMin
-            id="fromDate"
-            label="From"
-            value={filters.fromDate}
-            onChange={(v) => update({ fromDate: v })}
-          />
+    <div className={twMerge('flex w-full flex-col gap-3', className)}>
+      <div className="flex w-full flex-wrap items-center gap-3">
+        <DateInputNoMin
+          id="fromDate"
+          label=""
+          placeholder={t('report.filters.fromDate')}
+          value={filters.fromDate}
+          onChange={(v) => update({ fromDate: v })}
+          max={filters.toDate || undefined}
+          className="w-full sm:w-44"
+        />
 
-          <DateInput
-            id="toDate"
-            label="To"
-            value={filters.toDate}
-            onChange={(v) => update({ toDate: v })}
-          />
-        </div>
+        <DateInputNoMin
+          id="toDate"
+          label=""
+          placeholder={t('report.filters.toDate')}
+          value={filters.toDate}
+          onChange={(v) => update({ toDate: v })}
+          min={filters.fromDate || undefined}
+          className="w-full sm:w-44"
+        />
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-[1fr_1fr_auto]">
-          <Autocomplete<Option>
-            options={userOptions}
-            loading={usersLoading}
-            getOptionLabel={(option) => option.label}
-            value={
-              userOptions.find((u) => u.id === filters.userId) ?? null
-            }
-            onChange={(_, value) => {
-                update({
-                  userId: value?.id ?? null,
-                })
+        <button
+          type="button"
+          data-testid="reset-filters-button"
+          onClick={onReset}
+          className="ml-auto inline-flex h-11 shrink-0 items-center gap-1.5 rounded-xl bg-white px-3.5 text-sm font-medium text-[#000d4d] shadow-sm ring-1 ring-[rgba(152,197,251,0.45)] transition-all hover:cursor-pointer hover:bg-[rgba(152,197,251,0.12)] hover:ring-[rgba(152,197,251,0.7)] focus-visible:ring-2 focus-visible:ring-[#98c5fb] focus-visible:outline-none dark:bg-(--color-table-surface) dark:text-[#98c5fb] dark:ring-[rgba(152,197,251,0.25)] dark:hover:bg-[rgba(152,197,251,0.1)]"
+        >
+          <RestartAltSharpIcon sx={{ fontSize: 18 }} />
+          <span>{t('bookings.resetFilters')}</span>
+        </button>
+      </div>
 
-                setSelectedUserName(value?.label ?? '');
-              }
-            }
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="User"
-                size="small"
-              />
-            )}
-          />
+      <div className="flex w-full flex-wrap items-center gap-3">
+        <FilterSelect
+          id="report-user-filter"
+          data-testid="report-user-filter"
+          aria-label={t('report.filters.user')}
+          value={filters.userId ?? ''}
+          onChange={(value) => {
+            const selected = userOptions.find(
+              (option) => String(option.value) === value
+            );
+            update({ userId: value === '' ? null : Number(value) });
+            setSelectedUserName(value === '' ? '' : (selected?.label ?? ''));
+          }}
+          options={userOptions}
+          className="sm:w-44"
+          placeholder={usersLoading ? t('report.filters.loadingUsers') : undefined}
+        />
 
-          <Autocomplete<Option>
-            options={assetOptions}
-            loading={assetsLoading}
-            getOptionLabel={(option) => option.label}
-            value={
-              assetOptions.find((a) => a.id === filters.assetId) ?? null
-            }
-            onChange={(_, value) => {
-                update({
-                  assetId: value?.id ?? null,
-                })
-
-                setSelectedAssetName(value?.label ?? '');
-              }
-            }
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Asset"
-                size="small"
-              />
-            )}
-          />
-
-          <div className="flex gap-2 md:justify-end xl:self-center">
-            <Button
-              variant="secondary"
-              onClick={onReset}
-              className="h-10 min-w-[100px]"
-            >
-              Reset
-            </Button>
-          </div>
-        </div>
+        <FilterSelect
+          id="report-asset-filter"
+          data-testid="report-asset-filter"
+          aria-label={t('report.filters.asset')}
+          value={filters.assetId ?? ''}
+          onChange={(value) => {
+            const selected = assetOptions.find(
+              (option) => String(option.value) === value
+            );
+            update({ assetId: value === '' ? null : Number(value) });
+            setSelectedAssetName(value === '' ? '' : (selected?.label ?? ''));
+          }}
+          options={assetOptions}
+          className="sm:w-44"
+          placeholder={assetsLoading ? t('report.filters.loadingAssets') : undefined}
+        />
       </div>
     </div>
   );

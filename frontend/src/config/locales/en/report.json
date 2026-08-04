@@ -1,5 +1,15 @@
 {
   "title": "Report",
+  "filters": {
+    "fromDate": "From",
+    "toDate": "To",
+    "user": "User",
+    "asset": "Asset",
+    "allUsers": "All users",
+    "allAssets": "All assets",
+    "loadingUsers": "Loading users...",
+    "loadingAssets": "Loading assets..."
+  },
   "bookingStatusPieChart": {
     "title": "Bookings by Status"
   },

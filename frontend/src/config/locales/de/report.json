@@ -1,5 +1,15 @@
 {
   "title": "Bericht",
+  "filters": {
+    "fromDate": "Von",
+    "toDate": "Bis",
+    "user": "Benutzer",
+    "asset": "Asset",
+    "allUsers": "Alle Benutzer",
+    "allAssets": "Alle Assets",
+    "loadingUsers": "Benutzer werden geladen...",
+    "loadingAssets": "Assets werden geladen..."
+  },
   "bookingStatusPieChart": {
     "title": "Buchungen nach Status"
   },
