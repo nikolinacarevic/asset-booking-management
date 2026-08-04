@@ -211,7 +211,7 @@ function AssetCategoriesPage() {
             value={search}
             onChange={setSearch}
             placeholder={t('assetCategories.search.placeholder')}
-            className="mb-0 w-full sm:ml-auto sm:w-70"
+            className="mb-0 w-full sm:ml-auto sm:w-52"
           />
         </div>
 
