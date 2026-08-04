@@ -8,7 +8,6 @@ import AddIcon from '@mui/icons-material/Add';
 import { LayoutColumn } from '../components/layout/Layout';
 import { Button } from '../components/ui/Button';
 import { DeleteModal } from '../components/ui/DeleteModal';
-import { FormDropdown } from '../components/ui/FormDropdown';
 import { PageTitle, PageTitleDivider } from '../components/ui/PageTitle';
 import { SearchInput } from '../components/ui/SearchBar';
 import { Pagination } from '../components/ui/Pagination';
@@ -18,6 +17,7 @@ import { AssetBookingsModal } from '../features/asset/components/AssetBookingsMo
 import { AssetsTable } from '../features/asset/components/AssetTable';
 import { AssetReportModal } from '../features/asset/components/AssetReportModal';
 import { AssetFormModal } from '../features/asset/components/AssetFormModal';
+import { AssetStatusFilter } from '../features/asset/components/AssetStatusFilter';
 import { ShowDeletedFilter } from '../features/user/components/ShowDeletedFilter';
 import { Toast } from '../components/ui/Toast';
 
@@ -37,7 +37,7 @@ import { isAdmin, isEmployee } from '../features/user/utils/users';
 
 // Types
 import type { AssetDto } from '../features/asset/types';
-import { ALL_ASSETS_CATEGORY, assetStatuses } from '../features/asset/types';
+import { ALL_ASSETS_CATEGORY } from '../features/asset/types';
 import type { AssetCategoryDto } from '../features/asset-category/types';
 
 type ModalState =
@@ -121,20 +121,6 @@ function AssetsPage() {
     () => [...assetCategories.map((c) => c.name)],
     [assetCategories]
   );
-
-  const statusFilterOptions = useMemo(() => {
-    const statuses = isAdmin(user)
-      ? assetStatuses
-      : assetStatuses.filter((status) => status !== 'DELETED');
-
-    return [
-      { value: '', label: t('assets.filters.allStatuses') },
-      ...statuses.map((status) => ({
-        value: status,
-        label: t(`assets.status.${status}`),
-      })),
-    ];
-  }, [t, user]);
 
   const pageTitle =
     selectedCategory === ALL_ASSETS_CATEGORY
@@ -290,28 +276,22 @@ function AssetsPage() {
               checked={showDeleted}
               onToggle={() => setShowDeleted((v) => !v)}
               labelKey="assets.filters.showDeleted"
-              className="border-2 border-(--color-table-border) bg-(--color-table-surface) shadow-none ring-0 hover:bg-(--color-surface-hover) dark:bg-(--color-table-surface) dark:ring-0 dark:hover:bg-(--color-surface-hover)"
+              className="h-11 rounded-xl bg-white text-[#000d4d] shadow-sm ring-1 ring-[rgba(152,197,251,0.45)] hover:bg-[rgba(152,197,251,0.08)] hover:ring-[rgba(152,197,251,0.7)] focus-within:ring-2 focus-within:ring-[#98c5fb] dark:bg-(--color-table-surface) dark:text-[#98c5fb] dark:ring-[rgba(152,197,251,0.25)] dark:hover:bg-[rgba(152,197,251,0.1)] dark:focus-within:ring-[#98c5fb]"
             />
           )}
 
-          <div className="relative w-full sm:w-44">
-            <FormDropdown
-              data-testid="asset-status-filter"
-              id="assets-status-filter"
-              aria-label={t('assets.filters.status')}
-              value={selectedStatus}
-              onChange={(event) => setSelectedStatus(event.target.value)}
-              options={statusFilterOptions}
-              className="h-10 cursor-pointer border-2 py-0 text-(--color-table-text) shadow-none"
-            />
-          </div>
+          <AssetStatusFilter
+            value={selectedStatus}
+            onChange={setSelectedStatus}
+            includeDeleted={isAdmin(user)}
+          />
         </div>
 
         <SearchInput
           value={search}
           onChange={setSearch}
           placeholder={t('assets.search.placeholder')}
-          className="w-full sm:w-70"
+          className="w-full sm:w-52"
         />
       </div>
 
