@@ -27,67 +27,68 @@ export const AssetCategoryCard: React.FC<AssetCategoryCardProps> = ({
   const { t } = useTranslation();
   const isPlainCard = !showBackgroundImage;
 
-  let variantClassName: string;
-  if (isPlainCard) {
-    variantClassName = twMerge(
-      'bg-(--color-surface) text-black dark:text-white',
-      !isSelected && 'hover:-translate-y-0.5 hover:bg-(--color-bg)'
-    );
-  } else {
-    const imageCardStateClassName = isSelected
-      ? 'bg-(--color-surface-hover)'
-      : 'hover:-translate-y-0.5 hover:bg-(--color-surface-hover)';
-    variantClassName = twMerge(
-      'bg-(--color-table-surface) text-white dark:text-(--color-text)',
-      imageCardStateClassName
-    );
-  }
-
   return (
-    <button 
+    <button
       type="button"
       onClick={onClick}
+      aria-pressed={isSelected}
       data-testid={dataTestId ?? `category-card-${title.toLowerCase()}`}
       className={twMerge(
-        'group min-h-24 cursor-pointer overflow-hidden rounded-lg border border-(--color-table-border) text-left shadow-(--shadow-card) transition duration-100',
-        variantClassName,
+        'group relative min-h-28 cursor-pointer overflow-hidden rounded-2xl text-left transition-all duration-200',
+        'focus-visible:ring-2 focus-visible:ring-[#98c5fb] focus-visible:outline-none',
+        isSelected
+          ? 'bg-white shadow-md ring-2 ring-[#000d4d] ring-offset-2 ring-offset-(--color-bg) dark:bg-(--color-table-surface) dark:ring-[#98c5fb] dark:ring-offset-(--color-bg)'
+          : 'bg-white shadow-sm ring-1 ring-[rgba(152,197,251,0.45)] hover:-translate-y-0.5 hover:shadow-md hover:ring-[rgba(152,197,251,0.75)] dark:bg-(--color-table-surface) dark:ring-[rgba(152,197,251,0.25)] dark:hover:ring-[rgba(152,197,251,0.45)]',
         className
       )}
     >
-      <div className="relative flex h-full p-4">
+      <div className="relative flex h-full min-h-28">
         {showBackgroundImage && (
-          <>
+          <div className="relative w-[48%] shrink-0 overflow-hidden sm:w-1/2">
             <img
               src={getCategoryIconSrc(title)}
               alt=""
-              className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-70 dark:opacity-40"
+              className={twMerge(
+                'h-full w-full object-cover transition duration-200',
+                isSelected ? 'opacity-100' : 'opacity-90 group-hover:opacity-100'
+              )}
               onError={(e) => {
                 const img = e.currentTarget;
                 img.onerror = null;
                 img.src = CATEGORY_ICON_DEFAULT_SRC;
               }}
             />
-            <div className="pointer-events-none absolute inset-0 bg-black/25 dark:bg-(--color-table-surface)/25" />
-          </>
+            <div className="pointer-events-none absolute inset-0 bg-linear-to-r from-transparent to-white/40 dark:to-(--color-table-surface)/50" />
+          </div>
         )}
 
-        <div className="relative z-10 flex flex-1 flex-col justify-between">
+        <div
+          className={twMerge(
+            'relative z-10 flex flex-1 flex-col justify-between gap-3 p-4',
+            isPlainCard && 'items-start'
+          )}
+        >
           <span
             className={twMerge(
-              'text-[10px] font-semibold tracking-[0.22em] uppercase',
+              'text-[10px] font-semibold tracking-[0.18em] uppercase',
               isPlainCard
-                ? 'invisible text-black/70 dark:text-white/70'
-                : 'text-white/70 dark:text-(--color-table-head-text) dark:opacity-50'
+                ? 'text-[#000d4d]/70 dark:text-[#98c5fb]/70'
+                : 'text-[#000d4d]/60 dark:text-[#98c5fb]/60'
             )}
-            aria-hidden={isPlainCard}
           >
             {t('assets.categoryCard.badge')}
           </span>
-          <div>
-            <span className="block text-base font-black tracking-[0.06em]">
-              {title}
-            </span>
-          </div>
+
+          <span
+            className={twMerge(
+              'block text-base font-bold tracking-tight',
+              isSelected
+                ? 'text-[#000d4d] dark:text-[#98c5fb]'
+                : 'text-[#000d4d] dark:text-white'
+            )}
+          >
+            {title}
+          </span>
         </div>
       </div>
     </button>

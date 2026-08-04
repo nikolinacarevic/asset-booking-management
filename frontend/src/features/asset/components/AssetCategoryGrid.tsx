@@ -20,7 +20,7 @@ export const AssetCategoryGrid: React.FC<AssetCategoryGridProps> = ({
   allCategory,
 }) => {
   return (
-    <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
       {allCategory && (
         <AssetCategoryCard
           title={allCategory.label}
@@ -31,14 +31,14 @@ export const AssetCategoryGrid: React.FC<AssetCategoryGridProps> = ({
         />
       )}
       {categories.map((category) => (
-  <AssetCategoryCard
-    key={category}
-    title={category}
-    isSelected={selectedCategory === category}
-    onClick={() => onSelectCategory(category)}
-    data-testid={`category-card-${category.toLowerCase()}`}
-  />
-  ))}
+        <AssetCategoryCard
+          key={category}
+          title={category}
+          isSelected={selectedCategory === category}
+          onClick={() => onSelectCategory(category)}
+          data-testid={`category-card-${category.toLowerCase()}`}
+        />
+      ))}
     </div>
   );
 };
