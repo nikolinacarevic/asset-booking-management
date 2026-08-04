@@ -17,13 +17,18 @@ export function ShowDeletedFilter({
   const { t } = useTranslation();
 
   return (
-    <label data-testid="toggle-deleted"
+    <label
+      data-testid="toggle-deleted"
       className={twMerge(
-        'relative inline-flex h-10 items-center gap-2.5 rounded-lg bg-white px-4 text-sm font-medium text-gray-900 shadow-sm ring-1 ring-black/5 transition-colors hover:bg-gray-50 hover:cursor-pointer focus-within:ring-2 focus-within:ring-black/10 dark:bg-gray-900 dark:text-gray-100 dark:ring-white/10 dark:hover:bg-gray-800 dark:focus-within:ring-white/20',
+        'relative inline-flex h-11 cursor-pointer items-center gap-2.5 rounded-2xl bg-white px-4 text-sm font-medium text-[#000d4d] shadow-sm ring-1 ring-[rgba(152,197,251,0.45)] transition-all',
+        'hover:bg-[rgba(152,197,251,0.08)] hover:ring-[rgba(152,197,251,0.7)]',
+        'focus-within:ring-2 focus-within:ring-[#98c5fb]',
+        'dark:bg-(--color-table-surface) dark:text-[#98c5fb] dark:ring-[rgba(152,197,251,0.25)] dark:hover:bg-[rgba(152,197,251,0.1)]',
         className
       )}
     >
-      <input data-testid="toggle-deleted-assets"
+      <input
+        data-testid="toggle-deleted-assets"
         type="checkbox"
         checked={checked}
         onChange={onToggle}
@@ -31,7 +36,7 @@ export function ShowDeletedFilter({
       />
       <span
         aria-hidden="true"
-        className="grid h-4 w-4 place-items-center rounded-full bg-white shadow ring-1 ring-black/10 transition-colors peer-checked:bg-(--color-primaryblue) peer-checked:ring-black/10 peer-checked:[&>svg]:opacity-100 dark:bg-gray-950 dark:ring-white/10 dark:peer-checked:ring-white/10"
+        className="grid h-4 w-4 place-items-center rounded-full bg-white shadow ring-1 ring-[rgba(152,197,251,0.55)] transition-colors peer-checked:bg-(--color-primaryblue) peer-checked:ring-(--color-primaryblue) peer-checked:[&>svg]:opacity-100 dark:bg-gray-950 dark:ring-[rgba(152,197,251,0.35)]"
       >
         <svg
           viewBox="0 0 20 20"

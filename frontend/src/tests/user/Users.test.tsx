@@ -26,8 +26,8 @@ vi.mock('../../components/ui/SearchBar', () => ({
   ),
 }));
 
-vi.mock('../../components/ui/FormDropdown', () => ({
-  FormDropdown: ({
+vi.mock('../../components/ui/FilterSelect', () => ({
+  FilterSelect: ({
     value,
     onChange,
     options,
@@ -38,7 +38,7 @@ vi.mock('../../components/ui/FormDropdown', () => ({
       data-testid={testId}
       aria-label={ariaLabel}
       value={value}
-      onChange={onChange}
+      onChange={(e) => onChange(e.target.value)}
     >
       {options.map((option: { value: string | number; label: string }) => (
         <option key={option.value} value={option.value}>

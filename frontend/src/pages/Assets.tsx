@@ -276,7 +276,6 @@ function AssetsPage() {
               checked={showDeleted}
               onToggle={() => setShowDeleted((v) => !v)}
               labelKey="assets.filters.showDeleted"
-              className="h-11 rounded-xl bg-white text-[#000d4d] shadow-sm ring-1 ring-[rgba(152,197,251,0.45)] hover:bg-[rgba(152,197,251,0.08)] hover:ring-[rgba(152,197,251,0.7)] focus-within:ring-2 focus-within:ring-[#98c5fb] dark:bg-(--color-table-surface) dark:text-[#98c5fb] dark:ring-[rgba(152,197,251,0.25)] dark:hover:bg-[rgba(152,197,251,0.1)] dark:focus-within:ring-[#98c5fb]"
             />
           )}
 

@@ -12,7 +12,7 @@ import { PageTitle, PageTitleDivider } from '../components/ui/PageTitle';
 import { SearchInput } from '../components/ui/SearchBar';
 import { Pagination } from '../components/ui/Pagination';
 import { DeleteModal } from '../components/ui/DeleteModal';
-import { FormDropdown } from '../components/ui/FormDropdown';
+import { FilterSelect } from '../components/ui/FilterSelect';
 
 // User-related feature components
 import { UserModal } from '../features/user/components/UserModal';
@@ -121,55 +121,43 @@ function UsersPage() {
       <PageTitleDivider className="mt-6" />
 
       {/* Filters and search section */}
-      <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex flex-col items-start gap-3">
+      <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap items-center gap-3">
           <ShowDeletedFilter
             checked={list.showDeleted}
             onToggle={list.toggleShowDeleted}
           />
 
-          {/* Role and department filters */}
-          <div className="flex flex-wrap items-center gap-3">
-            {/* Role filter */}
-            <div className="relative w-full sm:w-44">
-              <FormDropdown
-                data-testid="user-role-filter"
-                id="users-role-filter"
-                aria-label={t('users.filters.role')}
-                value={list.selectedRole}
-                onChange={(event) =>
-                  list.setSelectedRole(event.target.value as UserRole | '')
-                }
-                options={roleFilterOptions}
-                className="h-10 cursor-pointer border-2 py-0 text-(--color-table-text) shadow-none"
-              />
-            </div>
+          <FilterSelect
+            data-testid="user-role-filter"
+            id="users-role-filter"
+            aria-label={t('users.filters.role')}
+            value={list.selectedRole}
+            onChange={(value) =>
+              list.setSelectedRole(value as UserRole | '')
+            }
+            options={roleFilterOptions}
+            className="sm:w-32"
+          />
 
-            {/* Department filter */}
-            <div className="relative w-full sm:w-52">
-              <FormDropdown
-                data-testid="user-department-filter"
-                id="users-department-filter"
-                aria-label={t('users.filters.department')}
-                value={list.selectedDepartment}
-                onChange={(event) =>
-                  list.setSelectedDepartment(
-                    event.target.value === '' ? '' : Number(event.target.value)
-                  )
-                }
-                options={departmentFilterOptions}
-                className="h-10 cursor-pointer border-2 py-0 text-(--color-table-text) shadow-none"
-              />
-            </div>
-          </div>
+          <FilterSelect
+            data-testid="user-department-filter"
+            id="users-department-filter"
+            aria-label={t('users.filters.department')}
+            value={list.selectedDepartment}
+            onChange={(value) =>
+              list.setSelectedDepartment(value === '' ? '' : Number(value))
+            }
+            options={departmentFilterOptions}
+            className="sm:w-40"
+          />
         </div>
 
-        {/* Search users by input value */}
         <SearchInput
           value={list.search}
           onChange={list.setSearch}
           placeholder={t('users.search.placeholder')}
-          className="w-full sm:w-70"
+          className="w-full sm:w-52"
         />
       </div>
 
