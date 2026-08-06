@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 // Components
+import { IconButton } from '../../../components/ui/IconButton';
+import { Modal } from '../../../components/ui/Modal';
 import { Table, type TableColumn } from '../../../components/ui/Table';
 
 // Types
@@ -87,50 +89,51 @@ export const AssetBookingsModal: React.FC<BookingsModalProps> = ({
 
   if (!isOpen || !asset) return null;
 
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div className="max-h-[90vh] w-full max-w-4xl overflow-hidden rounded-3xl border border-(--color-table-border) bg-(--color-table-surface) p-6 text-(--color-table-text) shadow-xl">
-        <div className="mb-6 flex items-start justify-between gap-4">
-          <div>
-            <h2 className="text-[10px] font-semibold tracking-[0.22em] text-(--color-table-head-text) uppercase opacity-50">
-              {t('assets.table.bookings')}
-            </h2>
-            <p className="block text-base font-black tracking-[0.06em]">
-              {asset.name}
-            </p>
-          </div>
-
-          <button data-testid="close-asset-bookings-modal"
-            type="button"
-            onClick={onClose}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-(--color-table-text) transition-colors hover:bg-(--color-table-row-hover)"
-            aria-label={t('assets.modals.bookings.closeAria')}
-          >
-            <CloseOutlinedIcon fontSize="small" />
-          </button>
-        </div>
-
-        {loading && (
-          <p className="py-6 text-sm text-(--color-table-head-text)">
-            {t('assets.modals.bookings.loading')}
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size="lg"
+      ariaLabel={t('assets.table.bookings')}
+      title={
+        <div>
+          <h2 className="text-[10px] font-semibold tracking-[0.22em] text-(--color-table-head-text) uppercase opacity-50">
+            {t('assets.table.bookings')}
+          </h2>
+          <p className="mt-0.5 block text-base font-bold tracking-tight text-[#000d4d] dark:text-[#4d8ad4]">
+            {asset.name}
           </p>
-        )}
+        </div>
+      }
+      headerRight={
+        <IconButton
+          data-testid="close-asset-bookings-modal"
+          onClick={onClose}
+          aria-label={t('assets.modals.bookings.closeAria')}
+        >
+          <CloseOutlinedIcon fontSize="small" />
+        </IconButton>
+      }
+    >
+      {loading && (
+        <p className="py-6 text-sm text-(--color-table-head-text)">
+          {t('assets.modals.bookings.loading')}
+        </p>
+      )}
 
-        {error && !loading && (
-          <p className="py-6 text-sm text-red-500">{error}</p>
-        )}
+      {error && !loading && (
+        <p className="py-6 text-sm text-red-500">{error}</p>
+      )}
 
-        {!loading && !error && (
-          <Table 
-            data={bookings}
-            columns={bookingColumns}
-            getRowKey={(booking) => booking.id}
-            className="w-full"
-            emptyMessage={t('assets.modals.bookings.empty')}
-          />
-        )}
-      </div>
-    </div>
+      {!loading && !error && (
+        <Table
+          data={bookings}
+          columns={bookingColumns}
+          getRowKey={(booking) => booking.id}
+          className="w-full"
+          emptyMessage={t('assets.modals.bookings.empty')}
+        />
+      )}
+    </Modal>
   );
 };

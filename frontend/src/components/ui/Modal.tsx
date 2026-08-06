@@ -2,7 +2,7 @@ import * as React from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useTranslation } from 'react-i18next';
 
-export type ModalSize = 'md' | 'lg';
+export type ModalSize = 'sm' | 'md' | 'lg';
 
 export type ModalProps = {
   isOpen: boolean;
@@ -14,11 +14,14 @@ export type ModalProps = {
   footer?: React.ReactNode;
   headerRight?: React.ReactNode;
   className?: string;
+  bodyClassName?: string;
   testId?: string;
+  backdropTestId?: string;
 };
 
 const sizeClassName: Record<ModalSize, string> = {
-  md: 'max-w-200',
+  sm: 'max-w-md',
+  md: 'max-w-2xl',
   lg: 'max-w-4xl',
 };
 
@@ -32,7 +35,9 @@ export const Modal: React.FC<ModalProps> = ({
   footer,
   headerRight,
   className,
+  bodyClassName,
   testId,
+  backdropTestId,
 }) => {
   const { t } = useTranslation();
   const dialogRef = React.useRef<HTMLDialogElement>(null);
@@ -58,7 +63,7 @@ export const Modal: React.FC<ModalProps> = ({
   return (
     <dialog
       ref={dialogRef}
-      className="fixed inset-0 z-50 m-0 flex h-full max-h-full w-full max-w-full items-center justify-center border-0 bg-transparent p-6 backdrop:bg-transparent"
+      className="fixed inset-0 z-50 m-0 flex h-full max-h-full w-full max-w-full items-center justify-center border-0 bg-transparent p-4 backdrop:bg-transparent sm:p-6"
       aria-label={resolvedAriaLabel}
       onCancel={(e) => {
         e.preventDefault();
@@ -67,36 +72,47 @@ export const Modal: React.FC<ModalProps> = ({
     >
       <button
         type="button"
-        className="fixed inset-0 cursor-default bg-(--color-modal-overlay)"
+        data-testid={backdropTestId}
+        className="animate-overlay-in fixed inset-0 cursor-default bg-(--color-modal-overlay) backdrop-blur-[3px]"
         aria-label={t('ui.modal.closeAria')}
         onClick={onClose}
       />
       <div
         data-testid={testId ?? 'modal-dialog'}
         className={twMerge(
-          'relative z-10 flex max-h-[95vh] w-full flex-col overflow-hidden rounded-2xl border border-(--color-table-border) bg-(--color-table-surface) text-(--color-table-text) shadow-(--shadow-card)',
+          'animate-modal-in relative z-10 flex max-h-[min(95vh,900px)] w-full flex-col overflow-hidden rounded-2xl border border-(--color-border) bg-(--color-table-surface) text-(--color-table-text) shadow-(--shadow-modal)',
           sizeClassName[size],
           className
         )}
       >
         {(title != null || headerRight != null) && (
-          <div className="flex items-center justify-between gap-4 px-8 pt-6 pb-4">
-            <div className="w-full min-w-0">{title}</div>
-            {headerRight}
+          <div className="flex shrink-0 items-start justify-between gap-4 border-b border-(--color-modal-divider) bg-(--color-modal-header) px-6 py-5 sm:px-8">
+            {title != null ? (
+              <div className="min-w-0 flex-1 [&_h2]:tracking-tight">{title}</div>
+            ) : (
+              <div className="min-w-0 flex-1" />
+            )}
+            {headerRight != null && (
+              <div className="flex shrink-0 items-center gap-2 pt-0.5">
+                {headerRight}
+              </div>
+            )}
           </div>
         )}
 
-        <div className="mx-8 h-px bg-(--color-table-border)" />
-
-        <div className="min-h-0 flex-1 overflow-hidden px-8 py-8">
+        <div
+          className={twMerge(
+            'min-h-0 flex-1 overflow-y-auto px-6 py-6 sm:px-8 sm:py-7',
+            bodyClassName
+          )}
+        >
           {children}
         </div>
 
         {footer != null && (
-          <>
-            <div className="mx-8 h-px bg-(--color-table-border)" />
-            <div className="px-8 py-5">{footer}</div>
-          </>
+          <div className="shrink-0 border-t border-(--color-modal-divider) bg-(--color-modal-header) px-6 py-4 sm:px-8 sm:py-5">
+            {footer}
+          </div>
         )}
       </div>
     </dialog>

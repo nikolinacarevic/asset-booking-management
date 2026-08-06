@@ -43,12 +43,39 @@ export function BookingModal({
       isOpen={true}
       onClose={onClose}
       title={
-        <h2 className="text-xl font-semibold">
+        <h2 className="text-xl font-bold text-[#000d4d] dark:text-[#4d8ad4]">
           {t('bookings.buttons.book')} {asset.name}
         </h2>
       }
+      footer={
+        <div className="flex justify-end gap-3">
+          <Button
+            data-testid="cancel-button"
+            variant="outline"
+            size="md"
+            onClick={onClose}
+          >
+            {t('bookings.buttons.cancel')}
+          </Button>
+
+          <Button
+            data-testid="book-now-button"
+            variant="solid"
+            size="md"
+            onClick={() => {
+              handleCreateBooking().then(() => {
+                onClose();
+              });
+            }}
+          >
+            {needApproval && user?.role === 'EMPLOYEE'
+              ? t('bookings.buttons.sendRequest')
+              : t('bookings.buttons.bookNow')}
+          </Button>
+        </div>
+      }
     >
-      <div className="text-lg">
+      <div className="text-base leading-relaxed text-(--color-text)">
         {getBookingMessage({
           filters,
           availableRecurringDates,
@@ -58,31 +85,6 @@ export function BookingModal({
           t,
           language: i18n.language,
         })}
-      </div>
-      <div className="mt-10 flex justify-end gap-4">
-        <Button
-          data-testid="cancel-button"
-          variant="outline"
-          size="md"
-          onClick={onClose}
-        >
-          {t('bookings.buttons.cancel')}
-        </Button>
-
-        <Button
-          data-testid="book-now-button"
-          variant="solid"
-          size="md"
-          onClick={() => {
-            handleCreateBooking().then(() => {
-              onClose();
-            });
-          }}
-        >
-          {needApproval && user?.role === 'EMPLOYEE'
-            ? t('bookings.buttons.sendRequest')
-            : t('bookings.buttons.bookNow')}
-        </Button>
       </div>
     </Modal>
   );

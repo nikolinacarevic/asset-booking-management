@@ -23,7 +23,7 @@ const fieldLabelClassName =
   'mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-(--color-table-head-text) opacity-60'
 
 const fieldClassName =
-  'w-full rounded-lg border border-(--color-table-border) bg-(--color-table-surface) px-2 py-3 text-sm font-medium text-(--color-text) shadow-(--shadow-card) outline-none transition'
+  'w-full rounded-lg border border-(--color-border) bg-(--color-table-surface) px-2 py-2.5 text-sm font-medium text-(--color-text) outline-none transition focus:border-(--color-primaryblue) focus:ring-2 focus:ring-(--color-primaryblue)/15'
 
 export const MultiSelect = ({
   name,

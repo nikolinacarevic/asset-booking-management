@@ -197,12 +197,13 @@ export const AssetFormModal = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
+      className="max-w-xl"
       testId={isCreate ? 'add-asset-modal' : 'edit-asset-modal'}
       ariaLabel={
         isCreate ? t('assets.modals.add.title') : t('assets.modals.edit.title')
       }
       title={
-        <h2 className="text-2xl font-bold">
+        <h2 className="text-xl font-bold text-[#000d4d] dark:text-[#4d8ad4]">
           {isCreate
             ? t('assets.modals.add.title')
             : t('assets.modals.edit.title')}
@@ -229,95 +230,99 @@ export const AssetFormModal = ({
           void handleSubmit(formData);
         }}
       >
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4">
           {submitError && (
-            <div className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">
+            <div className="rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">
               {submitError}
             </div>
           )}
 
-          <Form.Field name="status">
-            <Form.Control asChild>
-              <FormDropdown
-                data-testid="asset-status"
-                id="asset-status"
-                name="status"
-                label={t('assets.modals.fields.status')}
-                defaultValue={formValues.status}
-                error={!!errors.status}
-                errorMessage={errors.status}
-                options={statusOptions}
-              />
-            </Form.Control>
-          </Form.Field>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Form.Field name="status">
+              <Form.Control asChild>
+                <FormDropdown
+                  data-testid="asset-status"
+                  id="asset-status"
+                  name="status"
+                  label={t('assets.modals.fields.status')}
+                  defaultValue={formValues.status}
+                  error={!!errors.status}
+                  errorMessage={errors.status}
+                  options={statusOptions}
+                />
+              </Form.Control>
+            </Form.Field>
 
-          <Form.Field name="categoryId">
-            <Form.Control asChild>
-              <FormDropdown
-                key={`asset-category-${formKey}-${categories.length}`}
-                data-testid="asset-category"
-                id="asset-category"
-                name="categoryId"
-                label={t('assets.modals.fields.category')}
-                defaultValue={String(formValues.categoryId)}
-                error={!!errors.categoryId || !!categoriesError}
-                errorMessage={errors.categoryId || categoriesError}
-                options={
-                  categoriesLoading
-                    ? [
-                        {
-                          value: String(formValues.categoryId),
-                          label: t('assets.modals.loadingCategories'),
-                        },
-                      ]
-                    : [
-                        ...(isCreate
-                          ? [
-                              {
-                                value: '0',
-                                label: t('assets.modals.add.selectCategory'),
-                              },
-                            ]
-                          : []),
-                        ...categories.map((category) => ({
-                          value: String(category.id),
-                          label: category.name,
-                        })),
-                      ]
-                }
-              />
-            </Form.Control>
-          </Form.Field>
+            <Form.Field name="categoryId">
+              <Form.Control asChild>
+                <FormDropdown
+                  key={`asset-category-${formKey}-${categories.length}`}
+                  data-testid="asset-category"
+                  id="asset-category"
+                  name="categoryId"
+                  label={t('assets.modals.fields.category')}
+                  defaultValue={String(formValues.categoryId)}
+                  error={!!errors.categoryId || !!categoriesError}
+                  errorMessage={errors.categoryId || categoriesError}
+                  options={
+                    categoriesLoading
+                      ? [
+                          {
+                            value: String(formValues.categoryId),
+                            label: t('assets.modals.loadingCategories'),
+                          },
+                        ]
+                      : [
+                          ...(isCreate
+                            ? [
+                                {
+                                  value: '0',
+                                  label: t('assets.modals.add.selectCategory'),
+                                },
+                              ]
+                            : []),
+                          ...categories.map((category) => ({
+                            value: String(category.id),
+                            label: category.name,
+                          })),
+                        ]
+                  }
+                />
+              </Form.Control>
+            </Form.Field>
+          </div>
 
-          <Form.Field name="name">
-            <Form.Control asChild>
-              <FormInput
-                data-testid="asset-name"
-                id="asset-name"
-                name="name"
-                type="text"
-                label={t('assets.modals.fields.name')}
-                defaultValue={formValues.name}
-                error={!!errors.name}
-                errorMessage={errors.name}
-              />
-            </Form.Control>
-          </Form.Field>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Form.Field name="name">
+              <Form.Control asChild>
+                <FormInput
+                  data-testid="asset-name"
+                  id="asset-name"
+                  name="name"
+                  type="text"
+                  label={t('assets.modals.fields.name')}
+                  defaultValue={formValues.name}
+                  error={!!errors.name}
+                  errorMessage={errors.name}
+                />
+              </Form.Control>
+            </Form.Field>
 
-          <Form.Field name="location">
-            <Form.Control asChild>
-              <FormInput
-                data-testid="asset-location"
-                id="asset-location"
-                name="location"
-                type="text"
-                label={t('assets.modals.fields.location')}
-                defaultValue={formValues.location ?? ''}
-                error={!!errors.location}
-                errorMessage={errors.location}
-              />
-            </Form.Control>
-          </Form.Field>
+            <Form.Field name="location">
+              <Form.Control asChild>
+                <FormInput
+                  data-testid="asset-location"
+                  id="asset-location"
+                  name="location"
+                  type="text"
+                  label={t('assets.modals.fields.location')}
+                  defaultValue={formValues.location ?? ''}
+                  error={!!errors.location}
+                  errorMessage={errors.location}
+                />
+              </Form.Control>
+            </Form.Field>
+          </div>
 
           <Form.Field name="description">
             <Form.Control asChild>

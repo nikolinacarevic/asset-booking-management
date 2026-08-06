@@ -25,6 +25,14 @@ const STATUS_COLORS: Record<string, string> = {
   CANCELLED: '#6b7280',
 };
 
+const sectionClassName =
+  'rounded-xl border border-(--color-border) bg-(--color-surface)/50 p-4';
+
+const sectionTitleClassName =
+  'mb-3 text-[10px] font-semibold tracking-[0.18em] text-(--color-modal-label) uppercase';
+
+const fieldLabelClassName = 'text-sm text-(--color-modal-label)';
+
 export function BookingDetailsModal({
   booking,
   onClose,
@@ -59,24 +67,23 @@ export function BookingDetailsModal({
       isOpen={true}
       onClose={onClose}
       title={
-        <div className="flex w-full items-center justify-between">
-          {' '}
-          <div className="flex items-center gap-8">
-            <h2 className="text-2xl font-bold">
-              {t('bookings.bookingDetailsModal.booking')} #{booking.id}
-            </h2>
-            {canCancel() && (
-              <Button
-                variant="danger"
-                data-testid={`cancel-booking-${booking.id}`}
-                type="button"
-                size="sm"
-                onClick={() => openCancelModal(booking)}
-              >
-                {t('myBookings.actions.cancel')}
-              </Button>
-            )}
-          </div>{' '}
+        <h2 className="text-xl font-bold text-[#000d4d] dark:text-[#4d8ad4]">
+          {t('bookings.bookingDetailsModal.booking')} #{booking.id}
+        </h2>
+      }
+      headerRight={
+        <div className="flex items-center gap-2">
+          {canCancel() && (
+            <Button
+              variant="danger"
+              data-testid={`cancel-booking-${booking.id}`}
+              type="button"
+              size="sm"
+              onClick={() => openCancelModal(booking)}
+            >
+              {t('myBookings.actions.cancel')}
+            </Button>
+          )}
           <IconButton
             onClick={onClose}
             aria-label={t('myBookings.cancelModal.closeAria')}
@@ -86,89 +93,87 @@ export function BookingDetailsModal({
         </div>
       }
     >
-      <div className="space-y-6">
-        <div className="rounded-lg border border-(--color-table-border) p-4">
-          <h3 className="mb-3 text-lg font-semibold tracking-wide text-gray-500 uppercase">
+      <div className="space-y-4">
+        <div className={sectionClassName}>
+          <h3 className={sectionTitleClassName}>
             {t('bookings.bookingDetailsModal.user')}
           </h3>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <p className="text-gray-500">
+              <p className={fieldLabelClassName}>
                 {t('bookings.bookingDetailsModal.name')}
               </p>
-              <p className="text-lg font-medium">
+              <p className="font-medium">
                 {booking.user.name} {booking.user.surname}
               </p>
             </div>
 
             <div>
-              <p className="text-gray-500">
+              <p className={fieldLabelClassName}>
                 {t('bookings.bookingDetailsModal.role')}
               </p>
-              <p className="text-lg font-medium">{booking.user.role}</p>
+              <p className="font-medium">{booking.user.role}</p>
             </div>
 
             <div className="col-span-2">
-              <p className="text-gray-500">
+              <p className={fieldLabelClassName}>
                 {t('bookings.bookingDetailsModal.email')}
               </p>
-              <p className="text-lg font-medium">{booking.user.email}</p>
+              <p className="font-medium">{booking.user.email}</p>
             </div>
           </div>
         </div>
 
-        <div className="rounded-lg border border-(--color-table-border) p-4">
-          <h3 className="mb-3 text-lg font-semibold tracking-wide text-gray-500 uppercase">
+        <div className={sectionClassName}>
+          <h3 className={sectionTitleClassName}>
             {t('bookings.bookingDetailsModal.asset')}
           </h3>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <p className="text-gray-500">
+              <p className={fieldLabelClassName}>
                 {t('bookings.bookingDetailsModal.name')}
               </p>
-              <p className="text-lg font-medium">{booking.asset.name}</p>
+              <p className="font-medium">{booking.asset.name}</p>
             </div>
 
             <div>
-              <p className="text-gray-500">
+              <p className={fieldLabelClassName}>
                 {t('bookings.bookingDetailsModal.status')}
               </p>
-              <p className="text-lg font-medium">{booking.asset.status}</p>
+              <p className="font-medium">{booking.asset.status}</p>
             </div>
 
             <div>
-              <p className="text-gray-500">
+              <p className={fieldLabelClassName}>
                 {t('bookings.bookingDetailsModal.category')}
               </p>
-              <p className="text-lg font-medium">
-                {booking.asset.category.name}
-              </p>
+              <p className="font-medium">{booking.asset.category.name}</p>
             </div>
 
             <div>
-              <p className="text-gray-500">
+              <p className={fieldLabelClassName}>
                 {t('bookings.bookingDetailsModal.location')}
               </p>
-              <p className="text-lg font-medium">{booking.asset.location}</p>
+              <p className="font-medium">{booking.asset.location}</p>
             </div>
           </div>
         </div>
 
-        <div className="rounded-lg border border-(--color-table-border) p-4">
-          <h3 className="mb-3 text-lg font-semibold tracking-wide text-gray-500 uppercase">
+        <div className={sectionClassName}>
+          <h3 className={sectionTitleClassName}>
             {t('bookings.bookingDetailsModal.booking')}
           </h3>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <p className="text-gray-500">
+              <p className={fieldLabelClassName}>
                 {t('bookings.bookingDetailsModal.status')}
               </p>
 
               <span
-                className="inline-flex rounded px-2 py-1 font-medium text-white"
+                className="inline-flex rounded-lg px-2.5 py-1 text-sm font-medium text-white"
                 style={{
                   backgroundColor: STATUS_COLORS[booking.status] ?? '#6b7280',
                 }}
@@ -178,26 +183,26 @@ export function BookingDetailsModal({
             </div>
 
             <div>
-              <p className="text-gray-500">
+              <p className={fieldLabelClassName}>
                 {t('bookings.bookingDetailsModal.bookingId')}
               </p>
-              <p className="text-lg font-medium">#{booking.id}</p>
+              <p className="font-medium">#{booking.id}</p>
             </div>
 
             <div>
-              <p className="text-gray-500">
+              <p className={fieldLabelClassName}>
                 {t('bookings.bookingDetailsModal.start')}
               </p>
-              <p className="text-lg font-medium">
+              <p className="font-medium">
                 {formatDateTime(booking.bookingStart)}
               </p>
             </div>
 
             <div>
-              <p className="text-gray-500">
+              <p className={fieldLabelClassName}>
                 {t('bookings.bookingDetailsModal.end')}
               </p>
-              <p className="text-lg font-medium">
+              <p className="font-medium">
                 {formatDateTime(booking.bookingEnd)}
               </p>
             </div>
@@ -205,8 +210,8 @@ export function BookingDetailsModal({
         </div>
 
         {booking.notes && (
-          <div className="rounded-lg border border-(--color-table-border) p-4">
-            <h3 className="mb-3 text-lg font-semibold tracking-wide text-gray-500 uppercase">
+          <div className={sectionClassName}>
+            <h3 className={sectionTitleClassName}>
               {t('bookings.bookingDetailsModal.notes')}
             </h3>
 

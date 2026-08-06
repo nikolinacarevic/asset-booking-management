@@ -16,7 +16,7 @@ export const formFieldLabelClassName =
   'mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-(--color-table-head-text) opacity-60';
 
 const fieldClassName =
-  'w-full rounded-lg border border-(--color-table-border) bg-(--color-table-surface) px-4 py-3 text-sm font-medium text-(--color-text) shadow-(--shadow-card) outline-none transition duration-100 focus:border-(--color-primaryblue) focus:bg-(--color-surface-hover)';
+  'w-full rounded-lg border border-(--color-border) bg-(--color-table-surface) px-3.5 py-2.5 text-sm font-medium text-(--color-text) outline-none transition duration-100 placeholder:text-(--color-modal-label) focus:border-(--color-primaryblue) focus:ring-2 focus:ring-(--color-primaryblue)/15';
 
 const BULLET = '•';
 const REVEAL_MS = 900;
@@ -67,8 +67,8 @@ export const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
             className={twMerge(
               fieldClassName,
               size === 'sm' && 'px-3 py-2 text-xs',
-              size === 'md' && 'px-4 py-3 text-sm',
-              error && 'border-red-500 focus:border-red-500',
+              size === 'md' && 'px-3.5 py-2.5 text-sm',
+              error && 'border-red-500 focus:border-red-500 focus:ring-red-500/20',
               className
             )}
             {...props}
@@ -234,8 +234,8 @@ function PasswordInput({
             fieldClassName,
             'pr-12',
             size === 'sm' && 'px-3 py-2 text-xs',
-            size === 'md' && 'px-4 py-3 text-sm',
-            error && 'border-red-500 focus:border-red-500',
+            size === 'md' && 'px-3.5 py-2.5 text-sm',
+            error && 'border-red-500 focus:border-red-500 focus:ring-red-500/20',
             className
           )}
         />

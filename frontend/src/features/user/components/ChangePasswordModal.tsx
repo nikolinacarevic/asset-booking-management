@@ -119,9 +119,10 @@ export function ChangePasswordModal({ user, isOpen, onClose }: Readonly<ChangePa
     <Modal
       isOpen={isOpen}
       onClose={onClose}
+      size="sm"
       ariaLabel={t('account.password.modalTitle')}
       title={
-        <h2 className="text-xl font-bold tracking-wide text-black dark:text-white">
+        <h2 className="text-xl font-bold tracking-tight text-[#000d4d] dark:text-[#4d8ad4]">
           {t('account.password.modalTitle')}
         </h2>
       }

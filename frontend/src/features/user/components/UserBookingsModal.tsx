@@ -106,10 +106,12 @@ export const UserBookingsModal: FC<UserBookingsModalProps> = ({
       // title for the modal
       title={
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-widest text-(--color-table-head-text) opacity-50">
+          <h2 className="text-[10px] font-semibold tracking-[0.22em] text-(--color-table-head-text) uppercase opacity-50">
             {t('users.modals.bookings.title')}
           </h2>
-          <p className="block text-base font-black tracking-wider">{user.fullName}</p>
+          <p className="mt-0.5 block text-base font-bold tracking-tight text-[#000d4d] dark:text-[#4d8ad4]">
+            {user.fullName}
+          </p>
         </div>
       }
       headerRight={

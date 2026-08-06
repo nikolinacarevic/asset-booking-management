@@ -300,13 +300,14 @@ export const UserFormModal = ({
       testId={isCreate ? undefined : 'user-edit'}
       isOpen={isOpen}
       onClose={onClose}
+      className="max-w-xl"
       ariaLabel={
         isCreate
           ? t('users.modals.create.ariaLabel')
           : t('users.modals.edit.ariaLabel')
       }
       title={
-        <h2 className="text-2xl font-bold">
+        <h2 className="text-xl font-bold text-[#000d4d] dark:text-[#4d8ad4]">
           {isCreate
             ? t('users.modals.create.title')
             : t('users.modals.edit.title')}
@@ -348,13 +349,13 @@ export const UserFormModal = ({
           void handleSubmit(formData);
         }}
       >
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4">
           {submitError && (
-            <div className="rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">
+            <div className="rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">
               {submitError}
             </div>
           )}
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Form.Field name="role">
               <Form.Control asChild>
                 <FormDropdown
@@ -387,23 +388,40 @@ export const UserFormModal = ({
           </div>
 
           {isCreate && (
-            <Form.Field name="username">
-              <Form.Control asChild>
-                <FormInput
-                  data-testid="user-username"
-                  id="user-username"
-                  name="username"
-                  type="text"
-                  label={t(`${fieldsKey}.username`)}
-                  defaultValue={createInitialValues.username}
-                  error={!!errors.username}
-                  errorMessage={errors.username}
-                />
-              </Form.Control>
-            </Form.Field>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <Form.Field name="username">
+                <Form.Control asChild>
+                  <FormInput
+                    data-testid="user-username"
+                    id="user-username"
+                    name="username"
+                    type="text"
+                    label={t(`${fieldsKey}.username`)}
+                    defaultValue={createInitialValues.username}
+                    error={!!errors.username}
+                    errorMessage={errors.username}
+                  />
+                </Form.Control>
+              </Form.Field>
+
+              <Form.Field name="password">
+                <Form.Control asChild>
+                  <FormInput
+                    data-testid="user-password"
+                    id="user-password"
+                    name="password"
+                    type="password"
+                    label={t('users.modals.create.fields.password')}
+                    defaultValue={createInitialValues.password}
+                    error={!!errors.password}
+                    errorMessage={errors.password}
+                  />
+                </Form.Control>
+              </Form.Field>
+            </div>
           )}
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Form.Field name="name">
               <Form.Control asChild>
                 <FormInput
@@ -450,24 +468,7 @@ export const UserFormModal = ({
             </Form.Control>
           </Form.Field>
 
-          {isCreate && (
-            <Form.Field name="password">
-              <Form.Control asChild>
-                <FormInput
-                  data-testid="user-password"
-                  id="user-password"
-                  name="password"
-                  type="password"
-                  label={t('users.modals.create.fields.password')}
-                  defaultValue={createInitialValues.password}
-                  error={!!errors.password}
-                  errorMessage={errors.password}
-                />
-              </Form.Control>
-            </Form.Field>
-          )}
-
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Form.Field name="departmentId">
               <Form.Control asChild>
                 <FormDropdown

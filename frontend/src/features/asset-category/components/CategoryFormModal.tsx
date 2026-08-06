@@ -190,8 +190,13 @@ export const CategoryFormModal: React.FC<CategoryFormModalProps> = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
+      className="max-w-xl"
       ariaLabel={t(config.ariaLabelKey)}
-      title={<h2 className="text-2xl font-bold">{t(config.titleKey)}</h2>}
+      title={
+        <h2 className="text-xl font-bold text-[#000d4d] dark:text-[#4d8ad4]">
+          {t(config.titleKey)}
+        </h2>
+      }
       headerRight={
         <IconButton
           data-testid={config.closeTestId}
