@@ -707,17 +707,7 @@ COPY asset_booking_mgm.asset_user (id, username, password, name, surname, email,
 1	user_admin	$2a$12$9qse.vAVHdnMYkiWeK156.pWo3LCkZjVK6pfBXG4z0Rm3tiD5NVHu	John	Doe	john.doe@example.com	ACTIVE	1	ADMIN	This is a dummy admin user	ALL	manager.doe@example.com	2026-06-26 13:44:21.139664+00	2026-06-26 13:44:21.139664+00
 2	user_employee	$2a$12$GuQwFZyOKSOttzf.hsqnEuDRbX2fB7XudiQsmOqWwYKLzzDrQO9Uq	Jane	Smith	jane.smith@example.com	ACTIVE	1	EMPLOYEE	This is a dummy employee user	ALL	manager.doe@example.com	2026-06-26 13:44:21.139664+00	2026-06-26 13:44:21.139664+00
 3	user_manager	$2a$12$SlU1fXn97HS1ozbdV8mNy.UBbG.bK3fpEigx2//27.4eFPD3bWCNy	Mark	Jones	mark.jones@example.com	ACTIVE	1	MANAGER	This is a dummy manager user	ALL	manager.3@example.com	2026-06-26 13:44:21.139664+00	2026-06-26 13:44:21.139664+00
-4	mJokic	$2a$12$M3KtX92YKiGlTqLHWJY/DeblyrFjRAlAlcX/okYtJ7MYS4kh3Sf9q	Marko	Jokic	marko.jokic@example.com	STUDENT	1	EMPLOYEE	This is a dummy Marko account	ALL	mladen.banovic@example.com	2026-06-26 13:44:21.386663+00	2026-06-26 13:44:21.386663+00
-5	mBanovic	$2a$12$pMy0lnfG7RnzwDT3Nhf8/Oi2/BKoQadL6m0CJTOBCUaMekOuQ7KGW	Mladen	Banovic	mladen.banovic@example.com	ACTIVE	2	MANAGER	This is a dummy Mladen account	ALL	manager.doe@example.com	2026-06-26 13:44:21.386663+00	2026-06-26 13:44:21.386663+00
-6	mPlavcic	$2a$12$4PbDsj5Xn6oC7Iot.xjy6.lSxa/K/cSUsOdvX1jj.noWH825LuOje	Mateo	Plavcic	mateo.plavcic@example.com	STUDENT	3	EMPLOYEE	This is a dummy Mateo account	ALL	mladen.banovic@example.com	2026-06-26 13:44:21.386663+00	2026-06-26 13:44:21.386663+00
-7	nCarevic	$2a$12$0fGQHVWkfbDPAejm.VjBNOJuXG56ViZdtNKtP8rjOdF2MEDcYzSqa	Nikolina	Carevic	nikolina.carevic@example.com	STUDENT	4	EMPLOYEE	This is a dummy Nikolina account	ALL	mladen.banovic@example.com	2026-06-26 13:44:21.386663+00	2026-06-26 13:44:21.386663+00
-8	kNovakovic	$2a$12$jVlkOO3nofN57OzKsYwaLeLMGwLTA/YqFTSnGvI/j6B5SNq7wNIK.	Katarina	Novakovic	katarina.novakovic@example.com	STUDENT	4	EMPLOYEE	This is a dummy Katarina account	ALL	mladen.banovic@example.com	2026-06-26 13:44:21.386663+00	2026-06-26 13:44:21.386663+00
-9	mMajic	$2a$12$7Ibo2k6msrAwFXTgxEmGjeQvZBtJvzPndx3ckvYuEq.MEesp2ctJ6	Monika	Majic	monika.majic@example.com	STUDENT	5	EMPLOYEE	This is a dummy Monika account	ALL	mladen.banovic@example.com	2026-06-26 13:44:21.386663+00	2026-06-26 13:44:21.386663+00
-10	aMustapic	$2a$12$l15.tTGmBmoHkc.vxmLTqObXY4zchgFL/ZFXdf457VuL8.csEwCx2	Andela	Mustapic	andela.mustapic@example.com	STUDENT	6	EMPLOYEE	This is a dummy Andela account	ALL	mladen.banovic@example.com	2026-06-26 13:44:21.386663+00	2026-06-26 13:44:21.386663+00
-11	jDiko	$2a$12$Y4Ok9FyLScMv1yJ9Soz/dexsAyBuwUAFVyRCApNCjB1WwP2K33vuS	Josko	Diko	josko.diko@example.com	STUDENT	7	EMPLOYEE	This is a dummy Josko account	ALL	mladen.banovic@example.com	2026-06-26 13:44:21.386663+00	2026-06-26 13:44:21.386663+00
-12	jPetric	$2a$12$hDfCN4E.M8QicBIo6p599uh1Ntxqx9mJdpNDDSqP6reoj4eQEacku	Jakov	Petric	jakov.petric@example.com	STUDENT	8	EMPLOYEE	This is a dummy Jakov account	ALL	mladen.banovic@example.com	2026-06-26 13:44:21.386663+00	2026-06-26 13:44:21.386663+00
-13	zKujundzic	$2a$12$J.3tuMZ76JsvQ4bmpkHpF.KXNJi1V6HAh077mGv8gShpVj1zcjYkq	Zvonimir	Kujundzic	zvone.kujundzic@example.com	STUDENT	9	ADMIN	This is a dummy Zvone account	ALL	mladen.banovic@example.com	2026-06-26 13:44:21.386663+00	2026-06-26 13:44:21.386663+00
-14	dJezidzic	$2a$12$ExyBg6kzEU1Q93liOwG4qO.sWrxGEMG6Gxajsjf273ERAkbYM3xZO	David	Jezidzic	david.jezidzic@example.com	STUDENT	9	ADMIN	This is a dummy David account	ALL	mladen.banovic@example.com	2026-06-26 13:44:21.386663+00	2026-06-26 13:44:21.386663+00
+4	nCarevic	$2a$12$0fGQHVWkfbDPAejm.VjBNOJuXG56ViZdtNKtP8rjOdF2MEDcYzSqa	Nikolina	Carevic	nikolina.carevic@example.com	STUDENT	4	EMPLOYEE	This is a dummy Nikolina account	ALL	mark.jones@example.com	2026-06-26 13:44:21.386663+00	2026-06-26 13:44:21.386663+00
 \.
 
 
@@ -813,7 +803,7 @@ SELECT pg_catalog.setval('asset_booking_mgm.asset_id_seq', 63, true);
 -- Name: asset_user_id_seq; Type: SEQUENCE SET; Schema: asset_booking_mgm; Owner: asset_mgm_user
 --
 
-SELECT pg_catalog.setval('asset_booking_mgm.asset_user_id_seq', 14, true);
+SELECT pg_catalog.setval('asset_booking_mgm.asset_user_id_seq', 4, true);
 
 
 --
