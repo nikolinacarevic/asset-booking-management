@@ -108,3 +108,33 @@ JWT_REFRESH_SECONDS=3600
 2. Open collection: `tests/api-tests/bruno/`
 3. Select the **development** environment
 4. Start the app, then run requests against the local API
+
+## Screenshots
+
+### Login
+
+![Login](docs/images/screenshots/login.png)
+
+### Bookings
+
+![Bookings](docs/images/screenshots/bookings.png)
+
+### All bookings
+
+![All bookings](docs/images/screenshots/all-bookings.png)
+
+### Users
+
+![Users](docs/images/screenshots/users.png)
+
+### Report
+
+![Report](docs/images/screenshots/report.png)
+
+### Approvals
+
+![Approvals](docs/images/screenshots/approvals.png)
+
+### Account info
+
+![Account info](docs/images/screenshots/account-info.png)
