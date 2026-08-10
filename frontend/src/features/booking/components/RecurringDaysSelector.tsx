@@ -41,7 +41,7 @@ export function RecurringDaysSelector({ selectedDays, onChange }: Props) {
             <input
               data-testid="checkbox-days"
               type="checkbox"
-              className="h-5 w-5 rounded-lg border-gray-300 text-blue-600 hover:cursor-pointer focus:ring-blue-500"
+              className="h-5 w-5 rounded-lg border-gray-300 text-(--color-primaryblue) hover:cursor-pointer focus:ring-(--color-primaryblue)"
               checked={selectedDays.includes(day.value)}
               onChange={() => toggleDay(day.value)}
             />

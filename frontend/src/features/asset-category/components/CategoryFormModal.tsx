@@ -193,7 +193,7 @@ export const CategoryFormModal: React.FC<CategoryFormModalProps> = ({
       className="max-w-xl"
       ariaLabel={t(config.ariaLabelKey)}
       title={
-        <h2 className="text-xl font-bold text-[#000d4d] dark:text-[#4d8ad4]">
+        <h2 className="text-xl font-bold text-(--color-ink)">
           {t(config.titleKey)}
         </h2>
       }

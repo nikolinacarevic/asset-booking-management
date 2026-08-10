@@ -637,6 +637,9 @@
   --color-select-border: #2684ff;
   --color-primaryblue: #0033a8;
   --color-secondaryblue: #002784;
+  --color-primaryblue-soft: #93c5fd;
+  --color-ink: #000d4d;
+  --color-brand: var(--color-primaryblue);
   --color-table-surface: #ffffff;
   --color-table-head: #f5f8fc;
   --color-table-head-text: var(--color-text);
@@ -661,7 +664,11 @@
   --color-modal-placeholder-bg: var(--color-bg);
   --color-modal-label: color-mix(in srgb, var(--color-text) 65%, transparent);
   --color-modal-header: color-mix(in srgb, var(--color-surface) 70%, white);
-  --color-modal-divider: rgba(152, 197, 251, 0.35);
+  --color-modal-divider: color-mix(
+    in srgb,
+    var(--color-primaryblue-soft) 35%,
+    transparent
+  );
   --color-status-active-bg: #dcfce7;
   --color-status-active-text: #15803d;
   --color-status-inactive-bg: #fee2e2;
@@ -679,6 +686,8 @@
   --color-text: #f5f5f5;
   --color-surface: #111827;
   --color-border: #1f2937;
+  --color-brand: var(--color-primaryblue-soft);
+  --color-ink: var(--color-primaryblue-soft);
   --color-table-surface: #111111;
   --color-table-head: var(--color-surface);
   --color-table-head-text: var(--color-text);
@@ -699,7 +708,11 @@
   --color-modal-placeholder-bg: var(--color-surface);
   --color-modal-label: color-mix(in srgb, var(--color-text) 65%, transparent);
   --color-modal-header: color-mix(in srgb, var(--color-surface) 85%, black);
-  --color-modal-divider: rgba(152, 197, 251, 0.15);
+  --color-modal-divider: color-mix(
+    in srgb,
+    var(--color-primaryblue-soft) 15%,
+    transparent
+  );
   --color-status-active-bg: rgba(20, 83, 45, 0.45);
   --color-status-active-text: #86efac;
   --color-status-inactive-bg: rgba(127, 29, 29, 0.45);
@@ -709,7 +722,7 @@
   --color-status-deleted-bg: rgba(127, 29, 29, 0.45);
   --color-status-deleted-text: #fca5a5;
   --color-status-completed-bg: rgba(30, 64, 175, 0.45);
-  --color-status-completed-text: #93c5fd;
+  --color-status-completed-text: var(--color-primaryblue-soft);
 }
 
 @layer base {
@@ -776,4 +789,44 @@
 .dark .fc .fc-daygrid-day.fc-day-today {
   background-color: rgba(30, 58, 138, 0.4) !important; 
 }
+}
+
+@layer utilities {
+  .login-atmosphere {
+    background-image:
+      radial-gradient(
+        ellipse at top right,
+        color-mix(in srgb, var(--color-primaryblue-soft) 28%, transparent),
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse at bottom left,
+        color-mix(in srgb, var(--color-primaryblue) 8%, transparent),
+        transparent 50%
+      );
+  }
+
+  .dark .login-atmosphere {
+    background-image:
+      radial-gradient(
+        ellipse at top right,
+        color-mix(in srgb, var(--color-primaryblue-soft) 12%, transparent),
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse at bottom left,
+        color-mix(in srgb, var(--color-primaryblue-soft) 6%, transparent),
+        transparent 50%
+      );
+  }
+
+  .login-atmosphere-stripes {
+    background-image: repeating-linear-gradient(
+      -28deg,
+      transparent,
+      transparent 46px,
+      color-mix(in srgb, var(--color-primaryblue-soft) 35%, transparent) 46px,
+      color-mix(in srgb, var(--color-primaryblue-soft) 35%, transparent) 47px
+    );
+  }
 }

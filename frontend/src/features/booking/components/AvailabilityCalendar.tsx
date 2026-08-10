@@ -294,7 +294,7 @@ export function AvailabilityCalendar({
             'transition-all duration-150',
             isDisabled
               ? 'pointer-events-none cursor-not-allowed'
-              : 'cursor-pointer hover:bg-blue-50 dark:hover:bg-blue-900/20',
+              : 'cursor-pointer hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_20%,transparent)] dark:hover:bg-[color-mix(in_srgb,var(--color-primaryblue)_20%,transparent)]',
 
             isOutOfRange
               ? 'bg-gray-50 text-gray-400 opacity-50 dark:bg-gray-800/40'
@@ -305,7 +305,7 @@ export function AvailabilityCalendar({
               : '',
 
             !isDisabled && (isSelected || isRecurring)
-              ? 'bg-blue-100 ring-2 ring-blue-500 dark:bg-blue-900/40'
+              ? 'bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_35%,white)] ring-2 ring-(--color-primaryblue) dark:bg-[color-mix(in_srgb,var(--color-primaryblue)_40%,transparent)]'
               : '',
           ].join(' ');
         }}

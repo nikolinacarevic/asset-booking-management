@@ -203,7 +203,7 @@ export const AssetFormModal = ({
         isCreate ? t('assets.modals.add.title') : t('assets.modals.edit.title')
       }
       title={
-        <h2 className="text-xl font-bold text-[#000d4d] dark:text-[#4d8ad4]">
+        <h2 className="text-xl font-bold text-(--color-ink)">
           {isCreate
             ? t('assets.modals.add.title')
             : t('assets.modals.edit.title')}

@@ -87,13 +87,13 @@ export const SpotPopover: React.FC<Props> = ({
                 'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold',
                 isTaken
                   ? 'bg-orange-100 text-orange-700'
-                  : 'bg-blue-100 text-blue-700',
+                  : 'bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_35%,white)] text-(--color-secondaryblue)',
               ].join(' ')}
             >
               <span
                 className={[
                   'h-1.5 w-1.5 rounded-full',
-                  isTaken ? 'bg-orange-500' : 'bg-blue-500',
+                  isTaken ? 'bg-orange-500' : 'bg-(--color-primaryblue)',
                 ].join(' ')}
               />
 

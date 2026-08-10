@@ -62,7 +62,7 @@ export const HourSelect: React.FC<Props> = ({
 
       <div className="relative">
         <AccessTimeSharpIcon
-          className="pointer-events-none absolute top-1/2 left-3 z-10 -translate-y-1/2 text-(--color-primaryblue) opacity-80 dark:text-[#98c5fb]"
+          className="pointer-events-none absolute top-1/2 left-3 z-10 -translate-y-1/2 text-(--color-brand) opacity-80"
           sx={{ fontSize: 20 }}
         />
         <select
@@ -70,12 +70,12 @@ export const HourSelect: React.FC<Props> = ({
           onChange={(e) => onChange(e.target.value)}
           aria-label={`${ariaLabel ?? label} ${t('ui.dateTimeInput.hourAriaSuffix')}`}
           className={twMerge(
-            'h-11 w-full cursor-pointer appearance-none rounded-xl bg-white py-2 pr-3 pl-10 text-sm font-medium shadow-sm ring-1 ring-[rgba(152,197,251,0.45)] transition-all outline-none',
-            'hover:bg-[rgba(152,197,251,0.08)] hover:ring-[rgba(152,197,251,0.7)]',
-            'focus-visible:ring-2 focus-visible:ring-[#98c5fb]',
-            'dark:bg-(--color-table-surface) dark:ring-[rgba(152,197,251,0.25)] dark:hover:bg-[rgba(152,197,251,0.1)]',
+            'h-11 w-full cursor-pointer appearance-none rounded-xl bg-white py-2 pr-3 pl-10 text-sm font-medium shadow-sm ring-1 ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_45%,transparent)] transition-all outline-none',
+            'hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_8%,transparent)] hover:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_70%,transparent)]',
+            'focus-visible:ring-2 focus-visible:ring-(--color-primaryblue-soft)',
+            'dark:bg-(--color-table-surface) dark:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_25%,transparent)] dark:hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_10%,transparent)]',
             value
-              ? 'text-[#000d4d] dark:text-[#98c5fb]'
+              ? 'text-(--color-ink)'
               : 'text-(--color-table-text)/50'
           )}
         >

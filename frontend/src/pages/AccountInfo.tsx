@@ -21,7 +21,7 @@ import type { UserDto } from '../features/user/types';
 function getRoleBadgeClass(role: UserDto['role']) {
   switch (role) {
     case 'ADMIN':
-      return 'bg-blue-50 text-blue-700 ring-1 ring-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:ring-blue-900';
+      return 'bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_35%,white)] text-(--color-secondaryblue) ring-1 ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_55%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-primaryblue)_40%,transparent)] dark:text-(--color-primaryblue-soft) dark:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_35%,transparent)]';
     case 'MANAGER':
       return 'bg-purple-50 text-purple-700 ring-1 ring-purple-200 dark:bg-purple-950/40 dark:text-purple-300 dark:ring-purple-900';
     case 'EMPLOYEE':

@@ -100,7 +100,7 @@ export const AssetBookingsModal: React.FC<BookingsModalProps> = ({
           <h2 className="text-[10px] font-semibold tracking-[0.22em] text-(--color-table-head-text) uppercase opacity-50">
             {t('assets.table.bookings')}
           </h2>
-          <p className="mt-0.5 block text-base font-bold tracking-tight text-[#000d4d] dark:text-[#4d8ad4]">
+          <p className="mt-0.5 block text-base font-bold tracking-tight text-(--color-ink)">
             {asset.name}
           </p>
         </div>

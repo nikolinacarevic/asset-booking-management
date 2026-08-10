@@ -21,8 +21,8 @@ export default function ThemeToggle({ className }: Readonly<ThemeToggleProps>) {
       aria-label={t('ui.themeToggle.ariaLabel')}
       aria-pressed={isDark}
       className={twMerge(
-        'relative inline-flex h-10 w-26 items-center rounded-full bg-[rgba(152,197,251,0.18)] p-1 text-(--color-primaryblue) shadow-sm ring-1 ring-[rgba(152,197,251,0.25)] transition-colors outline-none hover:cursor-pointer hover:bg-[rgba(152,197,251,0.3)] focus-visible:ring-2 focus-visible:ring-[#98c5fb]',
-        'dark:bg-[rgba(152,197,251,0.08)] dark:text-[#98c5fb] dark:ring-[rgba(152,197,251,0.16)] dark:hover:bg-[rgba(152,197,251,0.14)]',
+        'relative inline-flex h-10 w-26 items-center rounded-full bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_18%,transparent)] p-1 text-(--color-brand) shadow-sm ring-1 ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_25%,transparent)] transition-colors outline-none hover:cursor-pointer hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_30%,transparent)] focus-visible:ring-2 focus-visible:ring-(--color-primaryblue-soft)',
+        'dark:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_8%,transparent)] dark:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_16%,transparent)] dark:hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_14%,transparent)]',
         className
       )}
     >
@@ -35,7 +35,7 @@ export default function ThemeToggle({ className }: Readonly<ThemeToggleProps>) {
         aria-hidden="true"
         className={twMerge(
           'absolute top-1 left-1 h-8 w-12 rounded-full bg-white shadow transition-transform duration-300 ease-in-out',
-          'dark:bg-[rgba(152,197,251,0.25)]',
+          'dark:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_25%,transparent)]',
           isDark && 'translate-x-12'
         )}
       />

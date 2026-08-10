@@ -32,8 +32,8 @@ export function Tab<T extends string>({
               'cursor-pointer px-4 py-3 text-sm font-semibold transition-colors',
               'rounded-none border-b-2',
               isActive
-                ? 'border-blue-600 text-blue-600'
-                : 'border-transparent text-black hover:text-blue-600'
+                ? 'border-(--color-primaryblue) text-(--color-primaryblue)'
+                : 'border-transparent text-black hover:text-(--color-primaryblue)'
             )}
           >
             {tab.label}

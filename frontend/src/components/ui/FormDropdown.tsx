@@ -22,10 +22,10 @@ const fieldLabelClassName =
   'mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-(--color-table-head-text) opacity-60';
 
 const triggerClassName = twMerge(
-  'inline-flex h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-2xl bg-white px-3.5 text-sm font-medium shadow-sm ring-1 ring-[rgba(152,197,251,0.45)] transition-all outline-none',
-  'hover:bg-[rgba(152,197,251,0.08)] hover:ring-[rgba(152,197,251,0.7)]',
-  'focus-visible:ring-2 focus-visible:ring-[#98c5fb]',
-  'dark:bg-(--color-table-surface) dark:ring-[rgba(152,197,251,0.25)] dark:hover:bg-[rgba(152,197,251,0.1)]'
+  'inline-flex h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-2xl bg-white px-3.5 text-sm font-medium shadow-sm ring-1 ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_45%,transparent)] transition-all outline-none',
+  'hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_8%,transparent)] hover:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_70%,transparent)]',
+  'focus-visible:ring-2 focus-visible:ring-(--color-primaryblue-soft)',
+  'dark:bg-(--color-table-surface) dark:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_25%,transparent)] dark:hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_10%,transparent)]'
 );
 
 export const FormDropdown = React.forwardRef<
@@ -143,7 +143,7 @@ export const FormDropdown = React.forwardRef<
               data-form-dropdown-menu="true"
               aria-labelledby={triggerId}
               style={menuStyle}
-              className="overflow-y-auto rounded-2xl bg-white p-2 shadow-lg ring-1 ring-[rgba(152,197,251,0.45)] dark:bg-(--color-table-surface) dark:ring-[rgba(152,197,251,0.25)]"
+              className="overflow-y-auto rounded-2xl bg-white p-2 shadow-lg ring-1 ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_45%,transparent)] dark:bg-(--color-table-surface) dark:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_25%,transparent)]"
             >
               {options.map((option) => {
                 const optionValue = String(option.value);
@@ -162,8 +162,8 @@ export const FormDropdown = React.forwardRef<
                       className={twMerge(
                         'flex w-full cursor-pointer items-center rounded-xl px-3 py-2 text-left text-sm font-medium transition-colors',
                         isSelected
-                          ? 'bg-[rgba(152,197,251,0.18)] text-[#000d4d] dark:text-[#98c5fb]'
-                          : 'text-[#000d4d]/70 hover:bg-[rgba(152,197,251,0.1)] dark:text-[#98c5fb]/70 dark:hover:bg-[rgba(152,197,251,0.1)]'
+                          ? 'bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_18%,transparent)] text-(--color-ink)'
+                          : 'text-(--color-ink)/70 hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_10%,transparent)] dark:text-(--color-ink)/70 dark:hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_10%,transparent)]'
                       )}
                     >
                       {option.label}
@@ -203,7 +203,7 @@ export const FormDropdown = React.forwardRef<
           }
           className={twMerge(
             triggerClassName,
-            open && 'ring-2 ring-[#98c5fb]',
+            open && 'ring-2 ring-(--color-primaryblue-soft)',
             error && 'ring-red-400 focus-visible:ring-red-400',
             disabled && 'cursor-not-allowed opacity-50'
           )}
@@ -212,15 +212,15 @@ export const FormDropdown = React.forwardRef<
             className={twMerge(
               'truncate',
               stringValue
-                ? 'text-[#000d4d] dark:text-[#98c5fb]'
-                : 'text-[#000d4d]/70 dark:text-[#98c5fb]/70'
+                ? 'text-(--color-ink)'
+                : 'text-(--color-ink)/70'
             )}
           >
             {displayLabel || '—'}
           </span>
           <KeyboardArrowDownSharpIcon
             className={twMerge(
-              'shrink-0 text-(--color-primaryblue) opacity-80 transition-transform dark:text-[#98c5fb]',
+              'shrink-0 text-(--color-brand) opacity-80 transition-transform',
               open && 'rotate-180'
             )}
             sx={{ fontSize: 20 }}

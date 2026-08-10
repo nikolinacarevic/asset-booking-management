@@ -41,7 +41,7 @@ export function CancelBookingModal({
       className="max-w-lg"
       ariaLabel={t('myBookings.cancelModal.ariaLabel', { id: booking.id })}
       title={
-        <h2 className="text-xl font-bold text-[#000d4d] dark:text-[#4d8ad4]">
+        <h2 className="text-xl font-bold text-(--color-ink)">
           {t('myBookings.cancelModal.title')}
         </h2>
       }

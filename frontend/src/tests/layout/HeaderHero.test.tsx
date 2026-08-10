@@ -14,7 +14,7 @@ describe('HeaderHero', () => {
       expect(p?.textContent).toContain(key);
     }
     expect(container.querySelector('[class*="primaryblue"]')).toBeInTheDocument();
-    expect(container.querySelector('.bg-\\[\\#93c5fd\\]')).toBeInTheDocument();
+    expect(container.querySelector('[class*="primaryblue-soft"]')).toBeInTheDocument();
   });
 
   it('applies custom className and forwards props', () => {

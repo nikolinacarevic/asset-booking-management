@@ -33,7 +33,7 @@ export const AssetModal: React.FC<AssetModalProps> = ({
       backdropTestId="asset-view-modal-backdrop"
       ariaLabel={t('assets.modals.view.aria')}
       title={
-        <h2 className="text-xl font-bold text-[#000d4d] dark:text-[#4d8ad4]">
+        <h2 className="text-xl font-bold text-(--color-ink)">
           {asset.name}
         </h2>
       }

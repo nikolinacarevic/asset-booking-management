@@ -30,7 +30,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose, c
       onClose={onClose}
       ariaLabel={t('assetCategories.modals.view.ariaLabel')}
       title={
-        <h2 className="text-xl font-bold text-[#000d4d] dark:text-[#4d8ad4]">
+        <h2 className="text-xl font-bold text-(--color-ink)">
           {category.name}
         </h2>
       }

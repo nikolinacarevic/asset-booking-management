@@ -81,17 +81,17 @@ function DateField({
       <div className="relative">
         <div
           className={twMerge(
-            'group flex h-11 w-full items-center gap-2.5 rounded-xl bg-white px-3.5 text-sm shadow-sm ring-1 ring-[rgba(152,197,251,0.45)] transition-all',
-            'hover:bg-[rgba(152,197,251,0.08)] hover:ring-[rgba(152,197,251,0.7)]',
-            'has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[#98c5fb]',
-            'dark:bg-(--color-table-surface) dark:ring-[rgba(152,197,251,0.25)] dark:hover:bg-[rgba(152,197,251,0.1)]',
+            'group flex h-11 w-full items-center gap-2.5 rounded-xl bg-white px-3.5 text-sm shadow-sm ring-1 ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_45%,transparent)] transition-all',
+            'hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_8%,transparent)] hover:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_70%,transparent)]',
+            'has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-(--color-primaryblue-soft)',
+            'dark:bg-(--color-table-surface) dark:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_25%,transparent)] dark:hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_10%,transparent)]',
             value
-              ? 'text-[#000d4d] dark:text-[#98c5fb]'
+              ? 'text-(--color-ink)'
               : 'text-(--color-table-text)/50'
           )}
         >
           <CalendarMonthSharpIcon
-            className="pointer-events-none shrink-0 text-(--color-primaryblue) opacity-80 dark:text-[#98c5fb]"
+            className="pointer-events-none shrink-0 text-(--color-brand) opacity-80"
             sx={{ fontSize: 20 }}
           />
           <span className="pointer-events-none min-w-0 flex-1 truncate font-medium">
@@ -119,7 +119,7 @@ function DateField({
             type="button"
             onClick={clearDate}
             aria-label={t('ui.filters.clearDate')}
-            className="absolute top-1/2 right-2 z-20 grid h-6 w-6 -translate-y-1/2 place-items-center rounded-full text-(--color-table-text)/50 transition-colors hover:cursor-pointer hover:bg-[rgba(152,197,251,0.25)] hover:text-(--color-primaryblue) dark:hover:text-[#98c5fb]"
+            className="absolute top-1/2 right-2 z-20 grid h-6 w-6 -translate-y-1/2 place-items-center rounded-full text-(--color-table-text)/50 transition-colors hover:cursor-pointer hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_25%,transparent)] hover:text-(--color-brand)"
           >
             <CloseSharpIcon sx={{ fontSize: 16 }} />
           </button>

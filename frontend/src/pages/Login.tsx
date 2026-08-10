@@ -11,12 +11,12 @@ function LoginBackground() {
       aria-hidden
       className="pointer-events-none absolute inset-0 overflow-hidden"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(147,197,253,0.28),transparent_55%),radial-gradient(ellipse_at_bottom_left,rgba(0,51,168,0.08),transparent_50%)] dark:bg-[radial-gradient(ellipse_at_top_right,rgba(147,197,253,0.12),transparent_55%),radial-gradient(ellipse_at_bottom_left,rgba(147,197,253,0.06),transparent_50%)]" />
+      <div className="login-atmosphere absolute inset-0" />
 
-      <div className="absolute inset-0 opacity-[0.45] dark:opacity-[0.22] [background-image:repeating-linear-gradient(-28deg,transparent,transparent_46px,rgba(147,197,253,0.35)_46px,rgba(147,197,253,0.35)_47px)]" />
+      <div className="login-atmosphere-stripes absolute inset-0 opacity-[0.45] dark:opacity-[0.22]" />
 
       <svg
-        className="absolute -top-16 -right-10 h-[70%] w-[70%] text-[#93c5fd] opacity-50 dark:opacity-25"
+        className="absolute -top-16 -right-10 h-[70%] w-[70%] text-(--color-primaryblue-soft) opacity-50 dark:opacity-25"
         viewBox="0 0 800 800"
         fill="none"
       >
@@ -42,7 +42,7 @@ function LoginBackground() {
       </svg>
 
       <svg
-        className="absolute -bottom-24 -left-16 h-[65%] w-[65%] text-[#93c5fd] opacity-40 dark:opacity-20"
+        className="absolute -bottom-24 -left-16 h-[65%] w-[65%] text-(--color-primaryblue-soft) opacity-40 dark:opacity-20"
         viewBox="0 0 800 800"
         fill="none"
       >
@@ -85,7 +85,7 @@ export default function Login() {
             smSpan={8}
             className="flex min-h-screen flex-col items-center justify-center px-4 py-10 sm:mb-0 md:pt-28"
           >
-            <p className="mb-6 text-2xl font-bold tracking-tight text-(--color-primaryblue) md:hidden">
+            <p className="mb-6 text-2xl font-bold tracking-tight text-(--color-brand) md:hidden">
               {t('layout.brand')}
             </p>
             <LoginForm />

@@ -76,7 +76,7 @@ export default function Bookings() {
             type="button"
             data-testid="reset-filters-button"
             onClick={handleResetFilters}
-            className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-xl bg-white px-3.5 text-sm font-medium text-[#000d4d] shadow-sm ring-1 ring-[rgba(152,197,251,0.45)] transition-all hover:cursor-pointer hover:bg-[rgba(152,197,251,0.12)] hover:ring-[rgba(152,197,251,0.7)] focus-visible:ring-2 focus-visible:ring-[#98c5fb] focus-visible:outline-none dark:bg-(--color-table-surface) dark:text-[#98c5fb] dark:ring-[rgba(152,197,251,0.25)] dark:hover:bg-[rgba(152,197,251,0.1)]"
+            className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-xl bg-white px-3.5 text-sm font-medium text-(--color-ink) shadow-sm ring-1 ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_45%,transparent)] transition-all hover:cursor-pointer hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_12%,transparent)] hover:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_70%,transparent)] focus-visible:ring-2 focus-visible:ring-(--color-primaryblue-soft) focus-visible:outline-none dark:bg-(--color-table-surface) dark:text-(--color-ink) dark:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_25%,transparent)] dark:hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_10%,transparent)]"
           >
             <RestartAltSharpIcon sx={{ fontSize: 18 }} />
             <span>{t('bookings.resetFilters')}</span>

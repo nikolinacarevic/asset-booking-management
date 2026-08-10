@@ -35,10 +35,10 @@ export const AssetCategoryCard: React.FC<AssetCategoryCardProps> = ({
       data-testid={dataTestId ?? `category-card-${title.toLowerCase()}`}
       className={twMerge(
         'group relative min-h-28 cursor-pointer overflow-hidden rounded-2xl text-left transition-all duration-200',
-        'focus-visible:ring-2 focus-visible:ring-[#98c5fb] focus-visible:outline-none',
+        'focus-visible:ring-2 focus-visible:ring-(--color-primaryblue-soft) focus-visible:outline-none',
         isSelected
-          ? 'bg-white shadow-md ring-2 ring-[#000d4d] ring-offset-2 ring-offset-(--color-bg) dark:bg-(--color-table-surface) dark:ring-[#98c5fb] dark:ring-offset-(--color-bg)'
-          : 'bg-white shadow-sm ring-1 ring-[rgba(152,197,251,0.45)] hover:-translate-y-0.5 hover:shadow-md hover:ring-[rgba(152,197,251,0.75)] dark:bg-(--color-table-surface) dark:ring-[rgba(152,197,251,0.25)] dark:hover:ring-[rgba(152,197,251,0.45)]',
+          ? 'bg-white shadow-md ring-2 ring-(--color-ink) ring-offset-2 ring-offset-(--color-bg) dark:bg-(--color-table-surface) dark:ring-(--color-primaryblue-soft) dark:ring-offset-(--color-bg)'
+          : 'bg-white shadow-sm ring-1 ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_45%,transparent)] hover:-translate-y-0.5 hover:shadow-md hover:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_75%,transparent)] dark:bg-(--color-table-surface) dark:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_25%,transparent)] dark:hover:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_45%,transparent)]',
         className
       )}
     >
@@ -72,8 +72,8 @@ export const AssetCategoryCard: React.FC<AssetCategoryCardProps> = ({
             className={twMerge(
               'text-[10px] font-semibold tracking-[0.18em] uppercase',
               isPlainCard
-                ? 'text-[#000d4d]/70 dark:text-[#98c5fb]/70'
-                : 'text-[#000d4d]/60 dark:text-[#98c5fb]/60'
+                ? 'text-(--color-ink)/70'
+                : 'text-(--color-ink)/60'
             )}
           >
             {t('assets.categoryCard.badge')}
@@ -83,8 +83,8 @@ export const AssetCategoryCard: React.FC<AssetCategoryCardProps> = ({
             className={twMerge(
               'block text-base font-bold tracking-tight',
               isSelected
-                ? 'text-[#000d4d] dark:text-[#98c5fb]'
-                : 'text-[#000d4d] dark:text-white'
+                ? 'text-(--color-ink)'
+                : 'text-(--color-ink) dark:text-white'
             )}
           >
             {title}

@@ -67,7 +67,7 @@ export function BookingDetailsModal({
       isOpen={true}
       onClose={onClose}
       title={
-        <h2 className="text-xl font-bold text-[#000d4d] dark:text-[#4d8ad4]">
+        <h2 className="text-xl font-bold text-(--color-ink)">
           {t('bookings.bookingDetailsModal.booking')} #{booking.id}
         </h2>
       }

@@ -98,7 +98,7 @@ const LoginForm = () => {
       className="w-full max-w-md rounded-2xl border border-(--color-table-border) bg-(--color-table-surface) px-6 py-8 shadow-(--shadow-card) sm:px-8 sm:py-10"
     >
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight text-(--color-primaryblue) sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-(--color-brand) sm:text-4xl">
           {t('ui.login.title')}
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-(--color-modal-label)">

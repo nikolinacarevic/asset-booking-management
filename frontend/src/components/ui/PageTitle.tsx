@@ -10,13 +10,13 @@ export function PageTitle({ children, className }: Readonly<PageTitleProps>) {
   return (
     <h1
       className={twMerge(
-        'flex items-center gap-3 text-3xl font-bold tracking-tight text-[#000d4d] dark:text-[#4d8ad4]',
+        'flex items-center gap-3 text-3xl font-bold tracking-tight text-(--color-ink)',
         className
       )}
     >
       <span
         aria-hidden="true"
-        className="h-7 w-1 shrink-0 rounded-full bg-[#000d4d] dark:bg-[#4d8ad4]"
+        className="h-7 w-1 shrink-0 rounded-full bg-(--color-ink)"
       />
       <span className="min-w-0 leading-tight">{children}</span>
     </h1>
@@ -31,7 +31,7 @@ export function PageTitleDivider({ className }: Readonly<PageTitleDividerProps>)
   return (
     <div
       className={twMerge(
-        'h-px w-full bg-[rgba(152,197,251,0.2)] dark:bg-[rgba(152,197,251,0.1)]',
+        'h-px w-full bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_20%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_10%,transparent)]',
         className
       )}
     />
