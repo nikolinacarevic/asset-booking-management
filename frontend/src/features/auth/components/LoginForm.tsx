@@ -90,9 +90,11 @@ const LoginForm = () => {
     <Form.Root
       onSubmit={(event) => {
         event.preventDefault();
+        if (loading) return;
         const formData = new FormData(event.currentTarget);
         handleSubmit(formData);
       }}
+      aria-busy={loading}
       className="w-full max-w-md rounded-2xl border border-(--color-table-border) bg-(--color-table-surface) px-6 py-8 shadow-(--shadow-card) sm:px-8 sm:py-10"
     >
       <div className="mb-8">
@@ -116,6 +118,7 @@ const LoginForm = () => {
               placeholder={t('ui.login.placeholders.username')}
               error={!!errors.username}
               errorMessage={errors.username}
+              disabled={loading}
             />
           </Form.Control>
         </Form.Field>
@@ -131,6 +134,7 @@ const LoginForm = () => {
               placeholder={t('ui.login.placeholders.password')}
               error={!!errors.password}
               errorMessage={errors.password}
+              disabled={loading}
             />
           </Form.Control>
         </Form.Field>
@@ -151,8 +155,17 @@ const LoginForm = () => {
           type="submit"
           className="mt-6 w-full font-semibold"
           disabled={loading}
+          aria-label={loading ? t('ui.login.loading') : undefined}
+          iconLeft={
+            loading ? (
+              <span
+                aria-hidden
+                className="size-4 shrink-0 animate-spin rounded-full border-2 border-white/35 border-t-white"
+              />
+            ) : undefined
+          }
         >
-          {loading ? t('ui.login.loading') : t('ui.login.submit')}
+          {t('ui.login.submit')}
         </Button>
       </Form.Submit>
     </Form.Root>

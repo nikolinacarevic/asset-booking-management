@@ -16,7 +16,7 @@ export const formFieldLabelClassName =
   'mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-(--color-table-head-text) opacity-60';
 
 const fieldClassName =
-  'w-full rounded-lg border border-(--color-border) bg-(--color-table-surface) px-3.5 py-2.5 text-sm font-medium text-(--color-text) outline-none transition duration-100 placeholder:text-(--color-modal-label) focus:border-(--color-primaryblue) focus:ring-2 focus:ring-(--color-primaryblue)/15';
+  'w-full rounded-lg border border-(--color-border) bg-(--color-table-surface) px-3.5 py-2.5 text-sm font-medium text-(--color-text) outline-none transition duration-100 placeholder:text-(--color-modal-label) focus:border-(--color-primaryblue) focus:ring-2 focus:ring-(--color-primaryblue)/15 disabled:cursor-not-allowed disabled:opacity-60';
 
 const BULLET = '•';
 const REVEAL_MS = 900;
