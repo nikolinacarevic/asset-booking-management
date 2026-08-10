@@ -96,13 +96,13 @@ export const Navbar: React.FC = () => {
   ];
   //TODO hover, new tab
   const linkBase =
-    'mx-3 flex w-[calc(100%-1.5rem)] cursor-pointer items-center gap-3 rounded-xl border-l-4 px-3.5 py-3 text-base leading-snug tracking-normal transition-all duration-150 md:text-lg lg:text-xl';
+    'mx-3 flex w-[calc(100%-1.5rem)] cursor-pointer items-center gap-3 rounded-r-lg border-l-4 px-3.5 py-3 text-base leading-snug tracking-normal transition-colors duration-150 md:text-lg lg:text-xl';
 
   const activeStyle =
-    'border-(--color-primaryblue) bg-(--color-bg) text-black shadow-(--shadow-card) dark:bg-bg-dark dark:text-white';
+    'border-(--color-primaryblue) bg-(--color-bg) text-black dark:bg-bg-dark dark:text-white';
 
   const inactiveStyle =
-    'border-transparent text-black hover:border-(--color-primaryblue) hover:bg-(--color-bg) dark:text-white dark:hover:bg-bg-dark';
+    'border-transparent text-black hover:bg-(--color-surface-hover) dark:text-white';
 
   const getLinkClass = (isActive: boolean) =>
     `${linkBase} ${isActive ? activeStyle : inactiveStyle}`;
