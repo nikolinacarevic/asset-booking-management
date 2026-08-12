@@ -1,4 +1,5 @@
 // External packages
+import { useEffect, useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { useTranslation } from 'react-i18next';
@@ -34,8 +35,27 @@ export default function MobileMenu() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
   const isAssetBookingRoute =
     matchPath('/assets/:assetId/bookings', pathname) != null;
+
+  // Close on any route change (nav links, deep links like /approvals/:id, logout).
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  // Close when resizing to desktop — hamburger is md:hidden but Dialog portal would stay open.
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+    const handleChange = (event: MediaQueryListEvent) => {
+      if (event.matches) {
+        setOpen(false);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   const isItemActive = (to: string, isActive: boolean) => {
     if (to === '/bookings') {
@@ -82,7 +102,7 @@ export default function MobileMenu() {
     navigate('/login');
   };
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <button className="group relative flex h-10 w-10 cursor-pointer items-center justify-center md:hidden">
           <span className="absolute h-0.5 w-6 -translate-y-2 bg-current transition-all duration-300 ease-in-out group-data-[state=open]:translate-y-0 group-data-[state=open]:rotate-45" />

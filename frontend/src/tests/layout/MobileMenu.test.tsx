@@ -1,13 +1,24 @@
 import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
-import { MemoryRouter } from 'react-router-dom';
+import { Link, MemoryRouter } from 'react-router-dom';
 
 const mockNavigate = vi.fn();
 
 vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
-  return { ...actual, useNavigate: () => mockNavigate };
+  const actual = await vi.importActual<typeof import('react-router-dom')>(
+    'react-router-dom'
+  );
+  return {
+    ...actual,
+    useNavigate: () => {
+      const navigate = actual.useNavigate();
+      return ((to: unknown, options?: unknown) => {
+        mockNavigate(to, options);
+        return navigate(to as never, options as never);
+      }) as typeof navigate;
+    },
+  };
 });
 vi.mock('react-i18next', () => ({ useTranslation: () => ({ t: (k: string) => k }) }));
 vi.mock('../../components/icons/Logo', () => ({
@@ -48,7 +59,13 @@ import { isAdmin, isManager } from '../../features/user/utils/users';
 
 const adminUser = { id: 1, role: 'ADMIN', name: 'Test', surname: 'User' } as const;
 
-const renderMenu = () => render(<MemoryRouter><MobileMenu /></MemoryRouter>);
+const renderMenu = (initialPath = '/', extra?: React.ReactNode) =>
+  render(
+    <MemoryRouter initialEntries={[initialPath]}>
+      {extra}
+      <MobileMenu />
+    </MemoryRouter>
+  );
 const openMenu = () => userEvent.click(screen.getByRole('button', { name: '' }));
 
 describe('MobileMenu', () => {
@@ -106,6 +123,28 @@ describe('MobileMenu', () => {
     renderMenu();
     await openMenu();
     expect(screen.getByTestId('approvals-pending-indicator')).toBeInTheDocument();
+  });
+
+  it('closes menu after clicking a nav link', async () => {
+    renderMenu('/bookings');
+    await openMenu();
+    expect(screen.getByRole('navigation')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('link', { name: 'layout.navbar.myBookings' }));
+    expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
+  });
+
+  it('closes menu after approvals deep-link navigation', async () => {
+    vi.mocked(isAdmin).mockReturnValue(true);
+    renderMenu(
+      '/approvals',
+      <Link to="/approvals/42">Open approval deep link</Link>
+    );
+    await openMenu();
+    expect(screen.getByRole('navigation')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('link', { name: 'Open approval deep link' }));
+    expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
   });
 
   it('navigates to /login on logout click', async () => {
