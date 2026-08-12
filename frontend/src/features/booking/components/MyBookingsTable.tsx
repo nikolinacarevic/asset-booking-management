@@ -132,6 +132,7 @@ export function MyBookingsTable({
           isBookingPastEnd(booking) ? 'opacity-55' : undefined
         }
         className="w-full"
+        mobileCards
         emptyMessage={emptyMessage}
       />
 

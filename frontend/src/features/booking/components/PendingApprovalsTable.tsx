@@ -104,6 +104,7 @@ export function PendingApprovalsTable({
         columns={columns}
         getRowKey={(booking) => String(booking.id)}
         className="w-full"
+        mobileCards
         onRowClick={(booking) => onOpenBooking(booking.id)}
         emptyMessage={emptyMessage}
       />

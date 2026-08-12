@@ -19,6 +19,8 @@ export type TableProps<T> = {
   rowClassName?: string | ((row: T, index: number) => string | undefined);
   emptyMessage?: React.ReactNode;
   onRowClick?: (row: T, index: number) => void;
+  /** Below `md`, render stacked cards instead of a horizontally scrolling table. */
+  mobileCards?: boolean;
 };
 
 const tableContainerClassName =
@@ -36,6 +38,9 @@ const defaultTableRowClassName =
 
 const tableCellClassName = 'px-6 py-4 text-(--color-table-text)';
 
+const mobileCardClassName =
+  'rounded-lg border border-(--color-table-border) bg-(--color-table-surface) p-4 text-(--color-table-text) shadow-(--color-table-shadow) transition-colors';
+
 const getCellContent = <T,>(column: TableColumn<T>, row: T, index: number) => {
   if (column.render) {
     return column.render(row, index);
@@ -48,6 +53,16 @@ const getCellContent = <T,>(column: TableColumn<T>, row: T, index: number) => {
   return null;
 };
 
+const isLabeledColumn = <T,>(column: TableColumn<T>) =>
+  typeof column.header === 'string' || typeof column.header === 'number';
+
+const resolveRowClassName = <T,>(
+  rowClassName: TableProps<T>['rowClassName'],
+  row: T,
+  index: number
+) =>
+  typeof rowClassName === 'function' ? rowClassName(row, index) : rowClassName;
+
 export function Table<T>({
   data,
   columns,
@@ -56,11 +71,21 @@ export function Table<T>({
   rowClassName,
   emptyMessage,
   onRowClick,
+  mobileCards = false,
 }: Readonly<TableProps<T>>) {
   const { t } = useTranslation();
   const resolvedEmptyMessage = emptyMessage ?? t('ui.table.emptyMessage');
-  return (
-    <div className={twMerge(tableContainerClassName, className)}>
+  const fieldColumns = columns.filter(isLabeledColumn);
+  const actionColumns = columns.filter((column) => !isLabeledColumn(column));
+
+  const table = (
+    <div
+      className={twMerge(
+        tableContainerClassName,
+        mobileCards && 'hidden md:block',
+        className
+      )}
+    >
       <div className="overflow-x-auto">
         <table className={tableClassName}>
           <thead className={tableHeadClassName}>
@@ -88,11 +113,8 @@ export function Table<T>({
                   className={twMerge(
                     defaultTableRowClassName,
                     onRowClick && 'cursor-pointer',
-                    typeof rowClassName === 'function'
-                      ? rowClassName(row, index)
-                      : rowClassName
+                    resolveRowClassName(rowClassName, row, index)
                   )}
-                  // added row click for viewing the booking details on approvals page
                   onClick={
                     onRowClick
                       ? () => {
@@ -131,5 +153,87 @@ export function Table<T>({
         </table>
       </div>
     </div>
+  );
+
+  if (!mobileCards) {
+    return table;
+  }
+
+  return (
+    <>
+      <div className={twMerge('md:hidden', className)}>
+        {data.length > 0 ? (
+          <ul className="flex flex-col gap-3">
+            {data.map((row, index) => {
+              const actionNodes = actionColumns
+                .map((column) => ({
+                  key: column.key,
+                  content: getCellContent(column, row, index),
+                }))
+                .filter(
+                  ({ content }) => content != null && content !== false
+                );
+
+              return (
+                <li key={getRowKey(row, index)}>
+                  <div
+                    className={twMerge(
+                      mobileCardClassName,
+                      onRowClick &&
+                        'cursor-pointer hover:bg-(--color-table-row-hover)',
+                      resolveRowClassName(rowClassName, row, index)
+                    )}
+                    onClick={
+                      onRowClick
+                        ? () => {
+                            onRowClick(row, index);
+                          }
+                        : undefined
+                    }
+                  >
+                    <dl className="flex flex-col gap-3">
+                      {fieldColumns.map((column) => (
+                        <div key={column.key}>
+                          <dt className="text-[10px] font-semibold tracking-[0.22em] text-(--color-table-head-text) uppercase opacity-60">
+                            {column.header}
+                          </dt>
+                          <dd
+                            className={twMerge(
+                              'mt-1 text-sm text-(--color-table-text)',
+                              column.cellClassName
+                            )}
+                          >
+                            {getCellContent(column, row, index)}
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+
+                    {actionNodes.length > 0 && (
+                      <div className="mt-4 flex flex-wrap items-center justify-end gap-2 border-t border-(--color-table-row-border) pt-3">
+                        {actionNodes.map(({ key, content }) => (
+                          <div key={key}>{content}</div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <div
+            className={twMerge(
+              mobileCardClassName,
+              'py-8 text-center text-sm text-(--color-table-head-text)'
+            )}
+          >
+            {resolvedEmptyMessage}
+          </div>
+        )}
+      </div>
+
+      {table}
+    </>
   );
 }
