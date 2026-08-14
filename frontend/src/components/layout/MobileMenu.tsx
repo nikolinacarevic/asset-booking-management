@@ -33,7 +33,7 @@ import {
 
 export default function MobileMenu() {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const isAssetBookingRoute =
@@ -97,8 +97,8 @@ export default function MobileMenu() {
       : []),
   ];
   const navigate = useNavigate();
-  const handleLogout = () => {
-    document.cookie = 'auth=; Max-Age=0; path=/';
+  const handleLogout = async () => {
+    await logout();
     navigate('/login');
   };
   return (

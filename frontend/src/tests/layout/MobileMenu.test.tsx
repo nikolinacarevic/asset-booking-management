@@ -71,6 +71,20 @@ const openMenu = () => userEvent.click(screen.getByRole('button', { name: '' }))
 describe('MobileMenu', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      configurable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
     vi.mocked(isAdmin).mockReturnValue(false);
     vi.mocked(isManager).mockReturnValue(false);
     mockUseAuth.mockReturnValue(authState({ user: adminUser as any }));
@@ -147,11 +161,14 @@ describe('MobileMenu', () => {
     expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
   });
 
-  it('navigates to /login on logout click', async () => {
+  it('calls logout and navigates to /login on logout click', async () => {
+    const auth = authState({ user: adminUser as any });
+    mockUseAuth.mockReturnValue(auth);
     renderMenu();
     await openMenu();
     await userEvent.click(screen.getByText('layout.navbar.logout'));
-    expect(mockNavigate).toHaveBeenCalledWith('/login');
+    expect(auth.logout).toHaveBeenCalled();
+    expect(mockNavigate.mock.calls[0][0]).toBe('/login');
   });
 
   it('renders user full name when logged in', async () => {

@@ -1,6 +1,6 @@
 // External packages
 import { useEffect, useState } from 'react';
-import { NavLink, matchPath, useLocation } from 'react-router-dom';
+import { NavLink, matchPath, useLocation, useNavigate } from 'react-router-dom';
 import MonitorSharpIcon from '@mui/icons-material/MonitorSharp';
 import CalendarTodaySharpIcon from '@mui/icons-material/CalendarTodaySharp';
 import PeopleSharpIcon from '@mui/icons-material/PeopleSharp';
@@ -26,8 +26,9 @@ import { getFullName, isAdmin, isEmployee, canAccessApprovals } from '../../feat
 
 export const Navbar: React.FC = () => {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const [userDto, setUserDto] = useState<UserDto | undefined>();
 
@@ -107,6 +108,11 @@ export const Navbar: React.FC = () => {
   const getLinkClass = (isActive: boolean) =>
     `${linkBase} ${isActive ? activeStyle : inactiveStyle}`;
 
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
+
   return (
     <LayoutColumn
       mdSpan={3}
@@ -151,10 +157,14 @@ export const Navbar: React.FC = () => {
               <span className="font-medium">{t('layout.navbar.account')}</span>
             )}
           </NavLink>
-          <NavLink to="/login" className={getLinkClass(false)}>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className={getLinkClass(false)}
+          >
             <LogoutSharpIcon className="shrink-0 opacity-80" fontSize="small" />
             <span className="font-medium">{t('layout.navbar.logout')}</span>
-          </NavLink>
+          </button>
         </div>
       </nav>
     </LayoutColumn>

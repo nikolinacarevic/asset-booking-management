@@ -1,7 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import UserMenu from '../../components/ui/UserMenu';
 
 const mockNavigate = vi.fn();
 
@@ -20,6 +19,9 @@ vi.mock('@mui/icons-material/LogoutOutlined', () => ({ default: () => <svg /> })
 vi.mock('@mui/icons-material/VisibilityOutlined', () => ({ default: () => <svg /> }));
 vi.mock('../icons/ChevronDown', () => ({ ChevronDown: () => <svg /> }));
 
+import UserMenu from '../../components/ui/UserMenu';
+import { authState, mockUseAuth } from '../mocks/auth';
+
 const setup = () => {
   render(<UserMenu />);
   const trigger = screen.getByRole('button', { name: 'User menu' });
@@ -28,7 +30,10 @@ const setup = () => {
 };
 
 describe('UserMenu', () => {
-  beforeEach(() => mockNavigate.mockClear());
+  beforeEach(() => {
+    mockNavigate.mockClear();
+    mockUseAuth.mockReturnValue(authState());
+  });
 
   it('renders the trigger, menu closed by default', () => {
     const { trigger } = setup();
@@ -61,15 +66,23 @@ describe('UserMenu', () => {
     expect(screen.getByText('Account Info')).toBeVisible();
   });
 
-  it.each([
-    ['Account Info', '/account-info'],
-    ['Logout', '/login'],
-  ])('"%s" navigates to %s and closes the menu', async (label, path) => {
+  it('"Account Info" navigates to /account-info and closes the menu', async () => {
     const { open } = setup();
     await open();
-    await userEvent.click(screen.getByText(label));
-    expect(mockNavigate).toHaveBeenCalledWith(path);
-    await waitFor(() => expect(screen.queryByText(label)).not.toBeInTheDocument());
+    await userEvent.click(screen.getByText('Account Info'));
+    expect(mockNavigate).toHaveBeenCalledWith('/account-info');
+    await waitFor(() => expect(screen.queryByText('Account Info')).not.toBeInTheDocument());
+  });
+
+  it('calls logout and navigates to /login', async () => {
+    const auth = authState();
+    mockUseAuth.mockReturnValue(auth);
+    const { open } = setup();
+    await open();
+    await userEvent.click(screen.getByText('Logout'));
+    expect(auth.logout).toHaveBeenCalled();
+    expect(mockNavigate).toHaveBeenCalledWith('/login');
+    await waitFor(() => expect(screen.queryByText('Logout')).not.toBeInTheDocument());
   });
 
   it('sets data-state="open" on trigger when menu is open', async () => {

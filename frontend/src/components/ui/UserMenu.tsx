@@ -5,11 +5,18 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { useNavigate } from 'react-router-dom';
 import { ChevronDown } from '../icons/ChevronDown';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../features/auth/context/AuthContext';
 
 
 function UserMenu() {
   const navigate = useNavigate();
+  const { logout } = useAuth();
   const { t } = useTranslation();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
 
   return (
     <DropdownMenu.Root modal={false}>
@@ -41,7 +48,7 @@ function UserMenu() {
         <DropdownMenu.Separator className="h-px bg-gray-200 dark:bg-gray-700" />
 
         <DropdownMenu.Item
-            onSelect={() => navigate('/login')}
+            onSelect={handleLogout}
             className="cursor-pointer px-4 py-2 text-red-600 hover:bg-gray-100 hover:outline-none dark:text-red-400 dark:hover:bg-gray-800"
         >
             <span className="flex items-center gap-2">

@@ -1,6 +1,19 @@
 import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
+
+const mockNavigate = vi.fn();
+
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual<typeof import('react-router-dom')>(
+    'react-router-dom'
+  );
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+  };
+});
 
 vi.mock('react-i18next', () => ({ useTranslation: () => ({ t: (k: string) => k }) }));
 vi.mock('../../components/layout/Layout', () => ({
@@ -60,7 +73,16 @@ describe('Navbar', () => {
       expect(screen.getByText(`layout.navbar.${key}`)).toBeInTheDocument();
     }
     expect(screen.getByRole('link', { name: /Test User/i })).toHaveAttribute('href', '/account-info');
-    expect(screen.getByRole('link', { name: /layout\.navbar\.logout/i })).toHaveAttribute('href', '/login');
+    expect(screen.getByRole('button', { name: /layout\.navbar\.logout/i })).toBeInTheDocument();
+  });
+
+  it('calls logout and navigates to /login', async () => {
+    const auth = authState({ user: adminUser as any });
+    mockUseAuth.mockReturnValue(auth);
+    renderNavbar();
+    await userEvent.click(screen.getByRole('button', { name: /layout\.navbar\.logout/i }));
+    expect(auth.logout).toHaveBeenCalled();
+    expect(mockNavigate).toHaveBeenCalledWith('/login');
   });
 
   it.each([
