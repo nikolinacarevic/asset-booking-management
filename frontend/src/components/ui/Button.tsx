@@ -39,6 +39,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={twMerge(
           // base
           'inline-flex items-center justify-center gap-2 rounded-lg border leading-none transition-colors outline-none hover:cursor-pointer active:scale-96',
+          // visible keyboard focus (WCAG 2.4.7)
+          'focus-visible:ring-2 focus-visible:ring-(--color-brand) focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-bg)',
 
           // variants
           variant === 'solid' &&

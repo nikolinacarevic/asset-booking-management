@@ -29,18 +29,18 @@ export function Pagination({
       className={twMerge('mt-5 flex w-full items-center justify-center', className)}
       aria-label={ariaLabel ?? t('ui.pagination.ariaLabel')}
     >
-      <div className="flex items-center gap-2 text-sm text-(--color-table-text)">
+      <div className="flex flex-wrap items-center justify-center gap-1 text-sm text-(--color-table-text) sm:gap-2">
         <button
           type="button"
           onClick={() => onPageChange(Math.max(1, page - 1))}
           disabled={!canPrev}
-          className="inline-flex cursor-pointer items-center gap-2 rounded px-2 py-1 transition-colors hover:bg-(--color-table-row-hover) disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex min-h-9 cursor-pointer items-center gap-2 rounded-lg px-3 py-1 transition-colors outline-none hover:bg-(--color-table-row-hover) focus-visible:ring-2 focus-visible:ring-(--color-brand) disabled:cursor-not-allowed disabled:opacity-50"
         >
           <span aria-hidden="true">‹</span>
           <span>{t('ui.pagination.previous')}</span>
         </button>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           {items.map((item, idx) => {
             if (item === 'ellipsis') {
               const prev = items[idx - 1];
@@ -64,9 +64,9 @@ export function Pagination({
                 onClick={() => onPageChange(item)}
                 aria-current={isActive ? 'page' : undefined}
                 className={[
-                  'inline-flex h-6 w-6 cursor-pointer items-center justify-center rounded border text-xs transition-colors',
+                  'inline-flex h-9 min-w-9 cursor-pointer items-center justify-center rounded-lg border px-2 text-sm transition-colors outline-none focus-visible:ring-2 focus-visible:ring-(--color-brand)',
                   isActive
-                    ? 'border-(--color-table-border) bg-(--color-table-row-hover)'
+                    ? 'border-(--color-brand) bg-(--color-table-row-hover) font-semibold text-(--color-brand)'
                     : 'border-transparent hover:bg-(--color-table-row-hover)',
                 ].join(' ')}
               >
@@ -80,7 +80,7 @@ export function Pagination({
           type="button"
           onClick={() => onPageChange(Math.min(totalPages, page + 1))}
           disabled={!canNext}
-          className="inline-flex cursor-pointer items-center gap-2 rounded px-2 py-1 transition-colors hover:bg-(--color-table-row-hover) disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex min-h-9 cursor-pointer items-center gap-2 rounded-lg px-3 py-1 transition-colors outline-none hover:bg-(--color-table-row-hover) focus-visible:ring-2 focus-visible:ring-(--color-brand) disabled:cursor-not-allowed disabled:opacity-50"
         >
           <span>{t('ui.pagination.next')}</span>
           <span aria-hidden="true">›</span>

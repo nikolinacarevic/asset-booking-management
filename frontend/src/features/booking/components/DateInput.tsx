@@ -85,9 +85,7 @@ function DateField({
             'hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_8%,transparent)] hover:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_70%,transparent)]',
             'has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-(--color-primaryblue-soft)',
             'dark:bg-(--color-table-surface) dark:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_25%,transparent)] dark:hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_10%,transparent)]',
-            value
-              ? 'text-(--color-ink)'
-              : 'text-(--color-table-text)/50'
+            value ? 'text-(--color-ink)' : 'text-(--color-table-text)/70'
           )}
         >
           <CalendarMonthSharpIcon

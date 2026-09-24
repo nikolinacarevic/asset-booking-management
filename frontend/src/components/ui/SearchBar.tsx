@@ -31,9 +31,10 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder ?? t('ui.search.byNamePlaceholder')}
+        aria-label={placeholder ?? t('ui.search.byNamePlaceholder')}
         className={twMerge(
           'h-11 w-full rounded-xl bg-white py-2 pr-3 pl-10 text-sm font-medium text-(--color-ink) shadow-sm ring-1 ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_45%,transparent)] transition-all outline-none',
-          'placeholder:font-normal placeholder:text-(--color-table-text)/50',
+          'placeholder:font-normal placeholder:text-(--color-table-text)/70',
           'hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_8%,transparent)] hover:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_70%,transparent)]',
           'focus-visible:ring-2 focus-visible:ring-(--color-primaryblue-soft)',
           'dark:bg-(--color-table-surface) dark:text-(--color-ink) dark:ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_25%,transparent)] dark:hover:bg-[color-mix(in_srgb,var(--color-primaryblue-soft)_10%,transparent)]'

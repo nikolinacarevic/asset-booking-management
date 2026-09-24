@@ -11,8 +11,9 @@ export const Toast = {
     toast.success(message, options);
   },
 
+  // Errors stay longer so there's time to read them.
   error(message: string) {
-    toast.error(message, options);
+    toast.error(message, { ...options, autoClose: 6000 });
   },
 
   info(message: string) {

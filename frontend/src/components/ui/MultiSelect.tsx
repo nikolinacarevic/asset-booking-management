@@ -20,7 +20,7 @@ type Props = {
 }
 
 const fieldLabelClassName =
-  'mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-(--color-table-head-text) opacity-60'
+  'mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-(--color-table-head-text)'
 
 const fieldClassName =
   'w-full rounded-lg border border-(--color-border) bg-(--color-table-surface) px-2 py-2.5 text-sm font-medium text-(--color-text) outline-none transition focus:border-(--color-primaryblue) focus:ring-2 focus:ring-(--color-primaryblue)/15'
@@ -92,7 +92,7 @@ export const MultiSelect = ({
               {/* SELECTED CHIPS */}
               <div className="flex flex-wrap gap-2">
                 {selectedOptions.length === 0 && (
-                  <span className="text-gray-400">
+                  <span className="text-(--color-modal-label)">
                     {t('ui.multiSelect.selectAssets')}
                   </span>
                 )}

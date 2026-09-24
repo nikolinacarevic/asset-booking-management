@@ -41,13 +41,45 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
   const { t } = useTranslation();
   const dialogRef = React.useRef<HTMLDialogElement>(null);
+  const panelRef = React.useRef<HTMLDivElement>(null);
+  const returnFocusRef = React.useRef<HTMLElement | null>(null);
+
+  // Remember the element that opened the modal and return focus to it once
+  // the modal closes/unmounts (WCAG 2.4.3). Declared before the showModal
+  // effect so it captures the trigger before focus moves into the dialog.
+  React.useEffect(() => {
+    if (!isOpen) return;
+    const active = document.activeElement;
+    // Ignore elements inside the dialog (StrictMode re-runs this effect
+    // after focus has already moved in).
+    if (active instanceof HTMLElement && !dialogRef.current?.contains(active)) {
+      returnFocusRef.current = active;
+    }
+
+    return () => {
+      const trigger = returnFocusRef.current;
+      if (trigger?.isConnected) trigger.focus();
+    };
+  }, [isOpen]);
 
   React.useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
 
     if (isOpen) {
-      if (!dialog.open) dialog.showModal();
+      if (!dialog.open) {
+        dialog.showModal();
+        // showModal() focuses the first focusable node, which is the
+        // pointer-only backdrop. Move focus to the first tabbable control in
+        // the panel instead (or the panel itself if it has none).
+        const panel = panelRef.current;
+        if (panel && !panel.contains(document.activeElement)) {
+          const firstTabbable = panel.querySelector<HTMLElement>(
+            'button:not([disabled]), [href], input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          );
+          (firstTabbable ?? panel).focus();
+        }
+      }
     } else if (dialog.open) {
       dialog.close();
     }
@@ -73,14 +105,19 @@ export const Modal: React.FC<ModalProps> = ({
       <button
         type="button"
         data-testid={backdropTestId}
+        // Pointer-only affordance; keyboard users close with Escape. Keeping
+        // it out of the tab order lets initial focus land on real content.
+        tabIndex={-1}
         className="animate-overlay-in fixed inset-0 cursor-default bg-(--color-modal-overlay) backdrop-blur-[3px]"
         aria-label={t('ui.modal.closeAria')}
         onClick={onClose}
       />
       <div
+        ref={panelRef}
+        tabIndex={-1}
         data-testid={testId ?? 'modal-dialog'}
         className={twMerge(
-          'animate-modal-in relative z-10 flex max-h-[min(95vh,900px)] w-full flex-col overflow-hidden rounded-2xl border border-(--color-border) bg-(--color-table-surface) text-(--color-table-text) shadow-(--shadow-modal)',
+          'animate-modal-in relative z-10 flex max-h-[min(95vh,900px)] w-full flex-col overflow-hidden rounded-2xl border border-(--color-border) bg-(--color-table-surface) text-(--color-table-text) shadow-(--shadow-modal) outline-none',
           sizeClassName[size],
           className
         )}

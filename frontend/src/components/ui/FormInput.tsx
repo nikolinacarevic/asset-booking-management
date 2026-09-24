@@ -13,10 +13,16 @@ type FormInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> 
 };
 
 export const formFieldLabelClassName =
-  'mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-(--color-table-head-text) opacity-60';
+  'mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-(--color-table-head-text)';
 
 const fieldClassName =
   'w-full rounded-lg border border-(--color-border) bg-(--color-table-surface) px-3.5 py-2.5 text-sm font-medium text-(--color-text) outline-none transition duration-100 placeholder:text-(--color-modal-label) focus:border-(--color-primaryblue) focus:ring-2 focus:ring-(--color-primaryblue)/15 disabled:cursor-not-allowed disabled:opacity-60';
+
+const getErrorId = (id: string | undefined, hasError: boolean) =>
+  hasError && id ? `${id}-error` : undefined;
+
+const joinIds = (...ids: (string | undefined)[]) =>
+  ids.filter(Boolean).join(' ') || undefined;
 
 const BULLET = '•';
 const REVEAL_MS = 900;
@@ -72,9 +78,19 @@ export const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
               className
             )}
             {...props}
+            aria-describedby={joinIds(
+              props['aria-describedby'],
+              getErrorId(id, Boolean(error && errorMessage))
+            )}
           />
           {error && errorMessage && (
-            <p className="mt-2 text-sm text-red-500">{errorMessage}</p>
+            <p
+              id={getErrorId(id, true)}
+              role="alert"
+              className="mt-2 text-sm text-red-600 dark:text-red-400"
+            >
+              {errorMessage}
+            </p>
           )}
         </div>
       );
@@ -229,6 +245,10 @@ function PasswordInput({
           disabled={disabled}
           autoComplete={autoComplete}
           aria-invalid={error || undefined}
+          aria-describedby={joinIds(
+            props['aria-describedby'],
+            getErrorId(id, Boolean(error && errorMessage))
+          )}
           spellCheck={false}
           className={twMerge(
             fieldClassName,
@@ -260,7 +280,13 @@ function PasswordInput({
         </IconButton>
       </div>
       {error && errorMessage && (
-        <p className="mt-2 text-sm text-red-500">{errorMessage}</p>
+        <p
+          id={getErrorId(id, true)}
+          role="alert"
+          className="mt-2 text-sm text-red-600 dark:text-red-400"
+        >
+          {errorMessage}
+        </p>
       )}
     </div>
   );

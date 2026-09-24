@@ -19,7 +19,7 @@ type FormDropdownProps = Omit<
 };
 
 const fieldLabelClassName =
-  'mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-(--color-table-head-text) opacity-60';
+  'mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-(--color-table-head-text)';
 
 const triggerClassName = twMerge(
   'inline-flex h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-2xl bg-white px-3.5 text-sm font-medium shadow-sm ring-1 ring-[color-mix(in_srgb,var(--color-primaryblue-soft)_45%,transparent)] transition-all outline-none',

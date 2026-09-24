@@ -9,13 +9,26 @@ type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> & {
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
-    { size = 'md', error = false, errorMessage, className, disabled, ...props },
+    {
+      size = 'md',
+      error = false,
+      errorMessage,
+      className,
+      disabled,
+      id,
+      ...props
+    },
     ref
   ) => {
+    const generatedId = React.useId();
+    const errorId = `${id ?? generatedId}-error`;
+    const showError = error && Boolean(errorMessage);
+
     return (
       <div className="w-full">
         <input
           ref={ref}
+          id={id}
           disabled={disabled}
           aria-invalid={error || undefined}
           className={twMerge(
@@ -37,10 +50,19 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className
           )}
           {...props}
+          aria-describedby={
+            [props['aria-describedby'], showError ? errorId : undefined]
+              .filter(Boolean)
+              .join(' ') || undefined
+          }
         />
 
-        {error && errorMessage && (
-          <p className="absolute mt-2 text-sm font-semibold tracking-normal text-red-500">
+        {showError && (
+          <p
+            id={errorId}
+            role="alert"
+            className="absolute mt-2 text-sm font-semibold tracking-normal text-red-600 dark:text-red-400"
+          >
             {errorMessage}
           </p>
         )}

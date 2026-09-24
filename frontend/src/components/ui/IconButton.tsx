@@ -16,7 +16,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
         ref={ref}
         type={type}
         className={twMerge(
-          'inline-flex cursor-pointer items-center justify-center rounded-lg p-1.5 transition-colors outline-none active:scale-95 disabled:cursor-not-allowed disabled:opacity-50',
+          'inline-flex cursor-pointer items-center justify-center rounded-lg p-1.5 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-(--color-brand) active:scale-95 disabled:cursor-not-allowed disabled:opacity-50',
           variant === 'neutral' &&
           'text-(--color-table-text) hover:bg-(--color-surface-hover) hover:text-(--color-primaryblue)',
           variant === 'danger' &&
