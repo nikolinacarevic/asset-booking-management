@@ -1,6 +1,5 @@
 // External packages
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 import {
   CATEGORY_ICON_DEFAULT_SRC,
@@ -24,7 +23,6 @@ export const AssetCategoryCard: React.FC<AssetCategoryCardProps> = ({
   showBackgroundImage = true,
   'data-testid': dataTestId,
 }) => {
-  const { t } = useTranslation();
   const isPlainCard = !showBackgroundImage;
 
   return (
@@ -34,7 +32,7 @@ export const AssetCategoryCard: React.FC<AssetCategoryCardProps> = ({
       aria-pressed={isSelected}
       data-testid={dataTestId ?? `category-card-${title.toLowerCase()}`}
       className={twMerge(
-        'group relative min-h-28 cursor-pointer overflow-hidden rounded-2xl text-left transition-all duration-200',
+        'group relative min-h-16 cursor-pointer overflow-hidden rounded-2xl text-left transition-all duration-200',
         'focus-visible:ring-2 focus-visible:ring-(--color-primaryblue-soft) focus-visible:outline-none',
         isSelected
           ? 'bg-white shadow-md ring-2 ring-(--color-ink) ring-offset-2 ring-offset-(--color-bg) dark:bg-(--color-table-surface) dark:ring-(--color-primaryblue-soft) dark:ring-offset-(--color-bg)'
@@ -42,7 +40,7 @@ export const AssetCategoryCard: React.FC<AssetCategoryCardProps> = ({
         className
       )}
     >
-      <div className="relative flex h-full min-h-28">
+      <div className="relative flex h-full min-h-16 sm:min-h-24">
         {showBackgroundImage && (
           <div className="relative w-[48%] shrink-0 overflow-hidden sm:w-1/2">
             <img
@@ -64,24 +62,13 @@ export const AssetCategoryCard: React.FC<AssetCategoryCardProps> = ({
 
         <div
           className={twMerge(
-            'relative z-10 flex flex-1 flex-col justify-between gap-3 p-4',
+            'relative z-10 flex flex-1 flex-col justify-center p-3 sm:p-4',
             isPlainCard && 'items-start'
           )}
         >
           <span
             className={twMerge(
-              'text-[10px] font-semibold tracking-[0.18em] uppercase',
-              isPlainCard
-                ? 'text-(--color-ink)/70'
-                : 'text-(--color-ink)/60'
-            )}
-          >
-            {t('assets.categoryCard.badge')}
-          </span>
-
-          <span
-            className={twMerge(
-              'block text-base font-bold tracking-tight',
+              'block text-sm font-bold tracking-tight sm:text-base',
               isSelected
                 ? 'text-(--color-ink)'
                 : 'text-(--color-ink) dark:text-white'
