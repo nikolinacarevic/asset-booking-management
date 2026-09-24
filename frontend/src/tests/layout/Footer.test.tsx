@@ -1,11 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { vi, describe, it, expect } from 'vitest';
 
-vi.mock('react-i18next', () => ({ useTranslation: () => ({ t: (k: string) => k }) }));
+vi.mock('react-i18next', () => ({
+  useTranslation: () => ({ t: (k: string) => k }),
+}));
 vi.mock('@radix-ui/react-icons', () => ({
   GlobeIcon: () => <svg aria-hidden="true" />,
   MobileIcon: () => <svg aria-hidden="true" />,
   EnvelopeClosedIcon: () => <svg aria-hidden="true" />,
+  ArrowTopRightIcon: () => <svg aria-hidden="true" />,
 }));
 
 import { Footer } from '../../components/layout/Footer';
@@ -16,22 +19,48 @@ describe('Footer', () => {
     expect(screen.getByRole('contentinfo')).toBeInTheDocument();
     expect(screen.getByText('+1 555 0100')).toBeInTheDocument();
     expect(screen.getByText('info@example.com')).toBeInTheDocument();
-    for (const key of ['layout.footer.websiteLinkLabel', 'layout.footer.copyright', 'layout.footer.partOfThe', 'layout.footer.groupName']) {
+    for (const key of [
+      'layout.footer.websiteLinkLabel',
+      'layout.footer.copyright',
+      'layout.footer.groupName',
+    ]) {
       expect(screen.getByText(key)).toBeInTheDocument();
     }
+    expect(screen.getByText(/layout\.footer\.partOfThe/)).toBeInTheDocument();
   });
 
-  it('renders website link with correct attributes', () => {
+  it('groups contact links in a labelled navigation region', () => {
     render(<Footer />);
-    const link = screen.getByRole('link', { name: /layout\.footer\.websiteLinkLabel/i });
+    expect(
+      screen.getByRole('navigation', { name: 'layout.footer.contactLabel' })
+    ).toBeInTheDocument();
+  });
+
+  it('renders website link opening in a new tab and announcing it', () => {
+    render(<Footer />);
+    const link = screen.getByRole('link', {
+      name: /layout\.footer\.websiteLinkLabel/i,
+    });
     expect(link).toHaveAttribute('href', 'https://example.com');
     expect(link).toHaveAttribute('target', '_blank');
     expect(link).toHaveAttribute('rel', 'noreferrer');
+    expect(link).toHaveTextContent('layout.footer.opensInNewTab');
+  });
+
+  it('renders phone and email as actionable links', () => {
+    render(<Footer />);
+    expect(screen.getByRole('link', { name: '+1 555 0100' })).toHaveAttribute(
+      'href',
+      'tel:+15550100'
+    );
+    expect(
+      screen.getByRole('link', { name: 'info@example.com' })
+    ).toHaveAttribute('href', 'mailto:info@example.com');
   });
 
   it('merges custom className with base classes', () => {
     render(<Footer className="custom-class" />);
     const footer = screen.getByRole('contentinfo');
-    expect(footer).toHaveClass('z-10', 'custom-class');
+    expect(footer).toHaveClass('border-t', 'custom-class');
   });
 });
