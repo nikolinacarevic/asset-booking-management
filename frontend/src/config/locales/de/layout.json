@@ -1,5 +1,7 @@
 {
   "brand": "Buchungen",
+  "skipToContent": "Zum Hauptinhalt springen",
+  "loading": "Wird geladen...",
   "navbar": {
     "assets": "Inventar",
     "categories": "Kategorien",
@@ -11,17 +13,24 @@
     "report": "Bericht",
     "approvals": "Freigaben",
     "pendingApprovals": "{{count}} ausstehende Buchung(en) warten auf Ihre Freigabe",
-    "logout": "Abmelden"
+    "logout": "Abmelden",
+    "mainLabel": "Hauptnavigation",
+    "manage": "Verwalten",
+    "home": "Buchungen – Startseite"
   },
   "footer": {
     "websiteLinkLabel": "Unternehmenswebsite",
     "copyright": "© 2026 | Example Company Ltd.",
     "partOfThe": "Teil der",
-    "groupName": "Example Group"
+    "groupName": "Example Group",
+    "contactLabel": "Kontakt",
+    "opensInNewTab": "(öffnet in einem neuen Tab)"
   },
   "mobileMenu": {
     "title": "Navigationsmenü",
-    "description": "Hauptnavigation"
+    "description": "Hauptnavigation",
+    "open": "Menü öffnen",
+    "close": "Menü schließen"
   },
   "headerHero": {
     "title": "Asset-Booking-Verwaltung",
@@ -53,5 +62,13 @@
     "userUpdateFailed": "Der Benutzer konnte nicht aktualisiert werden.",
     "userDeleteFailed": "Der Benutzer konnte nicht gelöscht werden.",
     "passwordChanged": "Das Passwort wurde erfolgreich geändert."
+  },
+  "accountMenu": {
+    "trigger": "Konto und Einstellungen",
+    "accountDetails": "Kontodaten",
+    "theme": "Design",
+    "light": "Hell",
+    "dark": "Dunkel",
+    "language": "Sprache"
   }
 }

@@ -70,28 +70,30 @@ export default function Login() {
     <div className="relative min-h-screen overflow-hidden">
       <LoginBackground />
       <Header className="hidden md:flex" brandClickable={false} />
-      <Layout className="relative">
-        <LayoutRow>
-          <LayoutColumn
-            lgSpan={6}
-            className="hidden min-h-screen items-start justify-center pt-28 lg:flex lg:flex-col"
-          >
-            <HeaderHero />
-          </LayoutColumn>
-          <LayoutColumn
-            lgSpan={6}
-            lgOffset={0}
-            smOffset={2}
-            smSpan={8}
-            className="flex min-h-screen flex-col items-center justify-center px-4 py-10 sm:mb-0 md:pt-28"
-          >
-            <p className="mb-6 text-2xl font-bold tracking-tight text-(--color-brand) md:hidden">
-              {t('layout.brand')}
-            </p>
-            <LoginForm />
-          </LayoutColumn>
-        </LayoutRow>
-      </Layout>
+      <main id="main-content" tabIndex={-1} className="outline-none">
+        <Layout className="relative">
+          <LayoutRow>
+            <LayoutColumn
+              lgSpan={6}
+              className="hidden min-h-screen items-start justify-center pt-28 lg:flex lg:flex-col"
+            >
+              <HeaderHero />
+            </LayoutColumn>
+            <LayoutColumn
+              lgSpan={6}
+              lgOffset={0}
+              smOffset={2}
+              smSpan={8}
+              className="flex min-h-screen flex-col items-center justify-center px-4 py-10 sm:mb-0 md:pt-28"
+            >
+              <p className="mb-6 text-2xl font-bold tracking-tight text-(--color-brand) md:hidden">
+                {t('layout.brand')}
+              </p>
+              <LoginForm />
+            </LayoutColumn>
+          </LayoutRow>
+        </Layout>
+      </main>
     </div>
   );
 }

@@ -1,32 +1,16 @@
 // External packages
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import DE from 'country-flag-icons/react/3x2/DE';
-import GB from 'country-flag-icons/react/3x2/GB';
-import HR from 'country-flag-icons/react/3x2/HR';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
-import { LANGUAGE_STORAGE_KEY } from '../../config/i18n';
+import { LANGUAGE_STORAGE_KEY } from '../../config/languageStorage';
 
 // Components
 import { ChevronDown } from '../icons/ChevronDown';
-
-const languages = [
-  { code: 'hr', label: 'Hrvatski', Flag: HR },
-  { code: 'en', label: 'English', Flag: GB },
-  { code: 'de', label: 'Deutsch', Flag: DE },
-] as const;
+import { languages, resolveLanguage } from './languages';
 
 const flagClass =
   'h-5 w-[1.875rem] shrink-0 overflow-hidden rounded-sm ring-1 ring-black/10 dark:ring-white/15';
-
-function resolveLanguage(code: string) {
-  return (
-    languages.find((lang) => lang.code === code) ??
-    languages.find((lang) => code.startsWith(`${lang.code}-`)) ??
-    languages.find((lang) => code.startsWith(lang.code))
-  );
-}
 
 type Props = {
   variant?: 'header' | 'mobileMenu';
@@ -55,7 +39,7 @@ function LanguageSwitcher({ variant = 'header', className }: Readonly<Props>) {
             currentLanguage?.label ?? t('ui.languageSwitcher.selectLanguage')
           }
           className={twMerge(
-            'group flex items-center gap-1.5 text-gray-900 hover:cursor-pointer focus:outline-none dark:text-gray-100',
+            'group flex items-center gap-1.5 rounded-md p-1 text-gray-900 hover:cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-brand) dark:text-gray-100',
             className
           )}
         >
@@ -74,7 +58,8 @@ function LanguageSwitcher({ variant = 'header', className }: Readonly<Props>) {
         </button>
       </DropdownMenu.Trigger>
 
-      <DropdownMenu.Content data-testid="select-language"
+      <DropdownMenu.Content
+        data-testid="select-language"
         side={variant === 'header' ? 'bottom' : 'top'}
         align={variant === 'header' ? 'end' : 'start'}
         className="my-2 rounded border border-gray-200 bg-white text-gray-900 shadow dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
@@ -86,7 +71,7 @@ function LanguageSwitcher({ variant = 'header', className }: Readonly<Props>) {
               key={lang.code}
               data-testid={`language-option-${lang.code}`}
               onSelect={() => handleChange(lang.code)}
-              className="cursor-pointer px-4 py-2 hover:bg-gray-100 hover:outline-none dark:hover:bg-gray-800"
+              className="cursor-pointer px-4 py-2 outline-none hover:bg-gray-100 data-[highlighted]:bg-gray-100 dark:hover:bg-gray-800 dark:data-[highlighted]:bg-gray-800"
             >
               <span className="flex items-center gap-3">
                 <Flag className={`${flagClass} pointer-events-none`} />

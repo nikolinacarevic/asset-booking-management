@@ -1,4 +1,4 @@
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { Link, MemoryRouter } from 'react-router-dom';
@@ -21,10 +21,10 @@ vi.mock('react-router-dom', async () => {
   };
 });
 vi.mock('react-i18next', () => ({ useTranslation: () => ({ t: (k: string) => k }) }));
-vi.mock('../../components/icons/Logo', () => ({
-  Logo: ({ className }: React.SVGProps<SVGSVGElement>) => <svg className={className} aria-label="Logo" />,
-}));
 vi.mock('../../components/ui/LanguageSwitcher', () => ({ default: () => <div>LanguageSwitcher</div> }));
+vi.mock('../../components/layout/PreferenceControls', () => ({
+  PreferenceControls: () => <div>PreferenceControls</div>,
+}));
 vi.mock('../../components/ui/ThemeToggle', () => ({ default: () => <button>ThemeToggle</button> }));
 vi.mock('../../components/ui/Button', () => ({
   Button: ({ children, onClick, className }: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
@@ -66,7 +66,9 @@ const renderMenu = (initialPath = '/', extra?: React.ReactNode) =>
       <MobileMenu />
     </MemoryRouter>
   );
-const openMenu = () => userEvent.click(screen.getByRole('button', { name: '' }));
+const getTrigger = () =>
+  screen.getByRole('button', { name: 'layout.mobileMenu.open' });
+const openMenu = () => userEvent.click(getTrigger());
 
 describe('MobileMenu', () => {
   beforeEach(() => {
@@ -92,7 +94,7 @@ describe('MobileMenu', () => {
 
   it('renders trigger button and opens menu on click', async () => {
     renderMenu();
-    expect(screen.getByRole('button', { name: '' })).toBeInTheDocument();
+    expect(getTrigger()).toBeInTheDocument();
     await openMenu();
     expect(screen.getByRole('navigation')).toBeInTheDocument();
   });
@@ -157,7 +159,11 @@ describe('MobileMenu', () => {
     await openMenu();
     expect(screen.getByRole('navigation')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByRole('link', { name: 'Open approval deep link' }));
+    // The modal drawer hides the page behind it from assistive tech, so reach
+    // the outside link with `hidden` and simulate an external route change.
+    fireEvent.click(
+      screen.getByRole('link', { name: 'Open approval deep link', hidden: true })
+    );
     expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
   });
 

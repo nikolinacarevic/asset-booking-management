@@ -45,6 +45,9 @@ vi.mock('@mui/icons-material/DnsSharp', () => ({ default: () => <svg /> }));
 vi.mock('@mui/icons-material/AssessmentSharp', () => ({ default: () => <svg /> }));
 vi.mock('@mui/icons-material/HowToRegSharp', () => ({ default: () => <svg /> }));
 vi.mock('@mui/icons-material/EventNoteSharp', () => ({ default: () => <svg /> }));
+vi.mock('../../components/layout/PreferenceControls', () => ({
+  PreferenceControls: () => <div>PreferenceControls</div>,
+}));
 vi.mock('../../components/layout/ApprovalsPendingIndicator', () => ({
   ApprovalsPendingIndicator: () => <span data-testid="approvals-pending-indicator" />,
 }));
@@ -57,6 +60,8 @@ const adminUser = { id: 1, role: 'ADMIN', name: 'Test', surname: 'User' } as con
 
 const renderNavbar = (initialEntries = ['/']) =>
   render(<MemoryRouter initialEntries={initialEntries}><Navbar /></MemoryRouter>);
+const openAccountMenu = () =>
+  userEvent.click(screen.getByRole('button', { name: /layout\.accountMenu\.trigger/i }));
 
 describe('Navbar', () => {
   beforeEach(() => {
@@ -66,13 +71,17 @@ describe('Navbar', () => {
     mockUseAuth.mockReturnValue(authState({ user: adminUser as any }));
   });
 
-  it('renders navigation with default links and correct hrefs', () => {
+  it('renders navigation with default links and correct hrefs', async () => {
     renderNavbar();
     expect(screen.getByRole('navigation')).toBeInTheDocument();
-    for (const key of ['assets', 'categories', 'bookings', 'myBookings', 'report', 'logout']) {
+    for (const key of ['assets', 'categories', 'bookings', 'myBookings', 'report']) {
       expect(screen.getByText(`layout.navbar.${key}`)).toBeInTheDocument();
     }
-    expect(screen.getByRole('link', { name: /Test User/i })).toHaveAttribute('href', '/account-info');
+    // Account details and logout live in the account menu at the foot of the rail.
+    await openAccountMenu();
+    expect(
+      screen.getByRole('link', { name: /layout\.accountMenu\.accountDetails/i })
+    ).toHaveAttribute('href', '/account-info');
     expect(screen.getByRole('button', { name: /layout\.navbar\.logout/i })).toBeInTheDocument();
   });
 
@@ -80,6 +89,7 @@ describe('Navbar', () => {
     const auth = authState({ user: adminUser as any });
     mockUseAuth.mockReturnValue(auth);
     renderNavbar();
+    await openAccountMenu();
     await userEvent.click(screen.getByRole('button', { name: /layout\.navbar\.logout/i }));
     expect(auth.logout).toHaveBeenCalled();
     expect(mockNavigate).toHaveBeenCalledWith('/login');
@@ -129,7 +139,7 @@ describe('Navbar', () => {
     renderNavbar();
     expect(screen.getByText('Test User')).toBeInTheDocument();
     await waitFor(() => {
-      expect(screen.getByText('ADMIN')).toBeInTheDocument();
+      expect(screen.getByText('users.roles.ADMIN')).toBeInTheDocument();
     });
   });
 

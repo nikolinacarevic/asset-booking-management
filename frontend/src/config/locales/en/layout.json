@@ -1,5 +1,7 @@
 {
   "brand": "Bookings",
+  "skipToContent": "Skip to main content",
+  "loading": "Loading...",
   "navbar": {
     "assets": "Assets",
     "categories": "Categories",
@@ -11,17 +13,24 @@
     "report": "Report",
     "approvals": "Approvals",
     "pendingApprovals": "{{count}} pending booking(s) awaiting your approval",
-    "logout": "Logout"
+    "logout": "Log out",
+    "mainLabel": "Main navigation",
+    "manage": "Manage",
+    "home": "Bookings home"
   },
   "footer": {
     "websiteLinkLabel": "Company Website",
     "copyright": "© 2026 | Example Company Ltd.",
     "partOfThe": "Part of the",
-    "groupName": "Example Group"
+    "groupName": "Example Group",
+    "contactLabel": "Contact",
+    "opensInNewTab": "(opens in a new tab)"
   },
   "mobileMenu": {
     "title": "Navigation menu",
-    "description": "Main navigation"
+    "description": "Main navigation",
+    "open": "Open menu",
+    "close": "Close menu"
   },
   "headerHero": {
     "title": "Asset Booking Management",
@@ -53,5 +62,13 @@
     "userUpdateFailed": "Failed to update user.",
     "userDeleteFailed": "Failed to delete user.",
     "passwordChanged": "Password successfully changed."
+  },
+  "accountMenu": {
+    "trigger": "Account and preferences",
+    "accountDetails": "Account details",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "language": "Language"
   }
 }

@@ -1,5 +1,7 @@
 {
   "brand": "Rezervacije",
+  "skipToContent": "Preskoči na glavni sadržaj",
+  "loading": "Učitavanje...",
   "navbar": {
     "assets": "Imovina",
     "categories": "Kategorije",
@@ -11,17 +13,24 @@
     "report": "Report",
     "approvals": "Odobravanja",
     "pendingApprovals": "{{count}} rezervacija čeka vaše odobrenje",
-    "logout": "Odjava"
+    "logout": "Odjava",
+    "mainLabel": "Glavna navigacija",
+    "manage": "Upravljanje",
+    "home": "Rezervacije – početna"
   },
   "footer": {
     "websiteLinkLabel": "Web stranica tvrtke",
     "copyright": "© 2026 | Example Company Ltd.",
     "partOfThe": "Dio",
-    "groupName": "Example Group"
+    "groupName": "Example Group",
+    "contactLabel": "Kontakt",
+    "opensInNewTab": "(otvara se u novoj kartici)"
   },
   "mobileMenu": {
     "title": "Navigacijski izbornik",
-    "description": "Glavna navigacija"
+    "description": "Glavna navigacija",
+    "open": "Otvori izbornik",
+    "close": "Zatvori izbornik"
   },
   "headerHero": {
     "title": "Upravljanje rezervacijama",
@@ -53,5 +62,13 @@
     "userUpdateFailed": "Ažuriranje korisnika nije uspjelo.",
     "userDeleteFailed": "Brisanje korisnika nije uspjelo.",
     "passwordChanged": "Lozinka je uspješno promijenjena."
+  },
+  "accountMenu": {
+    "trigger": "Račun i postavke",
+    "accountDetails": "Podaci o računu",
+    "theme": "Tema",
+    "light": "Svijetla",
+    "dark": "Tamna",
+    "language": "Jezik"
   }
 }

@@ -40,7 +40,9 @@ import deReport from './locales/de/report.json';
 import deApprovals from './locales/de/approvals.json';
 import deMyBookings from './locales/de/myBookings.json';
 
-export const LANGUAGE_STORAGE_KEY = 'language';
+import { LANGUAGE_STORAGE_KEY } from './languageStorage';
+
+export { LANGUAGE_STORAGE_KEY };
 const SUPPORTED_LANGUAGES = ['en', 'hr', 'de'] as const;
 
 const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY);

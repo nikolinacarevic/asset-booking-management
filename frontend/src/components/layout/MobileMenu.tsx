@@ -1,55 +1,48 @@
 // External packages
 import { useEffect, useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { useTranslation } from 'react-i18next';
-import { NavLink, matchPath, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
 
 // Components
-import { ApprovalsPendingIndicator } from './ApprovalsPendingIndicator';
-import { Button } from '../ui/Button';
-import { Logo } from '../icons/Logo';
-import LanguageSwitcher from '../ui/LanguageSwitcher';
-import ThemeToggle from '../ui/ThemeToggle';
-import {
-  MonitorSharp,
-  DnsSharp,
-  CalendarTodaySharp,
-  PeopleSharp,
-  LogoutSharp,
-  AccountCircleSharp,
-  HowToRegSharp,
-  EventNoteSharp,
-} from '@mui/icons-material';
+import { Avatar } from './AccountMenu';
+import { Brand } from './Brand';
+import { PreferenceControls } from './PreferenceControls';
+import { SidebarNav, shellFocusRing } from './SidebarNav';
 
 // Features
 import { useAuth } from '../../features/auth/context/AuthContext';
-import {
-  getFullName,
-  isAdmin,
-  isEmployee,
-  canAccessApprovals,
-} from '../../features/user/utils/users';
+import { getFullName } from '../../features/user/utils/users';
 
+/** Matches the breakpoint where the desktop rail (Navbar) takes over. */
+const DESKTOP_QUERY = '(min-width: 1024px)';
+
+/**
+ * Menu button + slide-in drawer used below the lg breakpoint. Mirrors the
+ * desktop rail (same nav groups), and hosts account + preferences inline.
+ */
 export default function MobileMenu() {
   const { t } = useTranslation();
   const { user, logout } = useAuth();
   const { pathname } = useLocation();
-  const [open, setOpen] = useState(false);
-  const isAssetBookingRoute =
-    matchPath('/assets/:assetId/bookings', pathname) != null;
+  const navigate = useNavigate();
+  // The drawer remembers the route it was opened on, so any route change
+  // (nav links, deep links like /approvals/:id, logout) closes it.
+  const [openedOn, setOpenedOn] = useState<string | null>(null);
+  const open = openedOn === pathname;
+  const setOpen = (next: boolean) => setOpenedOn(next ? pathname : null);
 
-  // Close on any route change (nav links, deep links like /approvals/:id, logout).
+  // Close when resizing to desktop — the trigger is hidden there but the
+  // Dialog portal would stay open.
   useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  // Close when resizing to desktop — hamburger is md:hidden but Dialog portal would stay open.
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 768px)');
+    const mediaQuery = window.matchMedia(DESKTOP_QUERY);
     const handleChange = (event: MediaQueryListEvent) => {
       if (event.matches) {
-        setOpen(false);
+        setOpenedOn(null);
       }
     };
 
@@ -57,131 +50,100 @@ export default function MobileMenu() {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  const isItemActive = (to: string, isActive: boolean) => {
-    if (to === '/bookings') {
-      return isActive || isAssetBookingRoute;
-    }
-    return isActive;
-  };
+  const close = () => setOpen(false);
 
-  const links = [
-    ...(user && !isEmployee(user)
-      ? [
-          { to: '/assets', label: t('layout.navbar.assets'), icon: MonitorSharp },
-          { to: '/categories', label: t('layout.navbar.categories'), icon: DnsSharp },
-        ]
-      : []),
-    {
-      to: '/bookings',
-      label: t('layout.navbar.bookings'),
-      icon: CalendarTodaySharp,
-    },
-    {
-      to: '/my-bookings',
-      label: isAdmin(user)
-        ? t('layout.navbar.allBookings')
-        : t('layout.navbar.myBookings'),
-      icon: EventNoteSharp,
-    },
-    ...(isAdmin(user)
-      ? [{ to: '/users', label: t('layout.navbar.users'), icon: PeopleSharp }]
-      : []),
-    ...(canAccessApprovals(user)
-      ? [
-          {
-            to: '/approvals',
-            label: t('layout.navbar.approvals'),
-            icon: HowToRegSharp,
-          },
-        ]
-      : []),
-  ];
-  const navigate = useNavigate();
   const handleLogout = async () => {
+    close();
     await logout();
     navigate('/login');
   };
+
+  const roleLabel = user?.role
+    ? t(`users.roles.${user.role}`, { defaultValue: user.role })
+    : '';
+
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <button className="group relative flex h-10 w-10 cursor-pointer items-center justify-center md:hidden">
-          <span className="absolute h-0.5 w-6 -translate-y-2 bg-current transition-all duration-300 ease-in-out group-data-[state=open]:translate-y-0 group-data-[state=open]:rotate-45" />
-          <span className="absolute h-0.5 w-6 bg-current opacity-100 transition-all duration-300 ease-in-out group-data-[state=open]:opacity-0" />
-          <span className="absolute h-0.5 w-6 translate-y-2 bg-current transition-all duration-300 ease-in-out group-data-[state=open]:translate-y-0 group-data-[state=open]:-rotate-45" />
+        <button
+          type="button"
+          aria-label={t('layout.mobileMenu.open')}
+          className="-ml-2 inline-flex size-11 cursor-pointer items-center justify-center rounded-lg text-(--color-ink) transition-colors outline-none hover:bg-(--color-surface-hover) focus-visible:ring-2 focus-visible:ring-(--color-brand) lg:hidden"
+        >
+          <MenuIcon aria-hidden />
         </button>
       </Dialog.Trigger>
 
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-40 bg-black/50 data-[state=closed]:animate-[fadeOut_200ms] data-[state=open]:animate-[fadeIn_200ms]" />
+        <Dialog.Overlay className="fixed inset-0 z-40 bg-(--color-modal-overlay) data-[state=closed]:animate-[fadeOut_200ms] data-[state=open]:animate-[fadeIn_200ms] motion-reduce:animate-none" />
 
-        <Dialog.Content className="fixed top-0 left-0 z-50 flex h-full w-[min(100vw-4rem,22rem)] flex-col bg-(--color-surface) shadow-lg data-[state=closed]:animate-[slideOut_300ms_ease-in] data-[state=open]:animate-[slideIn_300ms_ease-out]">
-          <VisuallyHidden.Root>
-            <Dialog.Title>{t('layout.mobileMenu.title')}</Dialog.Title>
-            <Dialog.Description>
-              {t('layout.mobileMenu.description')}
-            </Dialog.Description>
-          </VisuallyHidden.Root>
+        <Dialog.Content
+          aria-describedby={undefined}
+          className="fixed inset-y-0 left-0 z-50 flex w-[min(100vw-3rem,20rem)] flex-col bg-(--color-shell) text-(--color-shell-text) shadow-(--shadow-modal) outline-none data-[state=closed]:animate-[slideOut_250ms_ease-in] data-[state=open]:animate-[slideIn_250ms_ease-out] motion-reduce:animate-none"
+        >
+          <Dialog.Title className="sr-only">
+            {t('layout.mobileMenu.title')}
+          </Dialog.Title>
 
-          <div className="flex h-20 w-full shrink-0 items-center justify-center border-b border-(--color-border) px-6">
-            <Logo className="h-10 w-auto" />
-          </div>
-          <nav className="flex flex-1 flex-col gap-1 overflow-y-auto overscroll-contain px-3 py-3">
-            {links.map(({ to, label, icon: Icon }) => (
-              <Dialog.Close asChild key={label}>
-                <NavLink
-                  to={to}
-                  end={to === '/assets'}
-                  className={({ isActive }) =>
-                    [
-                      'flex items-center gap-3 rounded-xl px-3.5 py-3 text-base font-medium transition-colors duration-150',
-                      isItemActive(to, isActive)
-                        ? 'bg-(--color-bg) text-black shadow-(--shadow-card) dark:bg-bg-dark dark:text-white'
-                        : 'text-black hover:bg-(--color-bg)/70 dark:text-white dark:hover:bg-bg-dark/70',
-                    ].join(' ')
-                  }
-                >
-                  <Icon className="shrink-0 opacity-80" fontSize="small" />
-                  <span className="flex min-w-0 flex-1 items-center">
-                    {label}
-                    {to === '/approvals' && <ApprovalsPendingIndicator />}
-                  </span>
-                </NavLink>
-              </Dialog.Close>
-            ))}
-          </nav>
-          <div className="flex w-full shrink-0 items-center justify-between px-4 py-3">
-            <LanguageSwitcher variant="mobileMenu" />
-            <ThemeToggle />
-          </div>
-          <div className="mt-auto flex w-full shrink-0 flex-col gap-2.5 border-t border-(--color-border) p-3">
+          <div className="flex h-16 shrink-0 items-center justify-between gap-3 pr-3 pl-5">
+            <Brand tone="shell" onNavigate={close} />
             <Dialog.Close asChild>
-              <NavLink
-                to="/account-info"
-                className="flex w-full items-center gap-3 rounded-xl bg-(--color-bg) px-3.5 py-3 text-base font-medium shadow-(--shadow-card) transition-colors dark:bg-bg-dark"
-              >
-                <AccountCircleSharp className="shrink-0" sx={{ fontSize: 26 }} />
-                {user ? (
-                  <div className="flex min-w-0 flex-col items-start leading-tight">
-                    <div className="truncate">{getFullName(user)}</div>
-                    <div className="text-xs font-normal text-gray-500 dark:text-gray-400">
-                      {user.role}
-                    </div>
-                  </div>
-                ) : (
-                  t('layout.navbar.account')
+              <button
+                type="button"
+                aria-label={t('layout.mobileMenu.close')}
+                className={twMerge(
+                  'inline-flex size-11 cursor-pointer items-center justify-center rounded-lg text-(--color-shell-muted) transition-colors hover:bg-(--color-shell-hover) hover:text-(--color-shell-text)',
+                  shellFocusRing
                 )}
-              </NavLink>
-            </Dialog.Close>
-
-            <Dialog.Close asChild>
-              <Button
-                onClick={handleLogout}
-                className="w-full rounded-xl border-none bg-red-500 hover:bg-red-600"
               >
-                <LogoutSharp />
-                {t('layout.navbar.logout')}
-              </Button>
+                <CloseIcon aria-hidden />
+              </button>
             </Dialog.Close>
+          </div>
+
+          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain">
+            <SidebarNav className="pt-2 pb-6" onNavigate={close} />
+
+            <div className="mt-auto flex flex-col gap-4 border-t border-(--color-shell-border) p-4">
+              <Link
+                to="/account-info"
+                onClick={close}
+                className={twMerge(
+                  'flex items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-(--color-shell-hover)',
+                  shellFocusRing
+                )}
+              >
+                {user && <Avatar user={user} />}
+                {user ? (
+                  <span className="flex min-w-0 flex-col leading-tight">
+                    <span className="truncate text-sm font-semibold text-(--color-shell-text)">
+                      {getFullName(user)}
+                    </span>
+                    <span className="truncate text-xs text-(--color-shell-muted)">
+                      {roleLabel}
+                    </span>
+                  </span>
+                ) : (
+                  <span className="text-sm font-semibold">
+                    {t('layout.navbar.account')}
+                  </span>
+                )}
+              </Link>
+
+              <PreferenceControls tone="shell" className="px-2" />
+
+              <button
+                type="button"
+                onClick={() => void handleLogout()}
+                className={twMerge(
+                  'flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-(--color-shell-border) text-sm font-semibold text-(--color-shell-text) transition-colors hover:bg-(--color-shell-hover)',
+                  shellFocusRing
+                )}
+              >
+                <LogoutSharpIcon aria-hidden fontSize="small" />
+                {t('layout.navbar.logout')}
+              </button>
+            </div>
           </div>
         </Dialog.Content>
       </Dialog.Portal>

@@ -21,8 +21,11 @@ export function ApprovalsPendingIndicator() {
     count > MAX_DISPLAY_COUNT ? `${MAX_DISPLAY_COUNT}+` : String(count);
 
   return (
+    // role="img" gives the badge an accessible name (a plain span cannot carry
+    // aria-label reliably), so the link reads "Approvals, 4 pending ...".
     <span
-      className="ml-2 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-red-500 text-[10px] leading-none font-semibold tracking-normal text-white"
+      role="img"
+      className="ml-auto inline-flex h-5 min-w-5 shrink-0 items-center justify-center rounded-full bg-(--color-shell-accent) px-1.5 text-xs leading-none font-bold text-(--color-shell) tabular-nums"
       aria-label={t('layout.navbar.pendingApprovals', { count })}
     >
       {label}
