@@ -1,21 +1,30 @@
 {
   "title": "Odobravanje rezervacija",
   "search": {
-    "placeholder": "Pretraži rezervacije..."
+    "placeholder": "Pretraži po imenu, e-pošti, imovini ili ID-u"
   },
   "table": {
     "bookingId": "ID rezervacije",
     "user": "Korisnik",
     "asset": "Imovina",
     "time": "Vrijeme rezervacije",
-    "actionsSr": "Akcije odobravanja"
+    "actionsSr": "Akcije odobravanja",
+    "request": "Zahtjev",
+    "requestedBy": "Podnositelj",
+    "when": "Termin"
   },
   "actions": {
     "approve": "Odobri rezervaciju",
     "reject": "Odbij rezervaciju",
     "approveLabel": "Odobri",
     "rejectLabel": "Odbij",
-    "processing": "Obrada zahtjeva"
+    "processing": "Obrada zahtjeva",
+    "details": "Prikaži detalje",
+    "detailsAria": "Prikaži detalje rezervacije #{{id}}",
+    "approveAria": "Odobri rezervaciju #{{id}}",
+    "rejectAria": "Odbij rezervaciju #{{id}}",
+    "approving": "Odobravanje…",
+    "rejecting": "Odbijanje…"
   },
   "loading": "Učitavanje rezervacija na čekanju...",
   "empty": "Nema rezervacija na čekanju.",
@@ -23,14 +32,15 @@
   "actionError": "Rezervacija nije ažurirana. Pokušajte ponovno.",
   "modal": {
     "ariaLabel": "Detalji rezervacije na čekanju #{{id}}",
-    "title": "Rezervacija #{{id}}",
+    "title": "Zahtjev za rezervaciju #{{id}}",
     "closeAria": "Zatvori",
     "cancel": "Zatvori",
     "sections": {
       "user": "Korisnik",
       "asset": "Imovina",
       "booking": "Rezervacija",
-      "notes": "Napomene"
+      "notes": "Napomene",
+      "requestedBy": "Podnositelj zahtjeva"
     },
     "fields": {
       "name": "Ime",
@@ -43,5 +53,29 @@
       "bookingId": "ID rezervacije",
       "time": "Vrijeme rezervacije"
     }
+  },
+  "summary_one": "{{count}} zahtjev čeka vašu odluku, najraniji prvi.",
+  "summary_few": "{{count}} zahtjeva čekaju vašu odluku, najraniji prvi.",
+  "summary_other": "{{count}} zahtjeva čeka vašu odluku, najraniji prvi.",
+  "states": {
+    "emptyTitle": "Sve je riješeno",
+    "emptyBody": "Ovdje će se pojaviti novi zahtjevi za rezervaciju koji čekaju vaše odobrenje.",
+    "noResultsTitle": "Nijedan zahtjev ne odgovara upitu „{{query}}”",
+    "noResultsBody": "Pokušajte s imenom, e-poštom, nazivom imovine ili ID-om rezervacije.",
+    "clearSearch": "Očisti pretragu",
+    "errorTitle": "Zahtjevi na čekanju nisu učitani",
+    "retry": "Pokušaj ponovno",
+    "dismiss": "Zatvori",
+    "errorBody": "Provjerite vezu pa pokušajte ponovno."
+  },
+  "toast": {
+    "approved": "Rezervacija #{{id}} je odobrena.",
+    "rejected": "Rezervacija #{{id}} je odbijena."
+  },
+  "rejectDialog": {
+    "title": "Odbiti rezervaciju #{{id}}?",
+    "body": "Zahtjev korisnika {{name}} za {{asset}} bit će odbijen. Ova se radnja ne može poništiti.",
+    "confirm": "Odbij rezervaciju",
+    "cancel": "Ostavi na čekanju"
   }
 }

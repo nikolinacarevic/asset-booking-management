@@ -1,21 +1,30 @@
 {
-  "title": "Booking Approvals",
+  "title": "Booking approvals",
   "search": {
-    "placeholder": "Search bookings..."
+    "placeholder": "Search by name, email, asset or ID"
   },
   "table": {
     "bookingId": "Booking ID",
     "user": "User",
     "asset": "Asset",
     "time": "Booking time",
-    "actionsSr": "Approval actions"
+    "actionsSr": "Approval actions",
+    "request": "Request",
+    "requestedBy": "Requested by",
+    "when": "When"
   },
   "actions": {
     "approve": "Approve booking",
     "reject": "Reject booking",
     "approveLabel": "Approve",
     "rejectLabel": "Reject",
-    "processing": "Processing request"
+    "processing": "Processing request",
+    "details": "View details",
+    "detailsAria": "View details for booking #{{id}}",
+    "approveAria": "Approve booking #{{id}}",
+    "rejectAria": "Reject booking #{{id}}",
+    "approving": "Approving…",
+    "rejecting": "Rejecting…"
   },
   "loading": "Loading pending bookings...",
   "empty": "No pending bookings.",
@@ -23,14 +32,15 @@
   "actionError": "Could not update the booking. Please try again.",
   "modal": {
     "ariaLabel": "Pending booking details #{{id}}",
-    "title": "Booking #{{id}}",
+    "title": "Booking request #{{id}}",
     "closeAria": "Close",
     "cancel": "Close",
     "sections": {
       "user": "User",
       "asset": "Asset",
       "booking": "Booking",
-      "notes": "Notes"
+      "notes": "Notes",
+      "requestedBy": "Requested by"
     },
     "fields": {
       "name": "Name",
@@ -43,5 +53,28 @@
       "bookingId": "Booking ID",
       "time": "Booking time"
     }
+  },
+  "summary_one": "{{count}} request is waiting for your decision, soonest first.",
+  "summary_other": "{{count}} requests are waiting for your decision, soonest first.",
+  "states": {
+    "emptyTitle": "You're all caught up",
+    "emptyBody": "New booking requests that need your approval will appear here.",
+    "noResultsTitle": "No requests match “{{query}}”",
+    "noResultsBody": "Try a name, email, asset or booking ID.",
+    "clearSearch": "Clear search",
+    "errorTitle": "Pending bookings couldn't be loaded",
+    "retry": "Try again",
+    "dismiss": "Dismiss",
+    "errorBody": "Check your connection, then try again."
+  },
+  "toast": {
+    "approved": "Booking #{{id}} approved.",
+    "rejected": "Booking #{{id}} rejected."
+  },
+  "rejectDialog": {
+    "title": "Reject booking #{{id}}?",
+    "body": "The request from {{name}} for {{asset}} will be rejected. This can’t be undone.",
+    "confirm": "Reject booking",
+    "cancel": "Keep pending"
   }
 }

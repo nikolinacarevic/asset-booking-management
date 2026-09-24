@@ -1,21 +1,30 @@
 {
   "title": "Buchungsfreigaben",
   "search": {
-    "placeholder": "Buchungen suchen..."
+    "placeholder": "Nach Name, E-Mail, Asset oder ID suchen"
   },
   "table": {
     "bookingId": "Buchungs-ID",
     "user": "Benutzer",
     "asset": "Asset",
     "time": "Buchungszeit",
-    "actionsSr": "Freigabeaktionen"
+    "actionsSr": "Freigabeaktionen",
+    "request": "Anfrage",
+    "requestedBy": "Angefragt von",
+    "when": "Zeitraum"
   },
   "actions": {
     "approve": "Buchung genehmigen",
     "reject": "Buchung ablehnen",
     "approveLabel": "Genehmigen",
     "rejectLabel": "Ablehnen",
-    "processing": "Anfrage wird bearbeitet"
+    "processing": "Anfrage wird bearbeitet",
+    "details": "Details anzeigen",
+    "detailsAria": "Details zu Buchung #{{id}} anzeigen",
+    "approveAria": "Buchung #{{id}} freigeben",
+    "rejectAria": "Buchung #{{id}} ablehnen",
+    "approving": "Wird genehmigt…",
+    "rejecting": "Wird abgelehnt…"
   },
   "loading": "Ausstehende Buchungen werden geladen...",
   "empty": "Keine ausstehenden Buchungen.",
@@ -23,14 +32,15 @@
   "actionError": "Die Buchung konnte nicht aktualisiert werden. Bitte erneut versuchen.",
   "modal": {
     "ariaLabel": "Details zur ausstehenden Buchung #{{id}}",
-    "title": "Buchung #{{id}}",
+    "title": "Buchungsanfrage #{{id}}",
     "closeAria": "Schließen",
     "cancel": "Schließen",
     "sections": {
       "user": "Benutzer",
       "asset": "Asset",
       "booking": "Buchung",
-      "notes": "Notizen"
+      "notes": "Notizen",
+      "requestedBy": "Angefragt von"
     },
     "fields": {
       "name": "Name",
@@ -43,5 +53,28 @@
       "bookingId": "Buchungs-ID",
       "time": "Buchungszeit"
     }
+  },
+  "summary_one": "{{count}} Anfrage wartet auf Ihre Entscheidung, früheste zuerst.",
+  "summary_other": "{{count}} Anfragen warten auf Ihre Entscheidung, früheste zuerst.",
+  "states": {
+    "emptyTitle": "Alles erledigt",
+    "emptyBody": "Neue Buchungsanfragen, die Ihre Freigabe benötigen, erscheinen hier.",
+    "noResultsTitle": "Keine Anfrage passt zu „{{query}}“",
+    "noResultsBody": "Versuchen Sie es mit Name, E-Mail, Asset oder Buchungs-ID.",
+    "clearSearch": "Suche löschen",
+    "errorTitle": "Ausstehende Anfragen konnten nicht geladen werden",
+    "retry": "Erneut versuchen",
+    "dismiss": "Schließen",
+    "errorBody": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
+  },
+  "toast": {
+    "approved": "Buchung #{{id}} freigegeben.",
+    "rejected": "Buchung #{{id}} abgelehnt."
+  },
+  "rejectDialog": {
+    "title": "Buchung #{{id}} ablehnen?",
+    "body": "Die Anfrage von {{name}} für {{asset}} wird abgelehnt. Dies kann nicht rückgängig gemacht werden.",
+    "confirm": "Buchung ablehnen",
+    "cancel": "Ausstehend lassen"
   }
 }
