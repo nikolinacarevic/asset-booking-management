@@ -52,6 +52,7 @@ export function AssetsTable({
       },
       {
         key: 'name',
+        label: t('assets.table.assetName'),
         header: (
           <button
             type="button"
@@ -105,9 +106,9 @@ export function AssetsTable({
         render: (asset) => (
           <Button data-testid="asset-bookings-button"
             size="sm"
-            variant="solid"
+            variant="outline"
             iconLeft={<CalendarTodaySharpIcon fontSize="small" />}
-            className="shadow-none"
+            className="border-(--color-primaryblue) text-(--color-primaryblue) shadow-none hover:bg-(--color-surface-hover) dark:border-(--color-brand) dark:text-(--color-brand)"
             onClick={() => onBookings(asset)}
           >
             {t('assets.table.bookings')}
@@ -194,6 +195,7 @@ export function AssetsTable({
       columns={columns}
       getRowKey={(asset) => asset.id}
       className="w-full"
+      mobileCards
       rowClassName={(asset) =>
         asset.status === 'DELETED'
           ? 'bg-slate-100 opacity-60 hover:bg-slate-200 dark:text-black dark:[&_td]:!text-black dark:[&_button]:!text-black dark:[&_button:hover]:text-(--color-primaryblue) dark:hover:bg-slate-200'

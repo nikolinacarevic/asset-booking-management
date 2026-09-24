@@ -97,7 +97,7 @@ export default function MyBookings() {
               value={fromDate}
               onChange={setFromDate}
               max={toDate || undefined}
-              className="w-full sm:w-44"
+              className="w-[calc(50%-0.375rem)] sm:w-44"
               testId="my-bookings-from-date"
             />
             <DateInputNoMin
@@ -107,7 +107,7 @@ export default function MyBookings() {
               value={toDate}
               onChange={setToDate}
               min={fromDate || undefined}
-              className="w-full sm:w-44"
+              className="w-[calc(50%-0.375rem)] sm:w-44"
               testId="my-bookings-to-date"
             />
 

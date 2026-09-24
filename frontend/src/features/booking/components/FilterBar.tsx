@@ -158,7 +158,7 @@ export function FiltersBar({
           value={filters.search}
           onChange={(v) => update({ search: v })}
           placeholder={t('ui.search.assetsPlaceholder')}
-          className="ml-auto w-full max-w-60 sm:w-60"
+          className="w-full sm:ml-auto sm:w-60"
         />
       )}
     </div>

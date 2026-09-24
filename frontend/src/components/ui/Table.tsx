@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useTranslation } from 'react-i18next';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 
 export type TableColumn<T> = {
   key: React.Key;
   header: React.ReactNode;
+  /** Plain-text field name for mobile cards when `header` is not a string (e.g. a sort button). */
+  label?: string;
   accessor?: keyof T;
   render?: (row: T, index: number) => React.ReactNode;
   headerClassName?: string;
@@ -54,7 +57,9 @@ const getCellContent = <T,>(column: TableColumn<T>, row: T, index: number) => {
 };
 
 const isLabeledColumn = <T,>(column: TableColumn<T>) =>
-  typeof column.header === 'string' || typeof column.header === 'number';
+  column.label != null ||
+  typeof column.header === 'string' ||
+  typeof column.header === 'number';
 
 const resolveRowClassName = <T,>(
   rowClassName: TableProps<T>['rowClassName'],
@@ -74,18 +79,14 @@ export function Table<T>({
   mobileCards = false,
 }: Readonly<TableProps<T>>) {
   const { t } = useTranslation();
+  // Without matchMedia (e.g. jsdom) fall back to the desktop table.
+  const isDesktop = useMediaQuery('(min-width: 768px)', true);
   const resolvedEmptyMessage = emptyMessage ?? t('ui.table.emptyMessage');
   const fieldColumns = columns.filter(isLabeledColumn);
   const actionColumns = columns.filter((column) => !isLabeledColumn(column));
 
   const table = (
-    <div
-      className={twMerge(
-        tableContainerClassName,
-        mobileCards && 'hidden md:block',
-        className
-      )}
-    >
+    <div className={twMerge(tableContainerClassName, className)}>
       <div className="overflow-x-auto">
         <table className={tableClassName}>
           <thead className={tableHeadClassName}>
@@ -155,85 +156,95 @@ export function Table<T>({
     </div>
   );
 
-  if (!mobileCards) {
+  if (!mobileCards || isDesktop) {
     return table;
   }
 
+  // Headers that are controls (e.g. sort buttons) stay reachable above the cards.
+  const headerControls = columns.filter(
+    (column) => column.label != null && React.isValidElement(column.header)
+  );
+
   return (
-    <>
-      <div className={twMerge('md:hidden', className)}>
-        {data.length > 0 ? (
-          <ul className="flex flex-col gap-3">
-            {data.map((row, index) => {
-              const actionNodes = actionColumns
-                .map((column) => ({
-                  key: column.key,
-                  content: getCellContent(column, row, index),
-                }))
-                .filter(
-                  ({ content }) => content != null && content !== false
-                );
+    <div className={className}>
+      {headerControls.length > 0 && data.length > 1 && (
+        <div className="mb-3 flex flex-wrap items-center justify-end gap-4 text-xs font-semibold tracking-[0.18em] text-(--color-table-head-text) uppercase">
+          {headerControls.map((column) => (
+            <React.Fragment key={column.key}>{column.header}</React.Fragment>
+          ))}
+        </div>
+      )}
+      {data.length > 0 ? (
+        <ul className="flex flex-col gap-3">
+          {data.map((row, index) => {
+            const actionNodes = actionColumns
+              .map((column) => ({
+                key: column.key,
+                content: getCellContent(column, row, index),
+              }))
+              .filter(({ content }) => content != null && content !== false);
 
-              return (
-                <li key={getRowKey(row, index)}>
-                  <div
-                    className={twMerge(
-                      mobileCardClassName,
-                      onRowClick &&
-                        'cursor-pointer hover:bg-(--color-table-row-hover)',
-                      resolveRowClassName(rowClassName, row, index)
-                    )}
-                    onClick={
-                      onRowClick
-                        ? () => {
-                            onRowClick(row, index);
-                          }
-                        : undefined
-                    }
-                  >
-                    <dl className="flex flex-col gap-3">
-                      {fieldColumns.map((column) => (
-                        <div key={column.key}>
-                          <dt className="text-[10px] font-semibold tracking-[0.22em] text-(--color-table-head-text) uppercase opacity-60">
-                            {column.header}
-                          </dt>
-                          <dd
-                            className={twMerge(
-                              'mt-1 text-sm text-(--color-table-text)',
-                              column.cellClassName
-                            )}
-                          >
-                            {getCellContent(column, row, index)}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-
-                    {actionNodes.length > 0 && (
-                      <div className="mt-4 flex flex-wrap items-center justify-end gap-2 border-t border-(--color-table-row-border) pt-3">
-                        {actionNodes.map(({ key, content }) => (
-                          <div key={key}>{content}</div>
-                        ))}
+            return (
+              <li key={getRowKey(row, index)}>
+                <div
+                  className={twMerge(
+                    mobileCardClassName,
+                    onRowClick &&
+                      'cursor-pointer hover:bg-(--color-table-row-hover)',
+                    resolveRowClassName(rowClassName, row, index)
+                  )}
+                  onClick={
+                    onRowClick
+                      ? () => {
+                          onRowClick(row, index);
+                        }
+                      : undefined
+                  }
+                >
+                  {/* Label and value share a row to keep cards compact. */}
+                  <dl className="flex flex-col gap-2.5">
+                    {fieldColumns.map((column) => (
+                      <div
+                        key={column.key}
+                        className="flex items-baseline justify-between gap-4"
+                      >
+                        <dt className="shrink-0 text-[11px] font-semibold tracking-[0.12em] text-(--color-table-head-text) uppercase">
+                          {column.label ?? column.header}
+                        </dt>
+                        <dd
+                          className={twMerge(
+                            'min-w-0 text-right text-sm break-words text-(--color-table-text)',
+                            column.cellClassName
+                          )}
+                        >
+                          {getCellContent(column, row, index)}
+                        </dd>
                       </div>
-                    )}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        ) : (
-          <div
-            className={twMerge(
-              mobileCardClassName,
-              'py-8 text-center text-sm text-(--color-table-head-text)'
-            )}
-          >
-            {resolvedEmptyMessage}
-          </div>
-        )}
-      </div>
+                    ))}
+                  </dl>
 
-      {table}
-    </>
+                  {actionNodes.length > 0 && (
+                    <div className="mt-4 flex flex-wrap items-center justify-end gap-2 border-t border-(--color-table-row-border) pt-3">
+                      {actionNodes.map(({ key, content }) => (
+                        <div key={key}>{content}</div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <div
+          className={twMerge(
+            mobileCardClassName,
+            'py-8 text-center text-sm text-(--color-table-head-text)'
+          )}
+        >
+          {resolvedEmptyMessage}
+        </div>
+      )}
+    </div>
   );
 }

@@ -46,6 +46,7 @@ export const UsersTable = ({
   const columns: TableColumn<UserDto>[] = [
     {
       key: 'name',
+      label: t('users.table.columns.name'),
       header: (
         <button
           type="button"
@@ -91,9 +92,9 @@ export const UsersTable = ({
       render: (user) => (
         <Button data-testid="user-bookings-button"
           size="sm"
-          variant="solid"
+          variant="outline"
           iconLeft={<CalendarTodaySharpIcon fontSize="small" />}
-          className="shadow-none"
+          className="border-(--color-primaryblue) text-(--color-primaryblue) shadow-none hover:bg-(--color-surface-hover) dark:border-(--color-brand) dark:text-(--color-brand)"
           onClick={() => onBookings(user)}
         >
           {t('users.table.bookingsCta')}
@@ -167,6 +168,7 @@ export const UsersTable = ({
           : undefined
       }
       className="w-full"
+      mobileCards
       emptyMessage={emptyMessage}
     />
   );

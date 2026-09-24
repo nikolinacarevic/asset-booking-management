@@ -58,10 +58,10 @@ export default function Bookings() {
         onSelectCategory={selectCategoryByName}
       />
 
-      <div className="mt-12 flex w-full items-center justify-between gap-4">
+      <div className="mt-12 flex w-full flex-wrap items-center justify-between gap-4">
         <PageTitle>{selectedCategory?.name ?? ''}</PageTitle>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           {selectedCategory?.name === 'Parking' && (
             <ParkingMap
               bookings={bookings}

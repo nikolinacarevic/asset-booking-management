@@ -25,6 +25,7 @@ export const AssetCategoriesTable = ({
   const columns: TableColumn<AssetCategoryDto>[] = [
     {
       key: 'name',
+      label: t('assetCategories.table.columns.name'),
       header: (
         <button
           type="button"
@@ -118,6 +119,7 @@ export const AssetCategoriesTable = ({
       columns={columns}
       getRowKey={(c) => c.id}
       className="mt-6 w-full"
+      mobileCards
     />
   );
 };

@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 // Components
 import { Table, type TableColumn } from '../../../components/ui/Table';
-import { Button } from '../../../components/ui/Button';
 
 // Types
 import { type AssetDto } from '../../asset/types';
@@ -73,13 +72,15 @@ export function BookingTable({
         headerClassName: 'w-px whitespace-nowrap',
         cellClassName: 'w-px whitespace-nowrap',
         render: (asset) => (
+          // Single interactive element (no <button> nested inside <a>),
+          // styled to match the solid small Button.
           <Link
+            data-testid="book-button"
             to={`/assets/${asset.id}/bookings`}
             onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center justify-center gap-2 rounded-lg border border-(--color-primaryblue) bg-(--color-primaryblue) px-4 py-3 leading-none text-white transition-colors outline-none hover:border-(--color-secondaryblue) hover:bg-(--color-secondaryblue) focus-visible:ring-2 focus-visible:ring-(--color-brand) focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-bg)"
           >
-            <Button data-testid="book-button" size="sm">
-              {t('bookings.table.book')}
-            </Button>
+            {t('bookings.table.book')}
           </Link>
         ),
       },
@@ -93,6 +94,7 @@ export function BookingTable({
       columns={columns}
       getRowKey={(asset) => asset.id}
       className={`w-full ${className}`}
+      mobileCards
       onRowClick={(asset) => navigate(`/assets/${asset.id}/bookings`)}
       emptyMessage={
         isLoading
