@@ -41,6 +41,7 @@ export function useUsersData() {
     return dto;
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const create = async (input: any) => {
     const dto = await createUser({ ...input, benefit: 'ALL' });
     setUsers((prev) => [dto, ...prev]);
@@ -52,7 +53,7 @@ export function useUsersData() {
       await deleteUser(id);
       // Soft-delete: keep row visible, mark as deleted immediately.
       setUsers((prev) =>
-        prev.map((u) => (u.id === id ? { ...u, status: 'DELETED' } : u)),
+        prev.map((u) => (u.id === id ? { ...u, status: 'DELETED' } : u))
       );
     } finally {
       setDeletingUserId(null);
@@ -67,4 +68,3 @@ export function useUsersData() {
     actions: { update, create, remove },
   };
 }
-

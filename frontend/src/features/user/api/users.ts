@@ -35,8 +35,11 @@ export const getUserById = async (id: string | number) => {
   return res.data;
 };
 
-// Update existing user 
-export const updateUser = async (id: string | number, payload: UserUpdateRequest) => {
+// Update existing user
+export const updateUser = async (
+  id: string | number,
+  payload: UserUpdateRequest
+) => {
   const res = await api.patch<UserDto>(`/users/${id}`, payload);
   return res.data;
 };
@@ -53,7 +56,10 @@ export const deleteUser = async (id: number) => {
 };
 
 // Change own password
-export const changeOwnPassword = async (id: string | number, payload: ChangePasswordRequest) => {
+export const changeOwnPassword = async (
+  id: string | number,
+  payload: ChangePasswordRequest
+) => {
   await api.patch<void>(`/users/${id}/password`, payload);
 };
 

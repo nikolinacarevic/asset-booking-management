@@ -2,7 +2,12 @@ import type { TFunction } from 'i18next';
 import { z } from 'zod';
 
 export const userRoleSchema = z.enum(['EMPLOYEE', 'ADMIN', 'MANAGER']);
-export const userStatusSchema = z.enum(['ACTIVE', 'INACTIVE', 'STUDENT', 'LEFT_COMPANY']);
+export const userStatusSchema = z.enum([
+  'ACTIVE',
+  'INACTIVE',
+  'STUDENT',
+  'LEFT_COMPANY',
+]);
 
 export function createUserValidationSchema(t: TFunction) {
   return z.object({
@@ -41,11 +46,10 @@ export function createUserValidationSchema(t: TFunction) {
     managerEmail: z
       .email(t('users.validation.managerEmail.invalid'))
       .max(254, t('users.validation.managerEmail.max')),
-    notes: z
-      .string()
-      .max(1000, t('users.validation.notes.max'))
-      .optional(),
+    notes: z.string().max(1000, t('users.validation.notes.max')).optional(),
   });
 }
 
-export type UserFormValues = z.infer<ReturnType<typeof createUserValidationSchema>>;
+export type UserFormValues = z.infer<
+  ReturnType<typeof createUserValidationSchema>
+>;

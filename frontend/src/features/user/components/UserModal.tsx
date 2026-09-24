@@ -15,7 +15,8 @@ import type { UserModalUser } from '../types';
 
 const statusClassNameConfig: Record<string, string> = {
   ACTIVE: 'bg-(--color-status-active-bg) text-(--color-status-active-text)',
-  INACTIVE: 'bg-(--color-status-inactive-bg) text-(--color-status-inactive-text)',
+  INACTIVE:
+    'bg-(--color-status-inactive-bg) text-(--color-status-inactive-text)',
 };
 
 export type UserModalProps = {
@@ -24,7 +25,11 @@ export type UserModalProps = {
   user: UserModalUser | null;
 };
 
-export const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user }) => {
+export const UserModal: React.FC<UserModalProps> = ({
+  isOpen,
+  onClose,
+  user,
+}) => {
   const { t } = useTranslation();
   const { getDepartmentName } = useDepartments();
   if (!isOpen || !user) return null;
@@ -43,9 +48,15 @@ export const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user }) =
       isOpen={isOpen}
       onClose={onClose}
       ariaLabel={t('users.modals.view.ariaLabel')}
-      title={<h2 className="text-xl font-bold text-(--color-ink)">{user.name}</h2>}
+      title={
+        <h2 className="text-xl font-bold text-(--color-ink)">{user.name}</h2>
+      }
       headerRight={
-        <IconButton data-testid="user-close-button" onClick={onClose} aria-label={t('users.modals.common.closeAria')}>
+        <IconButton
+          data-testid="user-close-button"
+          onClick={onClose}
+          aria-label={t('users.modals.common.closeAria')}
+        >
           <CloseIcon className="pointer-events-none" />
         </IconButton>
       }
@@ -64,50 +75,93 @@ export const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user }) =
 
         {/* Name */}
         <div>
-          <p className="text-sm text-(--color-modal-label)">{t('users.modals.view.fields.name')}</p>
-          <p data-testid="user-name" className="font-medium text-(--color-text)">
+          <p className="text-sm text-(--color-modal-label)">
+            {t('users.modals.view.fields.name')}
+          </p>
+          <p
+            data-testid="user-name"
+            className="font-medium text-(--color-text)"
+          >
             {user.name}
           </p>
         </div>
 
         {/* Email */}
         <div>
-          <p className="text-sm text-(--color-modal-label)">{t('users.modals.view.fields.email')}</p>
-          <p data-testid="user-email" className="font-medium text-(--color-text)">
+          <p className="text-sm text-(--color-modal-label)">
+            {t('users.modals.view.fields.email')}
+          </p>
+          <p
+            data-testid="user-email"
+            className="font-medium text-(--color-text)"
+          >
             {user.email}
           </p>
         </div>
 
         {/* Username */}
         <div>
-          <p className="text-sm text-(--color-modal-label)">{t('users.modals.view.fields.username')}</p>
-          <p data-testid="user-username" className="font-medium text-(--color-text)">{user.username}</p>
+          <p className="text-sm text-(--color-modal-label)">
+            {t('users.modals.view.fields.username')}
+          </p>
+          <p
+            data-testid="user-username"
+            className="font-medium text-(--color-text)"
+          >
+            {user.username}
+          </p>
         </div>
 
         {/* Role */}
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           <div>
-            <p className="text-sm text-(--color-modal-label)">{t('users.modals.view.fields.role')}</p>
-            <p data-testid="user-role" className="font-medium text-(--color-text)">{user.role}</p>
+            <p className="text-sm text-(--color-modal-label)">
+              {t('users.modals.view.fields.role')}
+            </p>
+            <p
+              data-testid="user-role"
+              className="font-medium text-(--color-text)"
+            >
+              {user.role}
+            </p>
           </div>
 
           {/* Department */}
           <div>
-            <p className="text-sm text-(--color-modal-label)">{t('users.modals.view.fields.department')}</p>
-            <p data-testid="user-department-id" className="font-medium text-(--color-text)">{departmentLabel}</p>
+            <p className="text-sm text-(--color-modal-label)">
+              {t('users.modals.view.fields.department')}
+            </p>
+            <p
+              data-testid="user-department-id"
+              className="font-medium text-(--color-text)"
+            >
+              {departmentLabel}
+            </p>
           </div>
 
           {/* Manager Email */}
           <div>
-            <p className="text-sm text-(--color-modal-label)">{t('users.modals.view.fields.managerEmail')}</p>
-            <p data-testid="user-manager-email" className="font-medium text-(--color-text)">{user.managerEmail}</p>
+            <p className="text-sm text-(--color-modal-label)">
+              {t('users.modals.view.fields.managerEmail')}
+            </p>
+            <p
+              data-testid="user-manager-email"
+              className="font-medium text-(--color-text)"
+            >
+              {user.managerEmail}
+            </p>
           </div>
         </div>
 
         {/* Notes */}
         <div>
-          <p className="text-sm text-(--color-modal-label)">{t('users.modals.view.fields.notes')}</p>
-          <p data-testid="user-note" className="font-medium text-(--color-text)">
+          <p className="text-sm text-(--color-modal-label)">
+            {t('users.modals.view.fields.notes')}
+          </p>
+          <p
+            data-testid="user-note"
+            className="font-medium text-(--color-text)"
+          >
             {user.notes || t('users.modals.common.emptyValue')}
           </p>
         </div>

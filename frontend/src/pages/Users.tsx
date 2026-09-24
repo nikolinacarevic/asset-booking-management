@@ -133,9 +133,7 @@ function UsersPage() {
             id="users-role-filter"
             aria-label={t('users.filters.role')}
             value={list.selectedRole}
-            onChange={(value) =>
-              list.setSelectedRole(value as UserRole | '')
-            }
+            onChange={(value) => list.setSelectedRole(value as UserRole | '')}
             options={roleFilterOptions}
             className="sm:w-32"
           />
