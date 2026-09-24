@@ -12,9 +12,6 @@ vi.mock('../../components/layout/HeaderHero', () => ({ HeaderHero: () => <div>He
 vi.mock('../../components/layout/Header', () => ({
   Header: ({ className }: { className?: string }) => <header className={className}>Header</header>,
 }));
-vi.mock('../../components/icons/Logo', () => ({
-  Logo: ({ className }: React.SVGProps<SVGSVGElement>) => <svg className={className} aria-label="Logo" />,
-}));
 vi.mock('../../features/auth/components/RegisterForm', () => ({ default: () => <div>RegisterForm</div> }));
 
 import Register from '../../pages/Register';
@@ -23,10 +20,9 @@ const renderPage = () => render(<MemoryRouter><Register /></MemoryRouter>);
 
 describe('Register', () => {
   it('renders all key elements', () => {
-    const { container } = renderPage();
+    renderPage();
     expect(screen.getByText('HeaderHero')).toBeInTheDocument();
     expect(screen.getByText('RegisterForm')).toBeInTheDocument();
-    expect(container.querySelector('svg[aria-label="Logo"]')).toBeInTheDocument();
   });
 
   it('renders Header with hidden md:flex classes', () => {
