@@ -10,15 +10,11 @@ export function PageTitle({ children, className }: Readonly<PageTitleProps>) {
   return (
     <h1
       className={twMerge(
-        'flex items-center gap-3 text-3xl font-bold tracking-tight text-(--color-ink)',
+        'min-w-0 text-3xl leading-tight font-bold tracking-tight text-(--color-ink)',
         className
       )}
     >
-      <span
-        aria-hidden="true"
-        className="h-7 w-1 shrink-0 rounded-full bg-(--color-ink)"
-      />
-      <span className="min-w-0 leading-tight">{children}</span>
+      {children}
     </h1>
   );
 }
@@ -27,7 +23,9 @@ type PageTitleDividerProps = {
   className?: string;
 };
 
-export function PageTitleDivider({ className }: Readonly<PageTitleDividerProps>) {
+export function PageTitleDivider({
+  className,
+}: Readonly<PageTitleDividerProps>) {
   return (
     <div
       className={twMerge(
